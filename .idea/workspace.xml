@@ -2,29 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ffebfb4-8765-44f9-97cb-39d7d06de54a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/programme/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/programme/forms.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/programme/routes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/programme/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/programme/form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/programme/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/user.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/user.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/versions/2b017edaa91f_add_language_to_posts.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/versions/37f06a334dbf_new_fields_in_user_model.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/versions/780739b227a7_posts_table.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/versions/834b1a697901_user_tokens.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/versions/ae346256b650_followers.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/versions/c81bac34faab_tasks.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/versions/d049de007ccf_private_messages.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/versions/e517276bb1c2_users_table.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/versions/f7ac3d27bb1d_notifications.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,6 +26,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
+          <entry key="Dockerfile" value="3" />
           <entry key="css" value="245" />
           <entry key="dummy" value="3" />
           <entry key="html" value="7706" />
@@ -63,18 +42,20 @@
           <entry key="HTML" value="7706" />
           <entry key="JavaScript" value="145" />
           <entry key="Markdown" value="191" />
-          <entry key="PLAIN_TEXT" value="118" />
+          <entry key="PLAIN_TEXT" value="121" />
           <entry key="Python" value="6417" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
+          <entry key="Dockerfile" value="1" />
           <entry key="css" value="10" />
           <entry key="html" value="261" />
           <entry key="js" value="1" />
           <entry key="md" value="1" />
           <entry key="py" value="210" />
           <entry key="rnc" value="1" />
+          <entry key="sh" value="1" />
           <entry key="txt" value="2" />
         </counts>
       </usages-collector>
@@ -84,7 +65,7 @@
           <entry key="HTML" value="261" />
           <entry key="JavaScript" value="1" />
           <entry key="Markdown" value="1" />
-          <entry key="PLAIN_TEXT" value="2" />
+          <entry key="PLAIN_TEXT" value="4" />
           <entry key="Python" value="210" />
           <entry key="RNG Compact" value="1" />
         </counts>
@@ -162,7 +143,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/templates/sample/search.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="285">
@@ -171,23 +152,24 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Dockerfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3376">
-              <caret line="590" column="70" lean-forward="true" selection-start-line="590" selection-start-column="70" selection-end-line="590" selection-end-column="70" />
-              <folding>
-                <marker date="1541420553067" expanded="true" signature="16469:16474" ph="..." />
-              </folding>
+            <state relative-caret-position="240">
+              <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/boot.sh">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Student</find>
       <find>Orin</find>
       <find>for=&quot;&quot;</find>
       <find>etude</find>
@@ -217,6 +199,7 @@
       <find>box_type</find>
       <find>boxType</find>
       <find>equipement</find>
+      <find>microblog</find>
     </findStrings>
     <replaceStrings>
       <replace>study</replace>
@@ -244,6 +227,7 @@
       <replace>equipment_type</replace>
       <replace>box_type</replace>
       <replace>equipment</replace>
+      <replace>biobank</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/app/equipement</dir>
@@ -255,7 +239,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/process/routes.py" />
         <option value="$PROJECT_DIR$/app/templates/collect.html" />
         <option value="$PROJECT_DIR$/../biobank2/app/models.py" />
         <option value="$PROJECT_DIR$/app/templates/storage.html" />
@@ -306,6 +289,7 @@
         <option value="$PROJECT_DIR$/app/templates/sample/index.html" />
         <option value="$PROJECT_DIR$/app/templates/sample/_item.html" />
         <option value="$PROJECT_DIR$/app/templates/sample/search.html" />
+        <option value="$PROJECT_DIR$/Dockerfile" />
       </list>
     </option>
   </component>
@@ -337,13 +321,6 @@
               <item name="biobank" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="biobank" type="b2602c69:ProjectViewProjectNode" />
-              <item name="biobank" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="sample" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -416,7 +393,7 @@
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18797815" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18797815" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -458,23 +435,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/room/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="27" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/room/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/customer/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -852,6 +812,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="19" column="48" lean-forward="true" selection-start-line="19" selection-start-column="48" selection-end-line="19" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boot.sh">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
         </state>
       </provider>
     </entry>
