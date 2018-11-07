@@ -1,0 +1,110 @@
+.no-lign>tbody>tr>td{
+  border-top: 0 !important;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+.bar {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  justify-content: space-between;
+  padding-bottom: 30px;
+}
+
+.bar h1{
+    padding: 0;
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin: 0;
+    line-height: 2;
+}
+
+.bar h3{
+    padding: 0;
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin: 0;
+}
+
+.bar .actions{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.block{
+    /* margin-top : 30px; */
+    margin-bottom: 50px;
+}
+
+.block h1{
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+
+.nav-pills>li.active>a,
+.nav-pills>li.active>a:focus,
+.nav-pills>li.active>a:hover {
+    border-radius : 0;
+    color: #337ab7;
+    border-right: 3px solid #F48024;
+    background-color: #eee;
+}
+
+ul .btn{
+  width : 100%;
+  margin-bottom :5px;
+  font-weight : bold;
+  font-size : 13px;
+  line-height: 2;
+}
+
+
+#sinfo .total{}
+#sinfo .used{
+  padding: 5px;
+  margin: 2px;
+  background: green;
+  color: white;
+}
+#sinfo .free{
+  padding: 5px;
+  margin: 2px;
+  background: blue;
+  color: white;
+}
+
+#holes ul{
+  width: 500px;
+  list-style: none;
+}
+
+#holes li a{
+  color : #fff;
+}
+
+#holes li{
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  display: inline-block;
+  list-style: none;
+  text-align: center;
+  border: 1px solid;
+  background: blue;
+  color: white;
+  cursor: pointer;
+}
+
+#holes li.hole1{
+  background: green;
+  color: white;
+}

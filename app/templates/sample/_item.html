@@ -1,0 +1,22 @@
+<tr>
+    <td>{{sample.id}}</td>
+    <td>{{sample.code}}</td>
+    <td>{{sample.sample_type.name}}</td>
+    <td>{{sample.tube_type.name}}</td>
+    <td>{{sample.volume}}/{{sample.mesure.name}}</td>
+    <td>{{sample.date}}</td>
+    <td>{{sample.status}}</td>
+    <td>
+        <ul class="nav nav-pills">
+            {% if sample.basket_id == None %}
+            <li>
+                <a class="btn btn-default" href="{{ url_for('sample.addtolist', id=sample.id) }}">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></li>
+            {% else %}
+            <li><a class="btn btn-default" href="{{ url_for('sample.removefromlist', id=sample.id) }}"><span
+                    class="glyphicon glyphicon-minus" aria-hidden="true"></span></a></li>
+            {% endif %}
+            <li><a class="btn btn-default" href="{{ url_for('sample.detail', id=sample.id) }}">Voir</a></li>
+        </ul>
+    </td>
+</tr>

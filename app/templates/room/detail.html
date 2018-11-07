@@ -1,0 +1,17 @@
+{% extends "storage.html" %}
+{% set active_page = "room" %}
+{% block storage_content %}
+      <div class="bar">
+        <h1>{{ room.name }}</h1>
+        <div class="actions">
+          <ul class="nav nav-pills">
+            <li>
+              <a class="btn btn-default" href="{{ url_for('room.edit', id=room.id) }}">{{_('Modifier')}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="box">
+        <h3>Equipements</h3>
+      </div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "admin.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% set active_page = "subject" %}
+{% block admin_content %}
+    <div class="bar">
+        <h1>{{ _('Thématique') }}</h1>
+        <div class="actions">
+            <a class="btn btn-default" href="{{ url_for('subject.add') }}">{{ _('Nouvelle thématique') }}</a>
+        </div>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>{{_('Nom de l\'étude')}}</th>
+          <th>{{_('Nom de la thématique')}}</th>
+          <th>{{_('Description')}}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for subject in subjects %}
+          {% include 'subject/_item.html' %}
+        {% endfor %}
+      </tbody>
+    </table>
+{% endblock %}

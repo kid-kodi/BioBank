@@ -1,0 +1,35 @@
+{% extends "collect.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% set active_page = "project" %}
+{% block collect_content %}
+  <div class="bar">
+    <div>
+      <h1>{{project.title}}</h1>
+      <h3>{{project.customer.display_as}}</h3>
+    </div>
+    <div class="actions">
+      <a class="btn btn-success" href="{{ url_for('order.add') }}">{{ _('Nouveau dépôt') }}</a>
+      <a class="btn btn-default" href="{{ url_for('project.edit', id=project.id) }}">Modifier</a>
+    </div>
+  </div>
+  <div class="block">
+    <h3>Dépôt</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>{{_('Client')}}</th>
+          <th>{{_('Nom et prénoms du déposant')}}</th>
+          <th>{{_('Date')}}</th>
+          <th>{{_('Receptionné par')}}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in project.orders %}
+            {% include 'order/_item.html' %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

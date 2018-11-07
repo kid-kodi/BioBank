@@ -1,0 +1,9 @@
+<div class="" id="holes">
+  <ul>
+    {% for hole in box.holes %}
+      <li class="hole{{hole.status}}" id="{{hole.id}}">
+        <a href="{{url_for('location.hole', id=hole.id)}}">{{ hole.name }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

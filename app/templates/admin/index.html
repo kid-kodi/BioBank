@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+    <div class="header">
+      <h1>{{ _('ETUDE') }}</h1>
+      <div class="header-btn">
+        <a class="btn btn-default" href="{{ url_for('study.add') }}">{{ _('Nouvelle étude') }}</a>
+      </div>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>{{_('Nom de l\'étude')}}</th>
+          <th>{{_('Desccription')}}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for study in studys %}
+            {% include 'study/_item.html' %}
+        {% endfor %}
+      </tbody>
+    </table>
+{% endblock %}

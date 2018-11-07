@@ -1,0 +1,11 @@
+<tr>
+  <td>{{project.id}}</td>
+  <td>
+    <a href="{{ url_for('project.detail', id=project.id) }}">{{project.title}}</a>
+  </td>
+  <td>{{project.description}}</td>
+  <td><a href="{{ url_for('customer.detail', id=project.customer.id) }}">{{project.customer.display_as}}</a></td>
+  <td>
+    <a href="{{ url_for('project.edit', id=project.id) }}">Modifier</a>
+  </td>
+</tr>

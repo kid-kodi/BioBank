@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% set navigation_bar = [
+    ('/study', 'study', 'Etude'),
+    ('/subject', 'subject', 'Thématique'),
+    ('/program', 'program', 'Programme'),
+    ('/equipment_type', 'equipment_type', 'Type d\'équipement'),
+    ('/box_type', 'box_type', 'Type de boîte')
+] -%}
+{% set active_page = active_page|default('index') -%}
+
+{% block app_content %}
+    <div class="row">
+        <nav class="col-md-2">
+            <ul class="nav nav-pills nav-stacked">
+                {% for href, id, caption in navigation_bar %}
+                <li{% if id == active_page %} class="active"{% endif
+                %}><a href="{{ href|e }}">{{_(caption|e) }}</a>
+                </li>
+            {% endfor %}
+            </ul>
+        </nav>
+        <div class="col-md-10">
+            {% block admin_content %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

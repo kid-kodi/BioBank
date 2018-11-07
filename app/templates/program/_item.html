@@ -1,0 +1,11 @@
+<tr>
+  <td>{{program.id}}</td>
+  <td>{{program.subject.name}}</td>
+  <td>
+    <a href="{{ url_for('program.detail', id=program.id) }}">{{program.name}}</a>
+  </td>
+  <td>{{program.description}}</td>
+  <td>
+    <a href="{{ url_for('program.edit', id=program.id) }}">Modifier</a>
+  </td>
+</tr>

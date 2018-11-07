@@ -1,0 +1,26 @@
+{% extends "admin.html" %}
+{% set active_page = "program" %}
+{% block admin_content %}
+    <div class="bar">
+        <h1>{{ _('Programme') }}</h1>
+        <div class="actions">
+            <a class="btn btn-default" href="{{ url_for('program.add') }}">{{ _('Nouveau programme') }}</a>
+        </div>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>{{_('Thématique')}}</th>
+          <th>{{_('Nom de l\'programme')}}</th>
+          <th>{{_('Description')}}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for program in programs %}
+          {% include 'program/_item.html' %}
+        {% endfor %}
+      </tbody>
+    </table>
+{% endblock %}

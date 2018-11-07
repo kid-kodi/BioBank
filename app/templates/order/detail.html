@@ -1,0 +1,47 @@
+{% extends "collect.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% set active_page = "order" %}
+{% block collect_content %}
+    <div class="bar">
+        <div class="title">
+            <h1>{{order.project.title}} - {{order.serial}}</h1>
+            <h3>{{order.project.customer.display_as}} | {{ moment(order.timestamp).format('LLL') }}</h3>
+        </div>
+        <div class="actions">
+
+          <ul class="nav nav-pills">
+            <li><a class="btn btn-success" href="{{ url_for('order.edit', id=order.id) }}">Modifier</a></li>
+          </ul>
+
+        </div>
+    </div>
+    <div>
+        <h3>{{_('Participants')}}</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>{{_('Code')}}</th>
+              <th>{{_('sexe')}}</th>
+              <th>{{_('Date de naissance')}}</th>
+              <th>{{_('Nombre d\'échantillon')}}</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for patient in order.patients %}
+                <tr>
+                  <th></th>
+                  <th>{{patient.code}}</th>
+                  <th>{{patient.sexe}}</th>
+                  <th>{{patient.birthday}}</th>
+                  <th>{{patient.samples.all()|length}}</th>
+                  <th>
+                      <a href="{{ url_for('patient.detail', id=patient.id) }}">voir</a>
+                  </th>
+                </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
+{% endblock %}

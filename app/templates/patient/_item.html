@@ -1,0 +1,10 @@
+<tr>
+  <td>{{patient.id}}</td>
+  <td>{{patient.origin.name}}</td>
+  <td><a href="{{ url_for('patient.detail', id=patient.id) }}">{{patient.code}}</a></td>
+  <td>{{patient.sexe}}</td>
+  <td>{{patient.birthday}}</td>
+  <td>
+    <a href="{{ url_for('patient.edit', id=patient.id) }}">Modifier</a>
+  </td>
+</tr>

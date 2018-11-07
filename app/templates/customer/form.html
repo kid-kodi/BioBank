@@ -1,0 +1,14 @@
+{% extends "collect.html" %}
+{% set active_page = "customer" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block collect_content %}
+    <div class="bar">
+        <h1>{{ _('Formulaire d\'enregistrement d\'un client') }}</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            {{ wtf.quick_form(form) }}
+        </div>
+    </div>
+{% endblock %}

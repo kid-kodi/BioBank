@@ -1,0 +1,12 @@
+<tr>
+  <td>{{order.id}}</td>
+  <td>
+    <a href="{{ url_for('customer.detail', id=order.project.customer.id) }}">{{order.project.customer.display_as}}</a>
+  </td>
+  <td>{{order.firstname}} {{order.lastname}}</td>
+  <td>{{order.timestamp}}</td>
+  <td>{{order.user.username}}</td>
+  <td>
+    <a href="{{ url_for('order.detail', id=order.id) }}">voir</a>
+  </td>
+</tr>

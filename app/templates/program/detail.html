@@ -1,0 +1,19 @@
+{% extends "admin.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% set active_page = "program" %}
+{% block admin_content %}
+  <table class="table no-lign" style="border-top: 0;">
+    <tr>
+      <td style="text-align:left;"><h3>{{program.name}}</h3></td>
+      <td style="text-align:right;">
+        <a href="{{ url_for('program.edit', id=program.id) }}">Modifier</a>
+      </td>
+    </tr>
+    <tr>
+      <td>{{program.description}}</td>
+    </tr>
+  </table>
+  <div class="">
+
+  </div>
+{% endblock %}

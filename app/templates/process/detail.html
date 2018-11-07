@@ -1,0 +1,49 @@
+{% extends "process.html" %}
+{% set active_page = "process" %}
+{% block process_content %}
+    <div class="bar">
+        <h1>{{process.display_as}}</h1>
+        <div class="actions">
+            <a class="btn btn-default" href="{{ url_for('process.edit', id=process.id) }}">Modifier</a>
+        </div>
+    </div>
+  <div class="block">
+    <h3>Information générale</h3>
+    <table class="table">
+      <tr>
+        <td><b>{{_('Echantillon Préparer')}}</b></td>
+        <td>{{process.sample.code}}</td>
+      </tr>
+      <tr>
+        <td><b>{{_('Nombre effectué')}}</b></td>
+        <td>{{process.number}}</td>
+      </tr>
+      <tr>
+        <td><b>{{_('Date')}}</b></td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+  <div class="block">
+    <h3>Echantillons</h3>
+    <table class="table">
+      <thead>
+      <tr>
+        <th></th>
+        <th>{{_('Numéro à l\'arrivé')}}</th>
+        <th>{{_('Code biobanque')}}</th>
+        <th>{{_('Nature d\'échantillon')}}</th>
+        <th>{{_('Conditionnement')}}</th>
+        <th>{{_('Volume')}}/{{_('Unité')}}</th>
+        <th>{{_('Date de prélèvement')}}</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for sample in process.sample.children %}
+        {% include 'sample/_item.html' %}
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

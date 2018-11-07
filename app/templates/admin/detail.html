@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block app_content %}
+  <table class="table no-lign" style="border-top: 0;">
+    <tr>
+      <td style="text-align:left;"><h3>{{study.name}}</h3></td>
+      <td style="text-align:right;">
+        <a href="{{ url_for('study.edit', id=study.id) }}">Modifier</a>
+      </td>
+    </tr>
+    <tr>
+      <td>{{study.description}} | Nombre :{{study.subjects.all()|length}}</td>
+    </tr>
+  </table>
+  <div>
+    <table class="table">
+        {% for subject in study.subjects %}
+          {% include 'subject/_item.html' %}
+        {% endfor %}
+    </table>
+  </div>
+{% endblock %}

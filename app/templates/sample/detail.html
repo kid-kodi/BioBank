@@ -1,0 +1,112 @@
+{% extends "collect.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% set active_page = "sample" %}
+{% block collect_content %}
+<div class="bar">
+    <div>
+        <h1>{{sample.serial}}</h1>
+        <h3>{{sample.patient.order.project.customer.display_as}} | {{sample.patient.order.project.title}} |
+            {{sample.patient.order.code}} | {{sample.patient.order.project.customer.display_as}}</h3>
+    </div>
+    <div class="actions">
+        <ul class="nav nav-pills">
+            <li>
+                <a class="btn btn-default" href="{{ url_for('sample.edit', id=sample.id) }}">Modifier</a>
+            </li>
+            <li>
+                <a class="btn btn-default" href="{{ url_for('sample.edit', id=sample.id) }}">Imprimer</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="block">
+    <h1>Information générale</h1>
+    <table class="table">
+        <tr>
+            <td><b>{{_('Origine')}}</b></td>
+            <td>{{sample.patient.origin.name}}</td>
+        </tr>
+        <tr>
+            <td><b>{{_('Nature d\'échantillon')}}</b></td>
+            <td>{{sample.sample_type.name}}</td>
+        </tr>
+        <tr>
+            <td><b>{{_('Code Bio banque')}}</b></td>
+            <td>{{sample.serial}}</td>
+        </tr>
+        <tr>
+            <td><b>{{_('Code')}}</b></td>
+            <td>{{sample.code}}</td>
+        </tr>
+        <tr>
+            <td><b>{{_('volume / concentration')}}</b></td>
+            <td>{{sample.volume}} {{sample.mesure.name}}</td>
+        </tr>
+        <tr>
+            <td><b>{{_('Nom')}}</b></td>
+            <td>{{sample.patient.code}}</td>
+        </tr>
+        <tr>
+            <td><b>{{_('Date de naissance')}}</b></td>
+            <td>{{sample.patient.birthday}}</td>
+        </tr>
+        <tr>
+            <td><b>{{_('Sexe')}}</b></td>
+            <td>{{sample.patient.sexe}}</td>
+        </tr>
+        <tr>
+            <td><b>{{_('Echantillon parent')}}</b></td>
+            {% if sample.parent %}
+            <td>{{sample.parent.serial}}</td>
+            {% else %}
+            <td>{{_('Aucun parent')}}</td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td><b>{{_('Emplacement')}}</b></td>
+            {% if sample.location %}
+            <td>{{sample.location}}</td>
+            {% else %}
+            <td>{{_('En attente de stockage')}}</td>
+            {% endif %}
+        </tr>
+    </table>
+</div>
+<div class="block">
+    <div class="bar">
+        <h1>Rélation Enfants</h1>
+    </div>
+    {% if sample.children %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>{{_('Numéro à l\'arrivé')}}</th>
+            <th>{{_('Code biobanque')}}</th>
+            <th>{{_('Nature d\'échantillon')}}</th>
+            <th>{{_('Conditionnement')}}</th>
+            <th>{{_('Volume')}}/{{_('Unité')}}</th>
+            <th>{{_('Date de prélèvement')}}</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for sample in sample.children %}
+        {% include 'sample/_item.html' %}
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    {% include '_empty.html' %}
+    {% endif %}
+</div>
+<div class="block">
+    <div class="bar">
+        <h1>Historique de stockage</h1>
+    </div>
+    {% if sample.locations %}
+    {% else %}
+    {% include '_empty.html' %}
+    {% endif %}
+</div>
+{% endblock %}

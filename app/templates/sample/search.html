@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% import "_pagination.html" as macros %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block app_content %}
+<div class="row">
+    <div class="col-md-2">
+        <div class="bar">
+            <h1>{{ _('Recherche') }}</h1>
+        </div>
+        {{ wtf.quick_form(search_form) }}
+    </div>
+    <div class="col-md-10">
+        <div class="bar">
+            <h1>{{ _('Echantillon') }}</h1>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th></th>
+                <th>{{_('Code biobanque')}}</th>
+                <th>{{_('Nature d\'échantillon')}}</th>
+                <th>{{_('Conditionnement')}}</th>
+                <th>{{_('Volume')}}/{{_('Unité')}}</th>
+                <th>{{_('Date de prélèvement')}}</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for sample in samples %}
+            {% include 'sample/_item.html' %}
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="pagination">
+            {{ macros.pagination_widget(pagination, '.index') }}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

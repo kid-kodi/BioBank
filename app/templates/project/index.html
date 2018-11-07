@@ -1,0 +1,27 @@
+{% extends "collect.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% set active_page = "project" %}
+{% block collect_content %}
+    <div class="bar">
+        <h1>{{ _('Projet') }}</h1>
+        <div class="actions">
+            <a class="btn btn-default" href="{{ url_for('project.add') }}">{{ _('Nouveau projet') }}</a>
+        </div>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>{{_('Titre')}}</th>
+          <th>{{_('Description')}}</th>
+          <th>{{_('Client')}}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for project in projects %}
+          {% include 'project/_item.html' %}
+        {% endfor %}
+      </tbody>
+    </table>
+{% endblock %}

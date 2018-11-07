@@ -1,0 +1,40 @@
+{% extends "process.html" %}
+{% set active_page = "process" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block process_content %}
+    <div class="bar">
+        <h1>{{ _('Préparations') }}</h1>
+        <div class="actions">
+            <ul class="nav nav-pills">
+                <li><a class="btn btn-default" href="{{ url_for('process.add') }}">{{ _('Nouvelle préparation') }}</a></li>
+                <li><a class="btn btn-default" href="{{ url_for('process.import_data') }}">{{ _('Importer') }}</a></li>
+                <li><a class="btn btn-default" href="{{ url_for('process.export_data') }}">{{ _('Exporter') }}</a></li>
+            </ul>
+        </div>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>{{_('Echantillon')}}</th>
+          <th>{{_('Nombre d\'aliquots')}}</th>
+          <th>{{_('Date de préparation')}}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for process in processes %}
+        <tr>
+          <td>{{process.id}}</td>
+          <td>{{process.sample.code}}</td>
+          <td>{{process.number}}</td>
+          <td>{{process.created_at}}</td>
+          <td>
+            <a href="{{ url_for('process.detail', id=process.id) }}">voir</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+{% endblock %}

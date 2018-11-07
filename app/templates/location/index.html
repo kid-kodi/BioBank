@@ -1,0 +1,103 @@
+{% extends "storage.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% set active_page = "location" %}
+{% block storage_content %}
+<div class="bar">
+    <h1>{{ _('Stokage') }}</h1>
+</div>
+<div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">Arboresccence de stockage</div>
+                <div class="panel-body">
+                    <ul>
+                        {% for item in rooms %}
+                        <li><a href="{{url_for('location.room', id=item.id)}}">{{ item.name }}</a></li>
+                        <ul>
+                            {% for equipment in item.equipments %}
+                            <li><a href="{{url_for('location.equipment', id=equipment.id)}}">{{ equipment.name }}</a>
+                            </li>
+                            <ul>
+                                {% for rack in equipment.racks %}
+                                <li><a href="{{url_for('location.rack', id=rack.id)}}">{{ rack.name }}</a></li>
+                                <ul>
+                                    {% for box in rack.boxes %}
+                                    <li><a href="{{url_for('location.box', id=box.id)}}">{{ box.name }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                                {% endfor %}
+                            </ul>
+                            {% endfor %}
+                        </ul>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-heading">Détails de l'emplacement</div>
+                <div class="panel-body">
+                    {% if box %}
+                    <div class="">
+                        BOITE {{box.name}} | ESPACE DISPONIBLE {{box.available()}} | ESPACE OCCUPE {{box.occupied()}}
+                    </div>
+                    {% if hole %}
+                    <div class="">
+                        PUIT {{hole.name}} |
+                        {% if hole.is_available()==True %}
+                        <span>DISPONIBLE</span>
+                        {% else %}
+                        <span>OCCUPE</span>
+                        {% endif %}
+                        {% if hole.sample %}
+                        <p>{{hole.sample.serial_biobank}}</p>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    {% include 'location/_box.html' %}
+                    {% endif %}
+                    {% if rack %}
+                    RACK {{rack.name}} | ESPACE DISPONIBLE {{rack.available()}} | ESPACE OCCUPE {{rack.occupied()}}
+                    {% endif %}
+                    {% if equipment %}
+                    EQUIPMENT {{ equipment.name }} | ESPACE DISPONIBLE {{equipment.available()}} | ESPACE OCCUPE
+                    {{equipment.occupied()}}
+                    {% endif %}
+                    {% if room %}
+                    SALLE {{ room.name }}| ESPACE DISPONIBLE {{room.available()}} | ESPACE OCCUPE {{room.occupied()}}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% if box %}
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Stockage en cour</div>
+                <div class="panel-body">
+                    {% if basket.samples.all()|length>0 %}
+                    <form class="" action="{{url_for('location.store', id=box.id)}}" method="post">
+                        {% for item in basket.samples.all() %}
+                        {% if item.status == 0 %}
+                        <input type="checkbox" name="samples_id" value="{{item.id}}">
+                        {% endif %}
+                        {{item.code}}
+                        {% endfor %}
+                        <input type="submit" name="" value="Stocker">
+                    </form>
+                    {% else %}
+                    <div class="text-center">
+                        <h3>Aucune echantillon dans le panier</h3>
+                        <p>veuillez ajouter des échantillons au panier pour les stocker</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}

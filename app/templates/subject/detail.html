@@ -1,0 +1,22 @@
+{% extends "admin.html" %}
+{% set active_page = "subject" %}
+{% block admin_content %}
+  <table class="table no-lign" style="border-top: 0;">
+    <tr>
+      <td style="text-align:left;"><h3>{{subject.name}}</h3></td>
+      <td style="text-align:right;">
+        <a href="{{ url_for('subject.edit', id=subject.id) }}">Modifier</a>
+      </td>
+    </tr>
+    <tr>
+      <td>{{subject.description}} | Nombre :{{subject.programs.all()|length}}</td>
+    </tr>
+  </table>
+  <div class="">
+    <table class="table">
+        {% for program in subject.programs %}
+          {% include 'program/_item.html' %}
+        {% endfor %}
+    </table>
+  </div>
+{% endblock %}

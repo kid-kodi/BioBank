@@ -1,0 +1,32 @@
+{% extends "collect.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% set active_page = "sample" %}
+{% block collect_content %}
+<div class="bar">
+  <h1>{{ _('Prélèvement') }}</h1>
+  <div class="actions">
+    <a class="btn btn-default" href="{{ url_for('sample.add') }}">{{ _('Nouveau prélèvement') }}</a>
+  </div>
+</div>
+<div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th></th>
+      <th>{{_('Code biobanque')}}</th>
+      <th>{{_('Nature d\'échantillon')}}</th>
+      <th>{{_('Conditionnement')}}</th>
+      <th>{{_('Volume')}}/{{_('Unité')}}</th>
+      <th>{{_('Date de prélèvement')}}</th>
+      <th>{{_('Status')}}</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for sample in samples %}
+      {% include 'sample/_item.html' %}
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
