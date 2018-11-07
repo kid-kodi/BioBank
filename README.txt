@@ -14,3 +14,11 @@ documents déposé
 - fiche de renseignement
 - cahier d’observation
 
+
+
+1) Formulaire de dépôt
+when client selected
+look for its project
+
+2) check if we validate before create sample
+

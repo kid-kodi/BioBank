@@ -14,7 +14,6 @@
     <div class="row">
         <nav class="col-md-2">
             <ul class="nav nav-pills nav-stacked">
-                <a class="btn btn-danger" href="{{ url_for('order.add') }}">{{ _('Nouvelle réception') }}</a>
                 {% for href, id, caption in navigation_bar %}
                 <li{% if id == active_page %} class="active"{% endif
                 %}><a href="{{ href|e }}">{{_(caption|e) }}</a>

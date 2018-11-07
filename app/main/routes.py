@@ -6,7 +6,8 @@ from flask_babel import _, get_locale
 from guess_language import guess_language
 from app import db
 from app.main.forms import EditProfileForm, PostForm, SearchForm, MessageForm
-from app.models import Customer, Project, Sample, User, Post, Message, Notification, Basket
+from app.models import Customer, Project, Sample, User, Post, Message, Notification, Basket, Room, Equipment, Box, Rack, \
+    Hole
 from app.translate import translate
 from app.main import bp
 
@@ -28,9 +29,13 @@ def index():
     customers = Customer.query.all()
     projects = Project.query.all()
     samples = Sample.query.all()
-    return render_template('index.html', title=_('Home'),
-                           users=users, customers=customers,
-                           projects=projects, samples=samples)
+    rooms = Room.query.all()
+    equipment = Equipment.query.all()
+    rack = Rack.query.all()
+    box = Box.query.all()
+    hole = Hole.query.all()
+    return render_template('index.html', title=_('Home'), users=users, customers=customers, projects=projects,
+                           samples=samples, rooms=rooms, equipment=equipment, rack=rack, box=box, hole=hole)
 
 
 @bp.route('/user/<username>')
@@ -154,7 +159,7 @@ def messages():
     page = request.args.get('page', 1, type=int)
     messages = current_user.messages_received.order_by(
         Message.timestamp.desc()).paginate(
-            page, current_app.config['POSTS_PER_PAGE'], False)
+        page, current_app.config['POSTS_PER_PAGE'], False)
     next_url = url_for('main.messages', page=messages.next_num) \
         if messages.has_next else None
     prev_url = url_for('main.messages', page=messages.prev_num) \
@@ -192,4 +197,4 @@ def notifications():
 def basketto():
     basket = Basket.query.first()
     sample_count = len(basket.samples.all())
-    return jsonify({"count":sample_count})
+    return jsonify({"count": sample_count})
