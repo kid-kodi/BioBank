@@ -11,7 +11,7 @@ RUN venv/bin/pip install gunicorn
 
 COPY app app
 COPY migrations migrations
-COPY biobank.py config.py boot.sh ./
+COPY run.py config.py boot.sh ./
 RUN chmod a+x boot.sh
 
 ENV FLASK_APP run.py
