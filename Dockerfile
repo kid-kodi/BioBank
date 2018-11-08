@@ -22,5 +22,5 @@ ENV FLASK_APP run.py
 RUN chown -R admin:admin ./
 USER admin
 
-EXPOSE 2000
+EXPOSE 5000
 ENTRYPOINT ["./boot.sh"]
