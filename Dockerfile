@@ -1,8 +1,11 @@
 FROM python:3.6-alpine
 
-RUN adduser -D biobank
+RUN adduser -D admin
 
-WORKDIR /home/biobank
+WORKDIR /home/app
+
+RUN apk update && apk upgrade
+RUN apk add --no-cache curl python pkgconfig python-dev openssl-dev libffi-dev musl-dev make gcc
 
 COPY requirements.txt requirements.txt
 RUN python -m venv venv
@@ -12,12 +15,12 @@ RUN venv/bin/pip install gunicorn
 COPY app app
 COPY migrations migrations
 COPY run.py config.py boot.sh ./
-RUN chmod a+x boot.sh
+RUN chmod +x boot.sh
 
 ENV FLASK_APP run.py
 
-RUN chown -R biobank:biobank ./
-USER biobank
+RUN chown -R admin:admin ./
+USER admin
 
-EXPOSE 5000
+EXPOSE 2000
 ENTRYPOINT ["./boot.sh"]
