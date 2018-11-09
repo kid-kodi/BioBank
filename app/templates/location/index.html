@@ -11,27 +11,43 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Arboresccence de stockage</div>
                 <div class="panel-body">
-                    <ul>
-                        {% for item in rooms %}
-                        <li><a href="{{url_for('location.room', id=item.id)}}">{{ item.name }}</a></li>
+                    <div id="accordian">
                         <ul>
-                            {% for equipment in item.equipments %}
-                            <li><a href="{{url_for('location.equipment', id=equipment.id)}}">{{ equipment.name }}</a>
-                            </li>
-                            <ul>
-                                {% for rack in equipment.racks %}
-                                <li><a href="{{url_for('location.rack', id=rack.id)}}">{{ rack.name }}</a></li>
+                            {% for item in rooms %}
+                            <li>
+                                <div>
+                                    <a href="{{url_for('location.room', id=item.id)}}">+</a>
+                                    <h3><a href="#">{{ item.name }}</a></h3>
+                                </div>
                                 <ul>
-                                    {% for box in rack.boxes %}
-                                    <li><a href="{{url_for('location.box', id=box.id)}}">{{ box.name }}</a></li>
+                                    {% for equipment in item.equipments %}
+                                    <li>
+                                        <div>
+                                            <a href="{{url_for('location.equipment', id=equipment.id)}}">+</a>
+                                            <h3><a href="#">{{ equipment.name }}</a></h3>
+                                        </div>
+                                        <ul>
+                                            {% for rack in equipment.racks %}
+                                            <li>
+                                                <div>
+                                                    <a href="{{url_for('location.rack', id=rack.id)}}">+</a>
+                                                    <h3><a href="#">{{ rack.name }}</a></h3>
+                                                </div>
+                                                <ul>
+                                                    {% for box in rack.boxes %}
+                                                    <li><a href="{{url_for('location.box', id=box.id)}}">{{ box.name }}</a></li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
                                     {% endfor %}
                                 </ul>
-                                {% endfor %}
-                            </ul>
+                            </li>
                             {% endfor %}
                         </ul>
-                        {% endfor %}
-                    </ul>
+                    </div>
                 </div>
             </div>
         </div>

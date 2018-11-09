@@ -108,7 +108,7 @@ def create_app(config_class=Config):
     app.register_blueprint(program_bp)
 
     from app.api import bp as api_bp
-    app.register_blueprint(api_bp, url_prefix='/api')
+    app.register_blueprint(api_bp, url_prefix='/api/v1.0')
 
     if not app.debug and not app.testing:
         if app.config['MAIL_SERVER']:
@@ -122,7 +122,7 @@ def create_app(config_class=Config):
             mail_handler = SMTPHandler(
                 mailhost=(app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
                 fromaddr='no-reply@' + app.config['MAIL_SERVER'],
-                toaddrs=app.config['ADMINS'], subject='Microblog Failure',
+                toaddrs=app.config['ADMINS'], subject='BioBank Failure',
                 credentials=auth, secure=secure)
             mail_handler.setLevel(logging.ERROR)
             app.logger.addHandler(mail_handler)
@@ -143,7 +143,7 @@ def create_app(config_class=Config):
             app.logger.addHandler(file_handler)
 
         app.logger.setLevel(logging.INFO)
-        app.logger.info('Microblog startup')
+        app.logger.info('BioBank startup')
 
     return app
 

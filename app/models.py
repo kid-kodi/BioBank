@@ -270,6 +270,25 @@ class Customer(db.Model):
     telephone = db.Column(db.String(140), index=True, unique=True)
     email = db.Column(db.String(255), index=True, unique=True)
     projects = db.relationship('Project', backref='customer', lazy='dynamic')
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+    def to_dict(self):
+        data = {
+            'id': self.id,
+            'display_as': self.display_as,
+            'timestamp': self.timestamp.isoformat() + 'Z',
+            'firstname': self.firstname,
+            'lastname': self.lastname,
+            'adresse': self.adresse,
+            'telephone': self.telephone,
+            'email': self.email,
+        }
+        return data
+
+    def from_dict(self, data):
+        for field in ['display_as', 'firstname', 'lastname']:
+            if field in data:
+                setattr(self, field, data[field])
 
 
 class Project(db.Model):
@@ -281,6 +300,25 @@ class Project(db.Model):
     title = db.Column(db.String(255))
     description = db.Column(db.String(255))
     orders = db.relationship('Order', backref='project', lazy='dynamic')
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+    def to_json(self):
+        json_post = {
+            'id': self.id,
+            'customer_id': self.customer_id,
+            'timestamp': self.timestamp.isoformat() + 'Z',
+            'study_id': self.study_id,
+            'subject_id': self.subject_id,
+            'program_id': self.program_id,
+            'title': self.title,
+            'description': self.description,
+        }
+        return json_post
+
+    def from_json(self, data):
+        for field in ['title', 'description', 'timestamp']:
+            if field in data:
+                setattr(self, field, data[field])
 
 
 class Order(db.Model):
