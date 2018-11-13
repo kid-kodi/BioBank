@@ -54,6 +54,7 @@ def add(order_id):
             sample.mesure_id = s.mesure.data
             sample.volume = s.volume.data
             sample.patient_id = patient.id
+            sample.status = 0
 
             db.session.add(sample)
             db.session.commit()
