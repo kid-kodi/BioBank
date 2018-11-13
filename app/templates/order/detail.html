@@ -4,19 +4,26 @@
 {% block collect_content %}
     <div class="bar">
         <div class="title">
-            <h1>{{order.project.title}} - {{order.serial}}</h1>
-            <h3>{{order.project.customer.display_as}} | {{ moment(order.timestamp).format('LLL') }}</h3>
+            <h1>{{_('Client : ')}}{{order.project.customer.display_as}}</h1>
+            <h3>{{_('Projet : ')}}{{order.project.title}} - {{_('Numéro de dépôt : ')}}{{order.serial}}</h3>
         </div>
         <div class="actions">
 
           <ul class="nav nav-pills">
-            <li><a class="btn btn-success" href="{{ url_for('order.edit', id=order.id) }}">Modifier</a></li>
+            <li><a class="btn btn-default" href="{{ url_for('order.edit', id=order.id) }}">Modifier</a></li>
           </ul>
 
         </div>
     </div>
-    <div>
-        <h3>{{_('Participants')}}</h3>
+
+    <div class="block">
+        <div class="bar">
+            <h1>{{_('Patients')}}</h1>
+            <div class="actions">
+                <a class="btn btn-default" href="{{ url_for('patient.add', order_id=order.id) }}">{{ _('Nouveau patient') }}</a>
+            </div>
+        </div>
+        {% if order.patients.all() | length > 0%}
         <table class="table">
           <thead>
             <tr>
@@ -43,5 +50,14 @@
             {% endfor %}
           </tbody>
         </table>
+        {% else %}
+            <div class="blankslate blankslate-spacious blankslate-large">
+              <svg height="40" class="octicon octicon-issue-opened blankslate-icon" viewBox="0 0 14 16" version="1.1" width="35" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path>
+              </svg>
+              <h3>{{_('Veuillez enregistrer des patients')}}</h3>
+              <p>{{_('')}}</p>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}

@@ -14,6 +14,7 @@ from redis import Redis
 import rq
 from config import Config
 import flask_excel as excel
+from flask_uploads import UploadSet, IMAGES, configure_uploads
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -24,6 +25,7 @@ mail = Mail()
 bootstrap = Bootstrap()
 moment = Moment()
 babel = Babel()
+images = UploadSet('images', IMAGES)
 
 
 def create_app(config_class=Config):
@@ -38,6 +40,7 @@ def create_app(config_class=Config):
     moment.init_app(app)
     babel.init_app(app)
     excel.init_excel(app)
+    configure_uploads(app, images)
 
     app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) \
         if app.config['ELASTICSEARCH_URL'] else None

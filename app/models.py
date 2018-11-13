@@ -144,7 +144,7 @@ class User(UserMixin, PaginatedAPIMixin, db.Model):
     def followed_posts(self):
         followed = Post.query.join(
             followers, (followers.c.followed_id == Post.user_id)).filter(
-                followers.c.follower_id == self.id)
+            followers.c.follower_id == self.id)
         own = Post.query.filter_by(user_id=self.id)
         return followed.union(own).order_by(Post.timestamp.desc())
 
@@ -365,13 +365,23 @@ class Program(db.Model):
 class SampleType(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120))
+    siggle = db.Column(db.String(120))
     description = db.Column(db.String(128))
     samples = db.relationship('Sample', backref='sample_type', lazy='dynamic')
+
+
+class SampleNature(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120))
+    siggle = db.Column(db.String(120))
+    description = db.Column(db.String(128))
+    samples = db.relationship('Sample', backref='sample_nature', lazy='dynamic')
 
 
 class Origin(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120))
+    sign = db.Column(db.String(5))
     description = db.Column(db.String(128))
     patients = db.relationship('Patient', backref='origin', lazy='dynamic')
 
@@ -379,6 +389,7 @@ class Origin(db.Model):
 class TubeType(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120))
+    siggle = db.Column(db.String(120))
     description = db.Column(db.String(128))
     samples = db.relationship('Sample', backref='tube_type', lazy='dynamic')
 
@@ -386,8 +397,17 @@ class TubeType(db.Model):
 class Mesure(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120))
+    siggle = db.Column(db.String(120))
     description = db.Column(db.String(128))
     samples = db.relationship('Sample', backref='mesure', lazy='dynamic')
+
+
+class JoncType(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120))
+    siggle = db.Column(db.String(120))
+    description = db.Column(db.String(128))
+    samples = db.relationship('Sample', backref='jonc_type', lazy='dynamic')
 
 
 class Patient(db.Model):
@@ -395,8 +415,15 @@ class Patient(db.Model):
     order_id = db.Column(db.Integer, db.ForeignKey('order.id'))
     origin_id = db.Column(db.Integer, db.ForeignKey('origin.id'))
     code = db.Column(db.String(120))
+    bio_code = db.Column(db.String(120))
     birthday = db.Column(db.String(128))
     sexe = db.Column(db.Integer)
+    observation_file = db.Column(db.Integer)
+    observation_file_url = db.Column(db.String(255))
+    sample_file = db.Column(db.Integer)
+    sample_file_url = db.Column(db.String(255))
+    consent_file = db.Column(db.Integer)
+    consent_file_url = db.Column(db.String(255))
     samples = db.relationship('Sample', backref='patient', lazy='dynamic')
 
 
@@ -410,8 +437,10 @@ sample_hole_history = db.Table(
 class Sample(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
+    sample_nature_id = db.Column(db.Integer, db.ForeignKey('sample_nature.id'))
     sample_type_id = db.Column(db.Integer, db.ForeignKey('sample_type.id'))
     tube_type_id = db.Column(db.Integer, db.ForeignKey('tube_type.id'))
+    jonc_type_id = db.Column(db.Integer, db.ForeignKey('jonc_type.id'))
     mesure_id = db.Column(db.Integer, db.ForeignKey('mesure.id'))
     serial = db.Column(db.String(255))
     code = db.Column(db.String(255))
@@ -781,23 +810,50 @@ class Init():
         customer = Customer(display_as='customer 1', email='customer@gmail.com')
         db.session.add(customer)
 
-        origin = Origin(name='Humain', description='')
+        origin = Origin(name='Humain', sign='HU', description='')
         db.session.add(origin)
-        origin = Origin(name='Animal', description='')
+        origin = Origin(name='Animal', sign='AN', description='')
         db.session.add(origin)
-        origin = Origin(name='Environementale', description='')
+        origin = Origin(name='Environementale', sign='EN', description='')
         db.session.add(origin)
 
-        sample_type = SampleType(name='Sang', description='')
+        sample_type = SampleType(siggle='-fn-', name='-fn-', description='')
         db.session.add(sample_type)
 
-        tube_type = TubeType(name='EDTA', description='')
+        sample_type = SampleType(siggle='-in-', name='-in-', description='')
+        db.session.add(sample_type)
+
+        sample_nature = SampleNature(name='Sang', siggle="Sg", description='')
+        db.session.add(sample_nature)
+
+        sample_nature = SampleNature(name='Urine', siggle="Ur", description='')
+        db.session.add(sample_nature)
+
+        sample_nature = SampleNature(name='LCR', siggle="Lcr", description='')
+        db.session.add(sample_nature)
+
+        tube_type = TubeType(name='EDTA', siggle='', description='')
         db.session.add(tube_type)
 
-        mesure = Mesure(name='ul', description='')
+        tube_type = TubeType(name='Tube sec', description='')
+        db.session.add(tube_type)
+
+        jonc_type = JoncType(name='Rouge', siggle='Rouge', description='')
+        db.session.add(jonc_type)
+
+        jonc_type = JoncType(name='Bleu', siggle='Rouge', description='')
+        db.session.add(jonc_type)
+
+        jonc_type = JoncType(name='Vert', siggle='Rouge', description='')
+        db.session.add(jonc_type)
+
+        jonc_type = JoncType(name='Jaune', siggle='Rouge', description='')
+        db.session.add(jonc_type)
+
+        mesure = Mesure(name='microlitre', siggle='ul', description='')
         db.session.add(mesure)
 
-        mesure = Mesure(name='ug', description='')
+        mesure = Mesure(name='microgramme', siggle='mg', description='')
         db.session.add(mesure)
 
         study = Study(name='Etude1', description='')
@@ -852,6 +908,5 @@ class Init():
 
         equipment_type = EquipmentType(name='Cryoconservateur', description='')
         db.session.add(equipment_type)
-
 
         db.session.commit()

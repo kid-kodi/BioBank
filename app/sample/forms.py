@@ -8,48 +8,17 @@ from app import db
 from app.models import Sample
 
 
-class ModelFieldList(FieldList):
-    def __init__(self, *args, **kwargs):
-        self.model = kwargs.pop("model", None)
-        super(ModelFieldList, self).__init__(*args, **kwargs)
-        if not self.model:
-            raise ValueError("ModelFieldList requires model to be set")
-
-    def populate_obj(self, obj, name):
-        while len(getattr(obj, name)) < len(self.entries):
-            newModel = self.model()
-            db.session.add(newModel)
-            getattr(obj, name).append(newModel)
-        while len(getattr(obj, name)) > len(self.entries):
-            db.session.delete(getattr(obj, name).pop())
-        super(ModelFieldList, self).populate_obj(obj, name)
-
-
-class SampleForm(NoCsrfForm):
+class SampleForm(FlaskForm):
+    patient = SelectField(_l('Patient'), coerce=int, choices=[])
     code = StringField(_l('Code'), validators=[DataRequired()])
-    sample_type = SelectField(_l('Nature de prélèvement'), coerce=int, choices=[])
+    sample_nature = SelectField(_l('Nature de prélèvement'), coerce=int, choices=[])
+    sample_type = SelectField(_l('Type de prélèvement'), coerce=int, choices=[])
     date = StringField(_l('Date de prélèvement'), validators=[DataRequired()])
     site = StringField(_l('Site anatomique'), validators=[DataRequired()])
+    jonc_type = SelectField(_l('Couleur de jonc'), coerce=int, choices=[])
     tube_type = SelectField(_l('Conditionement'), coerce=int, choices=[])
     mesure = SelectField(_l('Unité de mésure'), coerce=int, choices=[])
     volume = StringField(_l('Volume / Concentration'), validators=[DataRequired()])
-
-
-class PatientForm(FlaskForm):
-    customer = SelectField(_l('Client'), coerce=int, choices=[])
-    project = SelectField(_l('Projet'), coerce=int, choices=[])
-
-    firstname = StringField(_l('Nom du deposant'), validators=[DataRequired()])
-    lastname = StringField(_l('Prénoms du deposant'), validators=[DataRequired()])
-    telephone = StringField(_l('Téléphone'), validators=[DataRequired()])
-    transport_date = StringField(_l('Date de transport'), validators=[DataRequired()])
-    temperature = StringField(_l('Temperature'), validators=[DataRequired()])
-
-    origin = SelectField(_l('Règne'), coerce=int, choices=[])
-    code = StringField(_l('Code Patient'), validators=[DataRequired()])
-    sexe = SelectField(_l('Sexe'), coerce=int, choices=[(1, 'Male'), (2, 'Femelle')])
-    birthday = StringField(_l('Date de naissaince'), validators=[DataRequired()])
-    samples = ModelFieldList(FormField(SampleForm), min_entries=1, model=Sample)
     submit = SubmitField(_l('Enregistrer'))
 
 

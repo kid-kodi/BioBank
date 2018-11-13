@@ -5,8 +5,9 @@ from flask_login import current_user, login_required
 from flask_babel import _, get_locale
 from guess_language import guess_language
 from app import db
-from app.sample.forms import PatientForm, SearchForm
-from app.models import Sample, Origin, Customer, Project, Order, SampleType, Mesure, TubeType, Patient, Basket
+from app.sample.forms import SampleForm, SearchForm
+from app.models import Sample, Origin, Customer, Project, Order, SampleType, Mesure, TubeType, Patient, Basket, \
+    SampleNature, JoncType
 from app.translate import translate
 from app.sample import bp
 
@@ -51,41 +52,28 @@ def index():
 @bp.route('/sample/add', methods=['GET', 'POST'])
 @login_required
 def add():
-    form = PatientForm()
-    form.origin.choices = [(c.id, c.name) for c in Origin.query.all()]
-    form.customer.choices = [(c.id, c.display_as) for c in Customer.query.all()]
-    form.project.choices = [(c.id, c.title) for c in Project.query.all()]
-    #form.order.choices = [(c.id, c.id) for c in Order.query.all()]
-
-    for entry in form.samples.entries:
-        entry.sample_type.choices = [(c.id, c.name) for c in SampleType.query.all()]
-        entry.mesure.choices = [(c.id, c.name) for c in Mesure.query.all()]
-        entry.tube_type.choices = [(c.id, c.name) for c in TubeType.query.all()]
+    form = SampleForm()
+    form.patient.choices = [(c.id, c.code) for c in Patient.query.all()]
+    form.sample_nature.choices = [(c.id, c.name) for c in SampleNature.query.all()]
+    form.sample_type.choices = [(c.id, c.name) for c in SampleType.query.all()]
+    form.tube_type.choices = [(c.id, c.name) for c in TubeType.query.all()]
+    form.jonc_type.choices = [(c.id, c.name) for c in JoncType.query.all()]
+    form.mesure.choices = [(c.id, c.name) for c in Mesure.query.all()]
 
     if form.validate_on_submit():
-        order = Order()
-        order.project_id = form.project.data
-        order.firstname = form.firstname.data
-        order.lastname = form.lastname.data
-        order.telephone = form.telephone.data
-        order.transport_date = form.transport_date.data
-        order.temperature = form.temperature.data
-
-        patient = Patient(origin_id=form.origin.data,
-                          code=form.code.data, sexe=form.sexe.data, birthday=form.birthday.data)
-        for s in form.samples.entries:
-            sample = Sample()
-            sample.code = s.code.data
-            sample.sample_type_id = s.sample_type.data
-            sample.date = s.date.data
-            sample.site = s.site.data
-            sample.tube_type_id = s.tube_type.data
-            sample.mesure_id = s.mesure.data
-            sample.volume = s.volume.data
-            patient.samples.append(sample)
-
-        order.patients.append(patient)
-        db.session.add(order)
+        sample = Sample()
+        sample.serial = get_bio_code('HU')
+        sample.code = form.code.data
+        sample.patient_id = form.patient.data
+        sample.sample_nature_id = form.sample_nature.data
+        sample.sample_type_id = form.sample_type.data
+        sample.tube_type_id = form.tube_type.data
+        sample.jonc_type_id = form.jonc_type.data
+        sample.mesure_id = form.mesure.data
+        sample.volume = form.volume.data
+        sample.site = form.site.data
+        sample.date = form.date.data
+        db.session.add(sample)
         db.session.commit()
         flash(_('Nouveau prélèvement ajouté avec succèss!'))
         return redirect(url_for('sample.index'))
@@ -96,32 +84,39 @@ def add():
 @login_required
 def edit(id):
     sample = Sample.query.get(id)
-    form = SampleForm()
+    form = SampleForm(obj=sample)
+    form.patient.choices = [(c.id, c.code) for c in Patient.query.all()]
+    form.sample_nature.choices = [(c.id, c.name) for c in SampleNature.query.all()]
+    form.sample_type.choices = [(c.id, c.name) for c in SampleType.query.all()]
+    form.tube_type.choices = [(c.id, c.name) for c in TubeType.query.all()]
+    form.jonc_type.choices = [(c.id, c.name) for c in JoncType.query.all()]
+    form.mesure.choices = [(c.id, c.name) for c in Mesure.query.all()]
 
-    form.origin.choices = [(c.id, c.name) for c in Origin.query.all()]
     if form.validate_on_submit():
-        sample.origin_id  = form.origin.data
-        sample.code       = form.code.data
-        sample.birthday   = form.birthday.data
-        sample.display_as = form.display_as.data
-        sample.firstname  = form.firstname.data
-        sample.lastname   = form.lastname.data
-        sample.adresse    = form.adresse.data
-        sample.telephone  = form.telephone.data
-        sample.email      = form.email.data
+        sample.code = form.code.data
+        sample.patient_id = form.patient.data
+        sample.sample_nature_id = form.sample_nature.data
+        sample.sample_type_id = form.sample_type.data
+        sample.tube_type_id = form.tube_type.data
+        sample.jonc_type_id = form.jonc_type.data
+        sample.mesure_id = form.mesure.data
+        sample.volume = form.volume.data
+        sample.site = form.site.data
+        sample.date = form.date.data
         db.session.commit()
         flash(_('Les informations ont été modifiées avec succèss'))
         return redirect(url_for('sample.detail', id=sample.id))
 
-    form.origin.data     = sample.origin_id
-    form.code.data       = sample.code
-    form.birthday.data   = sample.birthday
-    form.display_as.data = sample.display_as
-    form.firstname.data  = sample.firstname
-    form.lastname.data   = sample.lastname
-    form.adresse.data    = sample.adresse
-    form.telephone.data  = sample.telephone
-    form.email.data      = sample.email
+    form.code.data = sample.code
+    form.patient.data = sample.patient_id
+    form.sample_nature.data = sample.sample_nature_id
+    form.sample_type.data = sample.sample_type_id
+    form.tube_type.data = sample.tube_type_id
+    form.jonc_type.data = sample.jonc_type_id
+    form.mesure.data = sample.mesure_id
+    form.volume.data = sample.volume
+    form.site.data = sample.site
+    form.date.data = sample.date
     return render_template('sample/form.html', form=form)
 
 
@@ -152,3 +147,9 @@ def removefromlist(id):
     sample.basket_id = 0
     db.session.commit()
     return redirect(url_for('sample.index'))
+
+
+def get_bio_code(s):
+    size = len(Sample.query.all()) + 1
+    num = s + str(size).zfill(10)
+    return num

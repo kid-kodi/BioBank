@@ -3,6 +3,15 @@
 {% set active_page = "order" %}
 {% block collect_content %}
 <!-- just to display all potential errors -->
+{% if form.errors %}
+    <ul class="errors">
+        {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+            {% for error in field_errors %}
+                <li>{{ form[field_name].label }}: {{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+{% endif %}
     <div class="bar">
         <h1>{{ _('Formulaire d\'enregistrement de dépôt') }}</h1>
     </div>
@@ -68,6 +77,73 @@
                     </label>
                     {{ form.temperature(class_="form-control") }}
                 </div>
+            </div>
+        </div>
+        <div class="block">
+            <div class="bar">
+                <h1>Patient</h1>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label>
+                        {{ form.code.label }}
+                    </label>
+                    {{ form.code(class_="form-control") }}
+                </div>
+                <div class="col-md-4">
+                    <label>
+                        {{ form.sexe.label }}
+                    </label>
+                    {{ form.sexe(class_="form-control") }}
+                </div>
+                <div class="col-md-4">
+                    <label>
+                        {{ form.birthday.label }}
+                    </label>
+                    {{ form.birthday(class_="form-control datepicker") }}
+                </div>
+            </div>
+        </div>
+        <div class="block">
+            <div class="bar">
+                <h1>Documents</h1>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="radio-inline">
+                        {{ form.consent_file.label }}
+                        {{ form.consent_file() }}
+                    </label>
+                    {{ form.consent_file_url() }}
+                </div>
+                <div class="col-md-4">
+                    <label class="radio-inline">
+                        {{ form.sample_file.label }}
+                        {{ form.sample_file() }}
+                    </label>
+                    {{ form.sample_file_url() }}
+
+                </div>
+                <div class="col-md-4">
+                    <label class="radio-inline">
+                        {{ form.observation_file.label }}
+                        {{ form.observation_file() }}
+                    </label>
+                    {{ form.consent_file_url() }}
+                </div>
+            </div>
+        </div>
+        <div class="block">
+            <div class="bar">
+                <h1>Echantillons</h1>
+                <div class="actions">
+                    <button id="addSampleBtn" class="btn btn-default">Nouveau échantillon</button>
+                </div>
+            </div>
+            <div class="row" id="list">
+                {% for sample in form.samples %}
+                    {% include 'sample/_sample.html' %}
+                {% endfor %}
             </div>
         </div>
         <div class="row">

@@ -22,3 +22,36 @@ look for its project
 
 2) check if we validate before create sample
 
+ajouter une page de demmarage pour Echantillon (Humain, Animale, Végétale ect...)
+
+Fiche de dépôt
+
+Patient
+- fiche de renseignement des échantillons oui non
+- ajouter consentement radio button oui non , input date, fichier
+- cahier d'observation
+
+- code biobank générer chez le patient un patient un code biobank
+
+client
+catégorie
+Unité institu pasteur
+Enlever sample
+
+
+Echantillon
+- couleur de tube
+- volume / concentration + unité
+- nombre de tube
+- code échantillon
+- type d'echantillon
+
+Code impression
+- Code patient
+- code biobank
+- code aliquot
+
+EXP :
+HypoTC18CHUC003
+HU0000000001
+3SURur2-fn-rouge

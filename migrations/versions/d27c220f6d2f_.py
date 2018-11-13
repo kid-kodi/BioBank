@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 82a05778d507
+Revision ID: d27c220f6d2f
 Revises: 
-Create Date: 2018-11-05 10:32:15.539867
+Create Date: 2018-11-13 08:10:01.664592
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '82a05778d507'
+revision = 'd27c220f6d2f'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -24,21 +24,38 @@ def upgrade():
     sa.Column('description', sa.String(length=128), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_table('jonc_type',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('name', sa.String(length=120), nullable=True),
+    sa.Column('siggle', sa.String(length=120), nullable=True),
+    sa.Column('description', sa.String(length=128), nullable=True),
+    sa.PrimaryKeyConstraint('id')
+    )
     op.create_table('mesure',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=120), nullable=True),
+    sa.Column('siggle', sa.String(length=120), nullable=True),
     sa.Column('description', sa.String(length=128), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('origin',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=120), nullable=True),
+    sa.Column('sign', sa.String(length=5), nullable=True),
+    sa.Column('description', sa.String(length=128), nullable=True),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('sample_nature',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('name', sa.String(length=120), nullable=True),
+    sa.Column('siggle', sa.String(length=120), nullable=True),
     sa.Column('description', sa.String(length=128), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('sample_type',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=120), nullable=True),
+    sa.Column('siggle', sa.String(length=120), nullable=True),
     sa.Column('description', sa.String(length=128), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
@@ -51,6 +68,7 @@ def upgrade():
     op.create_table('tube_type',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=120), nullable=True),
+    sa.Column('siggle', sa.String(length=120), nullable=True),
     sa.Column('description', sa.String(length=128), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
@@ -79,6 +97,17 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_basket_created_at'), 'basket', ['created_at'], unique=False)
+    op.create_table('box_type',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('name', sa.String(length=255), nullable=True),
+    sa.Column('max_number', sa.Integer(), nullable=True),
+    sa.Column('description', sa.String(length=255), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('created_by', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['created_by'], ['user.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_box_type_created_at'), 'box_type', ['created_at'], unique=False)
     op.create_table('customer',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('category_id', sa.Integer(), nullable=True),
@@ -88,17 +117,40 @@ def upgrade():
     sa.Column('adresse', sa.String(length=255), nullable=True),
     sa.Column('telephone', sa.String(length=140), nullable=True),
     sa.Column('email', sa.String(length=255), nullable=True),
+    sa.Column('timestamp', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['category_id'], ['category.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_customer_email'), 'customer', ['email'], unique=True)
     op.create_index(op.f('ix_customer_telephone'), 'customer', ['telephone'], unique=True)
+    op.create_index(op.f('ix_customer_timestamp'), 'customer', ['timestamp'], unique=False)
+    op.create_table('equipment_type',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('name', sa.String(length=255), nullable=True),
+    sa.Column('description', sa.String(length=255), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('created_by', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['created_by'], ['user.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_equipment_type_created_at'), 'equipment_type', ['created_at'], unique=False)
     op.create_table('followers',
     sa.Column('follower_id', sa.Integer(), nullable=True),
     sa.Column('followed_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['followed_id'], ['user.id'], ),
     sa.ForeignKeyConstraint(['follower_id'], ['user.id'], )
     )
+    op.create_table('location_history',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('location_type', sa.String(length=255), nullable=True),
+    sa.Column('old_location', sa.String(length=255), nullable=True),
+    sa.Column('new_location', sa.String(length=255), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('created_by', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['created_by'], ['user.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_location_history_created_at'), 'location_history', ['created_at'], unique=False)
     op.create_table('message',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('sender_id', sa.Integer(), nullable=True),
@@ -131,6 +183,17 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_post_timestamp'), 'post', ['timestamp'], unique=False)
+    op.create_table('room',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('name', sa.String(length=255), nullable=True),
+    sa.Column('max_number', sa.Integer(), nullable=True),
+    sa.Column('status', sa.Integer(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('created_by', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['created_by'], ['user.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_room_created_at'), 'room', ['created_at'], unique=False)
     op.create_table('subject',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('study_id', sa.Integer(), nullable=True),
@@ -171,6 +234,21 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_temperature_created_at'), 'temperature', ['created_at'], unique=False)
+    op.create_table('equipment',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('room_id', sa.Integer(), nullable=True),
+    sa.Column('equipment_type_id', sa.Integer(), nullable=True),
+    sa.Column('name', sa.String(length=255), nullable=True),
+    sa.Column('max_number', sa.Integer(), nullable=True),
+    sa.Column('status', sa.Integer(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('created_by', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['created_by'], ['user.id'], ),
+    sa.ForeignKeyConstraint(['equipment_type_id'], ['equipment_type.id'], ),
+    sa.ForeignKeyConstraint(['room_id'], ['room.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_equipment_created_at'), 'equipment', ['created_at'], unique=False)
     op.create_table('process',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('technique_id', sa.Integer(), nullable=True),
@@ -198,12 +276,41 @@ def upgrade():
     sa.Column('program_id', sa.Integer(), nullable=True),
     sa.Column('title', sa.String(length=255), nullable=True),
     sa.Column('description', sa.String(length=255), nullable=True),
+    sa.Column('timestamp', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['customer_id'], ['customer.id'], ),
     sa.ForeignKeyConstraint(['program_id'], ['program.id'], ),
     sa.ForeignKeyConstraint(['study_id'], ['study.id'], ),
     sa.ForeignKeyConstraint(['subject_id'], ['subject.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_index(op.f('ix_project_timestamp'), 'project', ['timestamp'], unique=False)
+    op.create_table('rack',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('equipment_id', sa.Integer(), nullable=True),
+    sa.Column('name', sa.String(length=255), nullable=True),
+    sa.Column('max_number', sa.Integer(), nullable=True),
+    sa.Column('status', sa.Integer(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('created_by', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['created_by'], ['user.id'], ),
+    sa.ForeignKeyConstraint(['equipment_id'], ['equipment.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_rack_created_at'), 'rack', ['created_at'], unique=False)
+    op.create_table('box',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('rack_id', sa.Integer(), nullable=True),
+    sa.Column('box_type_id', sa.Integer(), nullable=True),
+    sa.Column('name', sa.String(length=255), nullable=True),
+    sa.Column('status', sa.Integer(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('created_by', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['box_type_id'], ['box_type.id'], ),
+    sa.ForeignKeyConstraint(['created_by'], ['user.id'], ),
+    sa.ForeignKeyConstraint(['rack_id'], ['rack.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_box_created_at'), 'box', ['created_at'], unique=False)
     op.create_table('order',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('project_id', sa.Integer(), nullable=True),
@@ -227,8 +334,15 @@ def upgrade():
     sa.Column('order_id', sa.Integer(), nullable=True),
     sa.Column('origin_id', sa.Integer(), nullable=True),
     sa.Column('code', sa.String(length=120), nullable=True),
+    sa.Column('bio_code', sa.String(length=120), nullable=True),
     sa.Column('birthday', sa.String(length=128), nullable=True),
     sa.Column('sexe', sa.Integer(), nullable=True),
+    sa.Column('observation_file', sa.Integer(), nullable=True),
+    sa.Column('observation_file_url', sa.String(length=255), nullable=True),
+    sa.Column('sample_file', sa.Integer(), nullable=True),
+    sa.Column('sample_file_url', sa.String(length=255), nullable=True),
+    sa.Column('consent_file', sa.Integer(), nullable=True),
+    sa.Column('consent_file_url', sa.String(length=255), nullable=True),
     sa.ForeignKeyConstraint(['order_id'], ['order.id'], ),
     sa.ForeignKeyConstraint(['origin_id'], ['origin.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -236,8 +350,10 @@ def upgrade():
     op.create_table('sample',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('patient_id', sa.Integer(), nullable=True),
+    sa.Column('sample_nature_id', sa.Integer(), nullable=True),
     sa.Column('sample_type_id', sa.Integer(), nullable=True),
     sa.Column('tube_type_id', sa.Integer(), nullable=True),
+    sa.Column('jonc_type_id', sa.Integer(), nullable=True),
     sa.Column('mesure_id', sa.Integer(), nullable=True),
     sa.Column('serial', sa.String(length=255), nullable=True),
     sa.Column('code', sa.String(length=255), nullable=True),
@@ -252,9 +368,11 @@ def upgrade():
     sa.Column('parent_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['basket_id'], ['basket.id'], ),
     sa.ForeignKeyConstraint(['created_by'], ['user.id'], ),
+    sa.ForeignKeyConstraint(['jonc_type_id'], ['jonc_type.id'], ),
     sa.ForeignKeyConstraint(['mesure_id'], ['mesure.id'], ),
     sa.ForeignKeyConstraint(['parent_id'], ['sample.id'], ),
     sa.ForeignKeyConstraint(['patient_id'], ['patient.id'], ),
+    sa.ForeignKeyConstraint(['sample_nature_id'], ['sample_nature.id'], ),
     sa.ForeignKeyConstraint(['sample_type_id'], ['sample_type.id'], ),
     sa.ForeignKeyConstraint(['tube_type_id'], ['tube_type.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -272,11 +390,34 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_aliquot_created_at'), 'aliquot', ['created_at'], unique=False)
+    op.create_table('hole',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('box_id', sa.Integer(), nullable=True),
+    sa.Column('sample_id', sa.Integer(), nullable=True),
+    sa.Column('name', sa.String(length=255), nullable=True),
+    sa.Column('status', sa.Integer(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('created_by', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['box_id'], ['box.id'], ),
+    sa.ForeignKeyConstraint(['created_by'], ['user.id'], ),
+    sa.ForeignKeyConstraint(['sample_id'], ['sample.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_hole_created_at'), 'hole', ['created_at'], unique=False)
+    op.create_table('sample_hole_history',
+    sa.Column('sample_id', sa.Integer(), nullable=True),
+    sa.Column('hole_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['hole_id'], ['hole.id'], ),
+    sa.ForeignKeyConstraint(['sample_id'], ['sample.id'], )
+    )
     # ### end Alembic commands ###
 
 
 def downgrade():
     # ### commands auto generated by Alembic - please adjust! ###
+    op.drop_table('sample_hole_history')
+    op.drop_index(op.f('ix_hole_created_at'), table_name='hole')
+    op.drop_table('hole')
     op.drop_index(op.f('ix_aliquot_created_at'), table_name='aliquot')
     op.drop_table('aliquot')
     op.drop_index(op.f('ix_sample_created_at'), table_name='sample')
@@ -284,10 +425,17 @@ def downgrade():
     op.drop_table('patient')
     op.drop_index(op.f('ix_order_timestamp'), table_name='order')
     op.drop_table('order')
+    op.drop_index(op.f('ix_box_created_at'), table_name='box')
+    op.drop_table('box')
+    op.drop_index(op.f('ix_rack_created_at'), table_name='rack')
+    op.drop_table('rack')
+    op.drop_index(op.f('ix_project_timestamp'), table_name='project')
     op.drop_table('project')
     op.drop_table('program')
     op.drop_index(op.f('ix_process_created_at'), table_name='process')
     op.drop_table('process')
+    op.drop_index(op.f('ix_equipment_created_at'), table_name='equipment')
+    op.drop_table('equipment')
     op.drop_index(op.f('ix_temperature_created_at'), table_name='temperature')
     op.drop_table('temperature')
     op.drop_index(op.f('ix_technique_created_at'), table_name='technique')
@@ -295,6 +443,8 @@ def downgrade():
     op.drop_index(op.f('ix_task_name'), table_name='task')
     op.drop_table('task')
     op.drop_table('subject')
+    op.drop_index(op.f('ix_room_created_at'), table_name='room')
+    op.drop_table('room')
     op.drop_index(op.f('ix_post_timestamp'), table_name='post')
     op.drop_table('post')
     op.drop_index(op.f('ix_notification_timestamp'), table_name='notification')
@@ -302,10 +452,17 @@ def downgrade():
     op.drop_table('notification')
     op.drop_index(op.f('ix_message_timestamp'), table_name='message')
     op.drop_table('message')
+    op.drop_index(op.f('ix_location_history_created_at'), table_name='location_history')
+    op.drop_table('location_history')
     op.drop_table('followers')
+    op.drop_index(op.f('ix_equipment_type_created_at'), table_name='equipment_type')
+    op.drop_table('equipment_type')
+    op.drop_index(op.f('ix_customer_timestamp'), table_name='customer')
     op.drop_index(op.f('ix_customer_telephone'), table_name='customer')
     op.drop_index(op.f('ix_customer_email'), table_name='customer')
     op.drop_table('customer')
+    op.drop_index(op.f('ix_box_type_created_at'), table_name='box_type')
+    op.drop_table('box_type')
     op.drop_index(op.f('ix_basket_created_at'), table_name='basket')
     op.drop_table('basket')
     op.drop_index(op.f('ix_user_username'), table_name='user')
@@ -315,7 +472,9 @@ def downgrade():
     op.drop_table('tube_type')
     op.drop_table('study')
     op.drop_table('sample_type')
+    op.drop_table('sample_nature')
     op.drop_table('origin')
     op.drop_table('mesure')
+    op.drop_table('jonc_type')
     op.drop_table('category')
     # ### end Alembic commands ###

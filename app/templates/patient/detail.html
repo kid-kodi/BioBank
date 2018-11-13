@@ -4,7 +4,7 @@
 {% block collect_content %}
     <div class="bar">
         <div>
-            <h1>{{patient.order.project.title}} - {{patient.code}}</h1>
+            <h1>{{_('Projet : ')}} {{patient.order.project.title}} - {{_('Code patient')}} {{patient.code}}</h1>
             <h3>{{patient.origin.name}} {{patient.sexe}} {{patient.birthday}}</h3>
         </div>
         <div class="actions">
@@ -29,7 +29,12 @@
         </table>
       </div>
     <div class="block">
-        <h3>Prélèvements</h3>
+        <div class="bar">
+            <h1>Prélèvements</h1>
+            <div class="actions">
+                <a class="btn btn-default" href="{{ url_for('sample.add') }}">{{ _('Nouvel échantillon') }}</a>
+            </div>
+        </div>
         <table class="table">
             <thead>
             <tr>

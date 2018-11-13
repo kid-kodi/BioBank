@@ -1,31 +1,67 @@
 <div class="col-md-4 item">
-    <p class="removeSampleBtn">remove</p>
-    <p>
-        {{ sample.code.label }}
-        {{ sample.code(class_="form-control") }}
-    </p>
-    <p>
-        {{ sample.sample_type.label }}
-        {{ sample.sample_type(class_="form-control") }}
-    </p>
-    <p>
-        {{ sample.date.label }}
-        {{ sample.date(class_="form-control") }}
-    </p>
-    <p>
-        {{ sample.site.label }}
-        {{ sample.site(class_="form-control") }}
-    </p>
-    <p>
-        {{ sample.tube_type.label }}
-        {{ sample.tube_type(class_="form-control") }}
-    </p>
-    <p>
-        {{ sample.mesure.label }}
-        {{ sample.mesure(class_="form-control") }}
-    </p>
-    <p>
-        {{ sample.volume.label }}
-        {{ sample.volume(class_="form-control") }}
-    </p>
+    <div class="bar">
+        <p class="removeSampleBtn"><span aria-hidden="true">&times;</span></p>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {{ sample.code.label }}
+            {{ sample.code(class_="form-control") }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {{ sample.sample_nature.label }}
+            {{ sample.sample_nature(class_="form-control") }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+           {{ sample.sample_type.label }}
+            {{ sample.sample_type(class_="form-control") }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {{ sample.date.label }}
+            {{ sample.date(class_="form-control datepicker") }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {{ sample.site.label }}
+            {{ sample.site(class_="form-control") }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {{ sample.tube_type.label }}
+            {{ sample.tube_type(class_="form-control") }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {{ sample.jonc_type.label }}
+            {{ sample.jonc_type(class_="form-control") }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {{ sample.number.label }}
+            {{ sample.number(class_="form-control") }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {{ sample.volume.label }}
+            <div class="row">
+                <div class="col-md-6">
+                    {{ sample.volume(class_="form-control col-md-6") }}
+                </div>
+                <div class="col-md-6">
+                    {{ sample.mesure(class_="form-control col-md-6") }}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+

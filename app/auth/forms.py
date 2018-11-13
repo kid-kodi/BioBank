@@ -6,20 +6,20 @@ from app.models import User
 
 
 class LoginForm(FlaskForm):
-    username = StringField(_l('Username'), validators=[DataRequired()])
-    password = PasswordField(_l('Password'), validators=[DataRequired()])
-    remember_me = BooleanField(_l('Remember Me'))
-    submit = SubmitField(_l('Sign In'))
+    username = StringField(_l('Nom utilisateur'), validators=[DataRequired()])
+    password = PasswordField(_l('Mot de passe'), validators=[DataRequired()])
+    remember_me = BooleanField(_l('Se souvenir'))
+    submit = SubmitField(_l('Connexion'))
 
 
 class RegistrationForm(FlaskForm):
-    username = StringField(_l('Username'), validators=[DataRequired()])
-    email = StringField(_l('Email'), validators=[DataRequired(), Email()])
-    password = PasswordField(_l('Password'), validators=[DataRequired()])
+    username = StringField(_l('Nom utilisateur'), validators=[DataRequired()])
+    email = StringField(_l('Email adresse'), validators=[DataRequired(), Email()])
+    password = PasswordField(_l('Mot de passe'), validators=[DataRequired()])
     password2 = PasswordField(
-        _l('Repeat Password'), validators=[DataRequired(),
+        _l('Repéter Mot de passe'), validators=[DataRequired(),
                                            EqualTo('password')])
-    submit = SubmitField(_l('Register'))
+    submit = SubmitField(_l('Enregistrer'))
 
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()

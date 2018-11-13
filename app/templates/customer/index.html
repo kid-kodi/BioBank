@@ -30,13 +30,12 @@
         <tr>
           <td>{{customer.id}}</td>
           <td>{{customer.category.name}}</td>
-          <td>
-            <a href="{{ url_for('customer.detail', id=customer.id) }}">{{customer.display_as}}</a>
-          </td>
+          <td>{{customer.display_as}}</td>
           <td>{{customer.telephone}}</td>
           <td>{{customer.email}}</td>
           <td>
-            <a href="{{ url_for('customer.edit', id=customer.id) }}">Modifier</a>
+            <a href="{{ url_for('customer.detail', id=customer.id) }}">{{ _('Détails') }}</a>
+            <a href="{{ url_for('customer.edit', id=customer.id) }}">{{ _('Modifier') }}</a>
           </td>
         </tr>
         {% endfor %}

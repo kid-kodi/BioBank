@@ -26,9 +26,9 @@ def add():
     form.category.choices = [(c.id, c.name) for c in Category.query.all()]
     if form.validate_on_submit():
         customer = Customer(category_id=form.category.data, display_as=form.display_as.data,
-                    firstname=form.firstname.data, lastname=form.lastname.data,
-                    adresse=form.adresse.data, telephone=form.telephone.data,
-                    email=form.email.data)
+                            firstname=form.firstname.data, lastname=form.lastname.data,
+                            adresse=form.adresse.data, telephone=form.telephone.data,
+                            email=form.email.data)
         db.session.add(customer)
         db.session.commit()
         flash(_('Nouveau Client ajouté avec succèss!'))
@@ -45,24 +45,25 @@ def edit(id):
     form.category.choices = [(c.id, c.name) for c in Category.query.all()]
     if form.validate_on_submit():
         customer.category_id = form.category.data
-        customer.display_as  = form.display_as.data
-        customer.firstname   = form.firstname.data
-        customer.lastname    = form.lastname.data
-        customer.adresse     = form.adresse.data
-        customer.telephone   = form.telephone.data
-        customer.email       = form.email.data
+        customer.display_as = form.display_as.data
+        customer.firstname = form.firstname.data
+        customer.lastname = form.lastname.data
+        customer.adresse = form.adresse.data
+        customer.telephone = form.telephone.data
+        customer.email = form.email.data
         db.session.commit()
         flash(_('Les informations ont été modifiées avec succèss'))
         return redirect(url_for('customer.detail', id=customer.id))
 
-    form.category.data   = customer.category_id
+    form.category.data = customer.category_id
     form.display_as.data = customer.display_as
-    form.firstname.data  = customer.firstname
-    form.lastname.data   = customer.lastname
-    form.adresse.data    = customer.adresse
-    form.telephone.data  = customer.telephone
-    form.email.data      = customer.email
+    form.firstname.data = customer.firstname
+    form.lastname.data = customer.lastname
+    form.adresse.data = customer.adresse
+    form.telephone.data = customer.telephone
+    form.email.data = customer.email
     return render_template('customer/form.html', form=form)
+
 
 @bp.route('/customer/<int:id>', methods=['GET', 'POST'])
 @login_required
@@ -75,48 +76,50 @@ def detail(id):
 @login_required
 def add_project(id):
     form = ProjectForm()
+    customer = Customer.query.get(id)
     form.customer.choices = [(c.id, c.display_as) for c in Customer.query.all()]
     form.study.choices = [(c.id, c.name) for c in Study.query.all()]
     form.subject.choices = [(c.id, c.name) for c in Subject.query.all()]
     form.program.choices = [(c.id, c.name) for c in Program.query.all()]
     if form.validate_on_submit():
-        project = Project(customer_id=form.customer.data, study_id=form.study.data,
-                    subject_id=form.subject.data, program_id=form.program.data,
-                    title=form.title.data, description=form.description.data)
+        project = Project(customer_id=customer.id, study_id=form.study.data,
+                          subject_id=form.subject.data, program_id=form.program.data,
+                          title=form.title.data, description=form.description.data)
         db.session.add(project)
         db.session.commit()
         flash(_('Nouveau projet ajouté avec succèss!'))
         return redirect(url_for('customer.detail', id=id))
-    form.customer.data = id
-    return render_template('project/form.html', form=form)
+    form.customer.data = customer.id
+    return render_template('project/form.html', form=form, customer=customer)
 
 
 @bp.route('/customer/<int:id>/project/edit/<int:pid>', methods=['GET', 'POST'])
 @login_required
 def edit_project(id, pid):
     project = Project.query.get(pid)
+    customer = project.customer
     form = ProjectForm()
     form.customer.choices = [(c.id, c.display_as) for c in Customer.query.all()]
     form.study.choices = [(c.id, c.name) for c in Study.query.all()]
     form.subject.choices = [(c.id, c.name) for c in Subject.query.all()]
     form.program.choices = [(c.id, c.name) for c in Program.query.all()]
     if form.validate_on_submit():
-        project.study_id  = form.study.data
-        project.subject_id   = form.subject.data
-        project.program_id    = form.program.data
-        project.title   = form.title.data
-        project.description  = form.description.data
+        project.study_id = form.study.data
+        project.subject_id = form.subject.data
+        project.program_id = form.program.data
+        project.title = form.title.data
+        project.description = form.description.data
         db.session.commit()
         flash(_('Les informations ont été modifiées avec succèss'))
-        return redirect(url_for('customer.detail', id=id))
+        return redirect(url_for('customer.detail', id=customer.id))
 
-    form.customer.data   = project.customer_id
+    form.customer.data = project.customer_id
     form.study.data = project.study_id
-    form.subject.data  = project.subject_id
-    form.program.data   = project.program_id
-    form.description.data  = project.description
-    form.title.data    = project.title
-    return render_template('project/form.html', form=form)
+    form.subject.data = project.subject_id
+    form.program.data = project.program_id
+    form.description.data = project.description
+    form.title.data = project.title
+    return render_template('project/form.html', form=form, customer=customer)
 
 
 @bp.route("/customer/export", methods=['GET'])
@@ -132,7 +135,8 @@ def import_data():
         def customer_init_func(row):
             c = Category.query.filter_by(name=row['category']).first()
             p = Customer(category=c, display_as=row['display_as'], firstname=row['firstname'],
-                         lastname=row['lastname'], adresse=row['adresse'], telephone=row['telephone'], email=row['email'])
+                         lastname=row['lastname'], adresse=row['adresse'], telephone=row['telephone'],
+                         email=row['email'])
             return p
 
         request.save_book_to_database(

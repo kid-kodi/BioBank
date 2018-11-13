@@ -5,7 +5,7 @@
     <div class="bar">
       <h1>{{ _('Dépôt') }}</h1>
       <div class="actions">
-        <a class="btn btn-default" href="{{ url_for('order.add') }}">{{ _('Nouveau dépôt') }}</a>
+        <a class="btn btn-default" href="{{ url_for('order.add', project_id=0) }}">{{ _('Nouveau dépôt') }}</a>
       </div>
     </div>
     <table class="table">

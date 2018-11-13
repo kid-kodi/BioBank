@@ -96,7 +96,7 @@
                     <form class="" action="{{url_for('location.store', id=box.id)}}" method="post">
                         {% for item in basket.samples.all() %}
                         {% if item.status == 0 %}
-                        <input type="checkbox" name="samples_id" value="{{item.id}}">
+                            <input type="checkbox" name="samples_id" value="{{item.id}}">
                         {% endif %}
                         {{item.code}}
                         {% endfor %}

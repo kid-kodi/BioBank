@@ -17,6 +17,7 @@
                     class="glyphicon glyphicon-minus" aria-hidden="true"></span></a></li>
             {% endif %}
             <li><a class="btn btn-default" href="{{ url_for('sample.detail', id=sample.id) }}">Voir</a></li>
+            <li><a class="btn btn-default" href="{{ url_for('sample.edit', id=sample.id) }}">Modifier</a></li>
         </ul>
     </td>
 </tr>

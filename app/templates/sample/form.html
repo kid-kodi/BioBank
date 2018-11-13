@@ -1,128 +1,75 @@
-{% extends "collect.html" %}
+{% extends "base.html" %}
 {% import 'bootstrap/wtf.html' as wtf %}
 {% set active_page = "sample" %}
-{% block collect_content %}
+{% block app_content %}
 <!-- just to display all potential errors -->
-{% if form.errors %}
-    <ul class="errors">
-        {% for field_name, field_errors in form.errors|dictsort if field_errors %}
-            {% for error in field_errors %}
-                <li>{{ form[field_name].label }}: {{ error }}</li>
-            {% endfor %}
-        {% endfor %}
-    </ul>
-{% endif %}
     <div class="bar">
         <h1>{{ _('Formulaire d\'enregistrement d\'un échantillon') }}</h1>
     </div>
     <form action="" method="post" novalidate>
-        <div class="block">
-            <div class="bar">
-                <h1>Client</h1>
+        <div class="row">
+            <div class="col-md-4">
+                {{ form.patient.label }}
+                {{ form.patient(class_="form-control") }}
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <label>
-                        {{ form.customer.label }}
-                    </label>
-                    {{ form.customer(class_="form-control") }}
-                </div>
-                <div class="col-md-6">
-                    <label>
-                        {{ form.project.label }}
-                    </label>
-                    {{ form.project(class_="form-control") }}
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                {{ form.code.label }}
+                {{ form.code(class_="form-control") }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                {{ form.sample_nature.label }}
+                {{ form.sample_nature(class_="form-control") }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+               {{ form.sample_type.label }}
+                {{ form.sample_type(class_="form-control") }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                {{ form.date.label }}
+                {{ form.date(class_="form-control datepicker") }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                {{ form.site.label }}
+                {{ form.site(class_="form-control") }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                {{ form.tube_type.label }}
+                {{ form.tube_type(class_="form-control") }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                {{ form.jonc_type.label }}
+                {{ form.jonc_type(class_="form-control") }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                {{ form.volume.label }}
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form.volume(class_="form-control col-md-6") }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.mesure(class_="form-control col-md-6") }}
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="block">
-            <div class="bar">
-                <h1>Déposant</h1>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <label>
-                        {{ form.firstname.label }}
-                    </label>
-                    {{ form.firstname(class_="form-control") }}
-                </div>
-                <div class="col-md-4">
-                    <label>
-                        {{ form.lastname.label }}
-                    </label>
-                    {{ form.lastname(class_="form-control") }}
-                </div>
-                <div class="col-md-4">
-                    <label>
-                        {{ form.telephone.label }}
-                    </label>
-                    {{ form.telephone(class_="form-control") }}
-                </div>
-            </div>
-        </div>
-        <div class="block">
-            <div class="bar">
-                <h1>Transport</h1>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <label>
-                        {{ form.transport_date.label }}
-                    </label>
-                    {{ form.transport_date(class_="form-control") }}
-                </div>
-                <div class="col-md-6">
-                    <label>
-                        {{ form.temperature.label }}
-                    </label>
-                    {{ form.temperature(class_="form-control") }}
-                </div>
-            </div>
-        </div>
-        <div class="block">
-            <div class="bar">
-                <h1>Patient</h1>
-            </div>
-            <div class="row">
-                <div class="col-md-3">
-                    <label>
-                        {{ form.origin.label }}
-                    </label>
-                    {{ form.origin(class_="form-control") }}
-                </div>
-                <div class="col-md-3">
-                    <label>
-                        {{ form.code.label }}
-                    </label>
-                    {{ form.code(class_="form-control") }}
-                </div>
-                <div class="col-md-3">
-                    <label>
-                        {{ form.sexe.label }}
-                    </label>
-                    {{ form.sexe(class_="form-control") }}
-                </div>
-                <div class="col-md-3">
-                    <label>
-                        {{ form.birthday.label }}
-                    </label>
-                    {{ form.birthday(class_="form-control") }}
-                </div>
-            </div>
-        </div>
-        <div class="block">
-            <div class="bar">
-                <h1>Echantillons</h1>
-                <div class="actions">
-                    <button id="addSampleBtn" class="btn btn-default">Nouveau échantillon</button>
-                </div>
-            </div>
-            <div class="row" id="list">
-                {% for sample in form.samples %}
-                    {% include 'sample/_sample.html' %}
-                {% endfor %}
-            </div>
-        </div>
+        <br>
+        <br>
         <div class="row">
             <div class="col-md-12">
                 <p>

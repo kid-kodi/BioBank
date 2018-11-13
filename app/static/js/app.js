@@ -74,6 +74,8 @@ $(function() {
                 closest_li.children("ul").slideDown();
                 closest_li.addClass("active");
         }
-    })
+    });
+
+    $( ".datepicker" ).datepicker();
 
 });
