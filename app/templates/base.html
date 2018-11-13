@@ -18,12 +18,12 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url_for('customer.index') }}">{{ _('Reception') }}</a></li>
-                    <li><a href="{{ url_for('process.index') }}">{{ _('Traitement') }}</a></li>
-                    <li><a href="{{ url_for('location.index') }}">{{ _('Stokage') }}</a></li>
-                    <li><a href="#">{{ _('Mise à disposition') }}</a></li>
-                    <li><a href="{{ url_for('sample.search') }}">{{ _('Echantillon') }}</a></li>
-                    <li><a href="{{ url_for('study.index') }}">{{ _('Administration') }}</a></li>
+                    <li><a href="{{ url_for('customer.index') }}">{{ _('RECEPTION') }}</a></li>
+                    <li><a href="{{ url_for('process.index') }}">{{ _('TRAITEMENT') }}</a></li>
+                    <li><a href="{{ url_for('location.index') }}">{{ _('STOCKAGE') }}</a></li>
+                    <li><a href="#">{{ _('MISE A DISPOSITION') }}</a></li>
+                    <li><a href="{{ url_for('sample.search') }}">{{ _('ECHANTILLON') }}</a></li>
+                    <li><a href="{{ url_for('study.index') }}">{{ _('ADMINISTRATION') }}</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     {% if current_user.is_anonymous %}
@@ -31,12 +31,12 @@
                     {% else %}
                     <li>
                         <a href="{{ url_for('basket.index') }}">
-                            <span>{{ _('Panier') }}</span>
+                            <span>{{ _('PANIER') }}</span>
                             <span id="sample_count" class="badge">0</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url_for('main.messages') }}">{{ _('Messages') }}
+                        <a href="{{ url_for('main.messages') }}">{{ _('MESSAGES') }}
                             {% set new_messages = current_user.new_messages() %}
                             <span id="message_count" class="badge"
                                   style="visibility: {% if new_messages %}visible
