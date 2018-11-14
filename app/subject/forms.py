@@ -8,6 +8,6 @@ from flask_babel import _, lazy_gettext as _l
 class SubjectForm(FlaskForm):
     study = SelectField(_l('Selectionner une étude'), coerce=int)
     name = StringField(_l('Nom de la thématique'), validators=[DataRequired()])
-    description = TextAreaField(_l('Adresse'),
-                             validators=[Length(min=0, max=140)])
+    description = TextAreaField(_l('Description'),
+                             validators=[Length(min=0, max=255)])
     submit = SubmitField(_l('Enregistrer'))

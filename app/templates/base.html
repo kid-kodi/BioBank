@@ -184,6 +184,8 @@
             );
         }
 
+        set_sample_count();
+
 
         {% if current_user.is_authenticated %}
         $(function() {
@@ -210,7 +212,6 @@
 
             }, 10000);
         });
-
         {% endif %}
     </script>
 {% endblock %}

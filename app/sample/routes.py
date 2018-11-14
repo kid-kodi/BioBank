@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import render_template, flash, redirect, url_for, request, g, \
+from flask import render_template, make_response, flash, redirect, url_for, request, g, \
     jsonify, current_app
 from flask_login import current_user, login_required
 from flask_babel import _, get_locale
@@ -10,6 +10,7 @@ from app.models import Sample, Origin, Customer, Project, Order, SampleType, Mes
     SampleNature, JoncType
 from app.translate import translate
 from app.sample import bp
+import pdfkit
 
 
 @bp.route('/search', methods=['GET', 'POST'])
@@ -147,6 +148,18 @@ def removefromlist(id):
     sample.basket_id = 0
     db.session.commit()
     return redirect(url_for('sample.index'))
+
+
+@bp.route('/sample/<int:id>/print', methods=['GET'])
+@login_required
+def print(id):
+    sample = Sample.query.get(id)
+    html = render_template('_bar_code.html', sample=sample)
+    pdf = pdfkit.from_string(html, False)
+    response = make_response(pdf)
+    response.headers['Content-Type'] = 'application/pdf'
+    response.headers['Content-Disposition'] = 'attachment; filename=code.pdf'
+    return response
 
 
 def get_bio_code(s):

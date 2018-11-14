@@ -49,7 +49,7 @@ def edit(id):
     form.subject.data = program.subject_id
     form.name.data = program.name
     form.description.data = program.description
-    return render_template('progamme/form.html', form=form)
+    return render_template('program/form.html', form=form)
 
 
 @bp.route('/program/<int:id>', methods=['GET', 'POST'])

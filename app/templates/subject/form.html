@@ -2,7 +2,12 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 {% set active_page = "subject" %}
 {% block admin_content %}
-    <h1>{{ _('Formulaire d\'enregistrement d\'une thématique') }}</h1>
+    <div class="bar">
+        <div>
+            <h1>{{ _('Formulaire d\'enregistrement d\'une thématique') }}</h1>
+            <p>Veuillez renseigner les informations ci-dessous</p>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-4">
             {{ wtf.quick_form(form) }}

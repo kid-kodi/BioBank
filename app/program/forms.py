@@ -9,5 +9,5 @@ class ProgramForm(FlaskForm):
     subject = SelectField(_l('Selectionner une thématique'), coerce=int)
     name = StringField(_l('Nom du programme'), validators=[DataRequired()])
     description = TextAreaField(_l('Description'),
-                             validators=[Length(min=0, max=140)])
+                             validators=[Length(min=0, max=255)])
     submit = SubmitField(_l('Enregistrer'))
