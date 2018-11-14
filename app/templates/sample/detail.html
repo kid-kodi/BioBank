@@ -4,9 +4,9 @@
 {% block collect_content %}
 <div class="bar">
     <div>
-        <h1>{{sample.serial}}</h1>
-        <h3>{{sample.patient.order.project.customer.display_as}} | {{sample.patient.order.project.title}} |
-            {{sample.patient.order.code}} | {{sample.patient.order.project.customer.display_as}}</h3>
+        <h1>{{_('Client : ')}}{{sample.patient.order.project.customer.display_as}} {{_(' > Projet : ')}}
+            {{sample.patient.order.project.title}} </h1>
+        <h3>{{_('Patient : ')}}{{sample.patient.bio_code}} {{_(' > Code aliqot : ')}} {{sample.code}}</h3>
     </div>
     <div class="actions">
         <ul class="nav nav-pills">
@@ -36,7 +36,7 @@
         </tr>
         <tr>
             <td><b>{{_('Code Bio banque')}}</b></td>
-            <td>{{sample.serial}}</td>
+            <td>{{sample.patient.bio_code}}</td>
         </tr>
         <tr>
             <td><b>{{_('Code')}}</b></td>

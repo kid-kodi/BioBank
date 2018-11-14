@@ -48,6 +48,7 @@ class SampleForm(NoCsrfForm):
 
 class PatientForm(FlaskForm):
     code = StringField(_l('Code Patient'), validators=[DataRequired()])
+    order = SelectField(_l('Selectionner un numéro de commande'), coerce=int, choices=[])
     sexe = SelectField(_l('Sexe'), coerce=int, choices=[(1, 'Male'), (2, 'Femelle')])
     birthday = StringField(_l('Date de naissaince'), validators=[DataRequired()])
     samples = ModelFieldList(FormField(SampleForm), min_entries=1, model=Sample)

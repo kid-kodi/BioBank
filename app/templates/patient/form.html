@@ -4,72 +4,82 @@
 {% block app_content %}
 <!-- just to display all potential errors -->
 {% if form.errors %}
-    <ul class="errors">
-        {% for field_name, field_errors in form.errors|dictsort if field_errors %}
-            {% for error in field_errors %}
-                <li>{{ form[field_name].label }}: {{ error }}</li>
-            {% endfor %}
-        {% endfor %}
-    </ul>
+<ul class="errors">
+    {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+    {% for error in field_errors %}
+    <li>{{ form[field_name].label }}: {{ error }}</li>
+    {% endfor %}
+    {% endfor %}
+</ul>
 {% endif %}
-    <div class="bar">
-        {% if order %}
-            <div>
-                <h1>{{ order.project.customer.display_as }}</h1>
-                <h3>{{_('Commande : ')}}{{ order.serial }}</h3>
-            </div>
-        {% else %}
-            <div>
-                <h1>{{ _('Nouveau patient') }}</h1>
-            </div>
-        {% endif %}
+<div class="bar">
+    <div>
+        <h1>{{ _('Formulaire d\'enregistrement d\'un patient') }}</h1>
     </div>
-    <form action="" method="post" novalidate>
-        <div class="block">
-            <div class="bar">
-                <h1>Patient</h1>
-            </div>
-            <div class="row">
-                <div class="col-md-3">
-                    <label>
-                        {{ form.code.label }}
-                    </label>
-                    {{ form.code(class_="form-control") }}
-                </div>
-                <div class="col-md-3">
-                    <label>
-                        {{ form.sexe.label }}
-                    </label>
-                    {{ form.sexe(class_="form-control") }}
-                </div>
-                <div class="col-md-3">
-                    <label>
-                        {{ form.birthday.label }}
-                    </label>
-                    {{ form.birthday(class_="form-control datepicker") }}
-                </div>
-            </div>
-        </div>
-        <div class="block">
-            <div class="bar">
-                <h1>Echantillons</h1>
-                <div class="actions">
-                    <button id="addSampleBtn" class="btn btn-default">Nouveau échantillon</button>
-                </div>
-            </div>
-            <div class="row" id="list">
-                {% for sample in form.samples %}
-                    {% include 'sample/_sample.html' %}
-                {% endfor %}
-            </div>
+</div>
+<form action="" method="post" novalidate>
+    {% if order %}
+    <h3>{{_('Commande : ')}}{{ order.serial }}</h3>
+    {% else %}
+    <div class="block">
+        <div class="bar">
+            <h1>Commande</h1>
         </div>
         <div class="row">
-            <div class="col-md-12">
-                <p>
-                    {{ form.hidden_tag() }}
-                    {{ form.submit(class_="btn btn-success") }}
-                </p>
+            <div class="col-md-3">
+                <label>
+                    {{ form.order.label }}
+                </label>
+                {{ form.order(class_="form-control") }}
             </div>
         </div>
-    </form>
+    </div>
+    {% endif %}
+    <div class="block">
+        <div class="bar">
+            <h1>Patient</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label>
+                    {{ form.code.label }}
+                </label>
+                {{ form.code(class_="form-control") }}
+            </div>
+            <div class="col-md-3">
+                <label>
+                    {{ form.sexe.label }}
+                </label>
+                {{ form.sexe(class_="form-control") }}
+            </div>
+            <div class="col-md-3">
+                <label>
+                    {{ form.birthday.label }}
+                </label>
+                {{ form.birthday(class_="form-control datepicker") }}
+            </div>
+        </div>
+    </div>
+    <div class="block">
+        <div class="bar">
+            <h1>Echantillons</h1>
+            <div class="actions">
+                <button id="addSampleBtn" class="btn btn-default">Nouveau échantillon</button>
+            </div>
+        </div>
+        <div class="row" id="list">
+            {% for sample in form.samples %}
+            {% include 'sample/_sample.html' %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+                {{ form.hidden_tag() }}
+                {{ form.submit(class_="btn btn-success") }}
+            </p>
+        </div>
+    </div>
+</form>
 {% endblock %}

@@ -4,78 +4,86 @@
 {% block app_content %}
 <!-- just to display all potential errors -->
     <div class="bar">
-        <h1>{{ _('Formulaire d\'enregistrement d\'un échantillon') }}</h1>
+        <div>
+            <h1>{{ _('Formulaire d\'enregistrement d\'un échantillon') }}</h1>
+            <p>Ajouter un nouvel échantillon le numéro patient est requis</p>
+        </div>
     </div>
     <form action="" method="post" novalidate>
-        <div class="row">
-            <div class="col-md-4">
-                {{ form.patient.label }}
-                {{ form.patient(class_="form-control") }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                {{ form.code.label }}
-                {{ form.code(class_="form-control") }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                {{ form.sample_nature.label }}
-                {{ form.sample_nature(class_="form-control") }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-               {{ form.sample_type.label }}
-                {{ form.sample_type(class_="form-control") }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                {{ form.date.label }}
-                {{ form.date(class_="form-control datepicker") }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                {{ form.site.label }}
-                {{ form.site(class_="form-control") }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                {{ form.tube_type.label }}
-                {{ form.tube_type(class_="form-control") }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                {{ form.jonc_type.label }}
-                {{ form.jonc_type(class_="form-control") }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                {{ form.volume.label }}
-                <div class="row">
-                    <div class="col-md-6">
-                        {{ form.volume(class_="form-control col-md-6") }}
-                    </div>
-                    <div class="col-md-6">
-                        {{ form.mesure(class_="form-control col-md-6") }}
-                    </div>
+        <div class="block">
+            <h3>Selectionnez un numéro de patient</h3>
+            <div class="row">
+                <div class="col-md-4">
+                    {{ form.patient(class_="form-control") }}
                 </div>
             </div>
         </div>
-        <br>
-        <br>
-        <div class="row">
-            <div class="col-md-12">
-                <p>
-                    {{ form.hidden_tag() }}
-                    {{ form.submit(class_="btn btn-success") }}
-                </p>
+        <div class="block">
+            <h3>Information sur l'échantillon</h3>
+            <div class="row">
+                <div class="col-md-4">
+                    {{ form.code.label }}
+                    {{ form.code(class_="form-control") }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    {{ form.sample_nature.label }}
+                    {{ form.sample_nature(class_="form-control") }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                   {{ form.sample_type.label }}
+                    {{ form.sample_type(class_="form-control") }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    {{ form.date.label }}
+                    {{ form.date(class_="form-control datepicker") }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    {{ form.site.label }}
+                    {{ form.site(class_="form-control") }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    {{ form.tube_type.label }}
+                    {{ form.tube_type(class_="form-control") }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    {{ form.jonc_type.label }}
+                    {{ form.jonc_type(class_="form-control") }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    {{ form.volume.label }}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form.volume(class_="form-control col-md-6") }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.mesure(class_="form-control col-md-6") }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        {{ form.hidden_tag() }}
+                        {{ form.submit(class_="btn btn-success") }}
+                    </p>
+                </div>
             </div>
         </div>
     </form>

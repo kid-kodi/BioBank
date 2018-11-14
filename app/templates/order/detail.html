@@ -4,8 +4,8 @@
 {% block collect_content %}
     <div class="bar">
         <div class="title">
-            <h1>{{_('Client : ')}}{{order.project.customer.display_as}}</h1>
-            <h3>{{_('Projet : ')}}{{order.project.title}} - {{_('Numéro de dépôt : ')}}{{order.serial}}</h3>
+            <h1>{{_('Client : ')}}{{order.project.customer.display_as}}{{_(' > Projet : ')}}{{order.project.title}}</h1>
+            <h3>{{_('Numéro de dépôt : ')}}{{order.serial}}</h3>
         </div>
         <div class="actions">
 

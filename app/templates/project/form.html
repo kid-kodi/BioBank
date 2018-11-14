@@ -4,12 +4,8 @@
 {% block app_content %}
     <div class="bar">
         <div>
-            {% if customer == undefined %}
-                <h1>{{ _('Nouveau project') }}</h1>
-            {% else %}
-                <h1>{{ _('Projet client') }}</h1>
-                <h3>{{ customer.display_as }}</h3>
-            {% endif %}
+            <h1>{{ _('Formulaire d\'enregistrement d\'un projet') }}</h1>
+            <p>Veuillez renseigner les informations ci-dessous</p>
         </div>
     </div>
     <form action="" method="post" novalidate>
@@ -35,6 +31,8 @@
                         <span style="color: red;">[{{ error }}]</span>
                     {% endfor %}
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-md-4">
                     <label>
                         {{ form.subject.label }}
@@ -44,6 +42,8 @@
                         <span style="color: red;">[{{ error }}]</span>
                     {% endfor %}
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-md-4">
                     <label>
                         {{ form.program.label }}
@@ -53,6 +53,8 @@
                         <span style="color: red;">[{{ error }}]</span>
                     {% endfor %}
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-md-4">
                     <label>
                         {{ form.title.label }}
@@ -62,6 +64,8 @@
                         <span style="color: red;">[{{ error }}]</span>
                     {% endfor %}
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-md-4">
                     <label>
                         {{ form.description.label }}

@@ -3,12 +3,17 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
+<div class="form">
     <div class="bar">
-        <h1>{{ _('Formulaire d\'enregistrement d\'un client') }}</h1>
+        <div>
+            <h1>{{ _('Formulaire d\'enregistrement d\'un client') }}</h1>
+            <p>Veuillez renseigner les informations ci-dessous</p>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-4">
             {{ wtf.quick_form(form) }}
         </div>
     </div>
+</div>
 {% endblock %}

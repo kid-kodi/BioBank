@@ -2,7 +2,7 @@
 {% set active_page = "customer" %}
 {% block collect_content %}
 <div class="bar">
-    <h1>{{_('CLIENT : ')}}{{customer.display_as}}</h1>
+    <h1>{{_('Client : ')}}{{customer.display_as}}</h1>
     <div class="actions">
         <a class="btn btn-default" href="{{ url_for('customer.edit', id=customer.id) }}">Modifier</a>
     </div>

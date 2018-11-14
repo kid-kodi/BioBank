@@ -26,6 +26,7 @@ def add(order_id):
     if order_id != 0:
         order = Order.query.get(order_id)
     form = PatientForm()
+    form.order.choices = [(c.id, c.serial) for c in Order.query.all()]
     for entry in form.samples.entries:
         entry.sample_type.choices = [(c.id, c.name) for c in SampleType.query.all()]
         entry.mesure.choices = [(c.id, c.name) for c in Mesure.query.all()]
@@ -62,6 +63,7 @@ def add(order_id):
 
         flash(_('Nouveau patient ajouté avec succèss!'))
         return redirect(url_for('order.detail', id=patient.order_id))
+    form.order.data = order_id
     return render_template('patient/form.html', form=form, order=order)
 
 
