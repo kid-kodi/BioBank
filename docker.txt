@@ -1,0 +1,12 @@
+docker run --name mysql -d -e MYSQL_RANDOM_ROOT_PASSWORD=yes \
+    -e MYSQL_DATABASE=biobank -e MYSQL_USER=biobank \
+    -e MYSQL_PASSWORD=pass12345 \
+    mysql/mysql-server:5.7
+
+
+docker run --name biobank -d -p 8000:5000 --rm -e SECRET_KEY=biobank@2018 \
+    -e MAIL_SERVER=smtp.googlemail.com -e MAIL_PORT=587 -e MAIL_USE_TLS=true \
+    -e MAIL_USERNAME=konedangui@gmail.com -e MAIL_PASSWORD=Impenetrable3 \
+    --link mysql:dbserver \
+    -e DATABASE_URL=mysql+pymysql://biobank:pass12345@dbserver/biobank \
+    biobank:latest

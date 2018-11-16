@@ -11,6 +11,8 @@ COPY requirements.txt requirements.txt
 RUN python -m venv venv
 RUN venv/bin/pip install -r requirements.txt
 RUN venv/bin/pip install gunicorn
+RUN venv/bin/pip install Flask-Uploads
+RUN venv/bin/pip install cryptography==1.2.3 pymysql wkhtmltopdf pdfkit
 
 COPY app app
 COPY migrations migrations
