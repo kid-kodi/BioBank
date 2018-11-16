@@ -18,12 +18,14 @@
     </div>
 </div>
 <form action="" method="post" novalidate>
-    {% if order %}
-    <h3>{{_('Commande : ')}}{{ order.serial }}</h3>
-    {% else %}
     <div class="block">
         <div class="bar">
-            <h1>Commande</h1>
+            <h1>Dépôt {% if order %} : {{order.serial}} {% endif %}</h1>
+        </div>
+    </div>
+    <div class="block" {% if order %} style="display:none;" {% endif %}>
+        <div class="bar">
+            <h1>Commande {% if order %} : {{order.serial}} {% endif %}</h1>
         </div>
         <div class="row">
             <div class="col-md-3">
@@ -34,7 +36,6 @@
             </div>
         </div>
     </div>
-    {% endif %}
     <div class="block">
         <div class="bar">
             <h1>Patient</h1>

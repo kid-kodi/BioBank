@@ -10,6 +10,11 @@
     </div>
     <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
+        {% if customer %}
+        <div class="block">
+            <h1>{{customer.display_as}}</h1>
+        </div>
+        {% endif %}
         <div class="block" {% if customer %} style="display:none;" {% endif %}>
             <div class="row">
                 <div class="col-md-6">

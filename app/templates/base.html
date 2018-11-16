@@ -55,7 +55,7 @@
                           <li><a href="{{ url_for('main.user', username=current_user.username) }}">{{ _('Profile') }}</a></li>
                           <li role="separator" class="divider"></li>
                           <li><a href="#">Help</a></li>
-                          <li><a href="#">Setting</a></li>
+                          <li><a href="{{ url_for('setup.index') }}">Setting</a></li>
                           <li role="separator" class="divider"></li>
                           <li><a href="{{ url_for('auth.logout') }}">{{ _('Logout') }}</a></li>
                         </ul>
@@ -73,7 +73,10 @@
         {% with tasks = current_user.get_tasks_in_progress() %}
         {% if tasks %}
             {% for task in tasks %}
-            <div class="alert alert-success" role="alert">
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
                 {{ task.description }}
                 <span id="{{ task.id }}-progress">{{ task.get_progress() }}</span>%
             </div>

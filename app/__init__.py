@@ -77,6 +77,9 @@ def create_app(config_class=Config):
     from app.process import bp as process_bp
     app.register_blueprint(process_bp)
 
+    from app.setup import bp as setup_bp
+    app.register_blueprint(setup_bp)
+
     from app.location import bp as location_bp
     app.register_blueprint(location_bp)
 

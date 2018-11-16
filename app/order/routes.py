@@ -49,7 +49,7 @@ def add(project_id):
         db.session.commit()
 
         flash(_('Nouveau prélèvement ajouté avec succèss!'))
-        return redirect(url_for('order.detail', id=order.id))
+        return redirect(url_for('patient.add', order_id=order.id))
 
     return render_template('order/form.html', form=form, project=project)
 
@@ -80,7 +80,7 @@ def edit(id):
         order.temperature = form.temperature.data
         db.session.commit()
         flash(_('Modification effectuée avec succèss!!'))
-        return redirect(url_for('order.detail', id=order.id))
+        return redirect(url_for('patient.add', order_id=order.id))
     form.customer.data = order.project.customer.id
     form.project.data = order.project_id
     form.firstname.data = order.firstname

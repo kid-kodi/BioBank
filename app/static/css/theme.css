@@ -19,6 +19,11 @@ body {
   box-sizing: inherit;
 }
 
+#holes{
+	display: flex;
+	flex-wrap: wrap;
+}
+
 html {
   box-sizing: border-box;
 }
@@ -31,6 +36,10 @@ html {
   padding-bottom: 30px;
 }
 
+navbar{
+    border-radius: 0;
+    margin-bottom : 10px;
+}
 .navbar ul li a{
     font-size : 12px;
 }
@@ -112,9 +121,9 @@ ul .btn{
 }
 
 #holes li{
-  width: 37px;
-  height: 40px;
-  line-height: 40px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
   display: inline-block;
   list-style: none;
   text-align: center;

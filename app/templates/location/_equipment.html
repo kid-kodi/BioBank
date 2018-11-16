@@ -2,32 +2,30 @@
     <div class="panel-heading">Détails de l'emplacement</div>
     <table class="table">
         <tr>
-            <td>NOM DE LA BOITE</td>
-            <td>{{ box.name }}</td>
+            <td>NOM DE L'EQUIPEMENT</td>
+            <td>{{ equipment.name }}</td>
         </tr>
         <tr>
             <td>ESPACE DISPONIBLE</td>
-            <td>{{box.available()}}</td>
+            <td>{{equipment.available()}}</td>
         </tr>
         <tr>
             <td>ESPACE OCCUPE</td>
-            <td>{{box.occupied()}}</td>
+            <td>{{equipment.occupied()}}</td>
         </tr>
     </table>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading">Répresentation</div>
     <div class="panel-body">
-        <div class="" id="holes">
+        <div class="" id="equipments">
             <ul>
-                {% for hole in box.holes %}
-                <li class="hole{{hole.status}}" id="{{hole.id}}">
-                    <a href="{{url_for('location.hole', id=hole.id)}}">{{ hole.name }}</a>
+                {% for e in equipment.racks %}
+                <li id="{{e.id}}">
+                    {{ e.name }}
                 </li>
                 {% endfor %}
             </ul>
         </div>
     </div>
 </div>
-
-

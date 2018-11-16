@@ -16,7 +16,7 @@
         <div class="bar">
             <h1>Dépôt</h1>
             <div class="actions">
-                <a class="btn btn-default" href="{{ url_for('order.add', project_id=0) }}">{{ _('Nouveau dépôt') }}</a>
+                <a class="btn btn-default" href="{{ url_for('order.add', project_id=project.id) }}">{{ _('Nouveau dépôt') }}</a>
             </div>
         </div>
         {% if project.orders.all() | length > 0%}
