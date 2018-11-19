@@ -38,6 +38,9 @@ def add():
     if form.validate_on_submit():
         box = Box(name=form.name.data,
                   rack_id=form.rack.data,
+                  horizontal=form.horizontal.data,
+                  vertical=form.vertical.data,
+                  status=0,
                   box_type_id=form.box_type.data,
                   created_at=datetime.utcnow(),
                   created_by=current_user.id)
@@ -72,7 +75,8 @@ def edit(id):
     if form.validate_on_submit():
         box.name = form.name.data
         box.rack_id = form.rack.data
-        box.box_type_id = form.box_type.data
+        box.horizontal = form.horizontal.data
+        box.vertical = form.vertical.data
         db.session.commit()
         flash('You have successfully edited the box.')
 

@@ -21,7 +21,7 @@ def index():
 @bp.route('/patient/add', methods=['GET', 'POST'])
 @bp.route('/order/<int:order_id>/patient/add', methods=['GET', 'POST'])
 @login_required
-def add(order_id):
+def add(order_id=0):
     order = None
     if order_id != 0:
         order = Order.query.get(order_id)
@@ -62,7 +62,7 @@ def add(order_id):
             generateCode(sample, index)
 
         flash(_('Nouveau patient ajouté avec succèss!'))
-        return redirect(url_for('order.detail', id=patient.order_id))
+        return redirect(url_for('patient.add', order_id=order_id))
     form.order.data = order_id
     return render_template('patient/form.html', form=form, order=order)
 

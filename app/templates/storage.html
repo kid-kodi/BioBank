@@ -2,27 +2,28 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% set navigation_bar = [
-    ('/location', 'location', 'Emplacement'),
-    ('/room', 'room', 'Salle'),
-    ('/equipment', 'equipment', 'Equipement'),
-    ('/rack', 'rack', 'Rack'),
-    ('/box', 'box', 'Boîte')
+('/location', 'location', 'Emplacement'),
+('/room', 'room', 'Salle'),
+('/equipment', 'equipment', 'Equipement'),
+('/rack', 'rack', 'Rack'),
+('/box', 'box', 'Boîte')
 ] -%}
 {% set active_page = active_page|default('index') -%}
 
 {% block app_content %}
-    <div class="row">
-        <nav class="col-md-2">
-            <ul class="nav nav-pills nav-stacked">
-                {% for href, id, caption in navigation_bar %}
-                <li{% if id == active_page %} class="active"{% endif
-                %}><a href="{{ href|e }}">{{_(caption|e) }}</a>
-                </li>
-            {% endfor %}
-            </ul>
-        </nav>
-        <div class="col-md-10">
-            {% block storage_content %}{% endblock %}
-        </div>
+<nav>
+    <ul class="nav nav-pills">
+        {% for href, id, caption in navigation_bar %}
+        <li
+        {% if id == active_page %} class="active"{% endif
+        %}><a href="{{ href|e }}">{{_(caption|e) }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</nav>
+<div class="row">
+    <div class="col-md-12">
+        {% block storage_content %}{% endblock %}
     </div>
+</div>
 {% endblock %}

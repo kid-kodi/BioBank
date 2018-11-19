@@ -14,5 +14,7 @@ class SearchForm(FlaskForm):
 class RackForm(FlaskForm):
     equipment = SelectField(choices=[], coerce=int, label="Choisir l'équipement")
     name = StringField(_l('Nom du rack'), validators=[DataRequired()])
+    horizontal = StringField(_l('Nombre de ligne'), validators=[DataRequired()])
+    vertical = StringField(_l('Nombre de colonne'), validators=[DataRequired()])
     max_number = IntegerField(_l('Espace maximum'), validators=[DataRequired()])
     submit = SubmitField(_l('Enregistrer'))

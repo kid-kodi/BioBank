@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 2ad08149dcb8
+Revision ID: bd64c867137d
 Revises: 
-Create Date: 2018-11-13 09:16:42.968407
+Create Date: 2018-11-19 00:20:11.240312
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '2ad08149dcb8'
+revision = 'bd64c867137d'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -41,7 +41,7 @@ def upgrade():
     op.create_table('origin',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=120), nullable=True),
-    sa.Column('sign', sa.String(length=5), nullable=True),
+    sa.Column('siggle', sa.String(length=5), nullable=True),
     sa.Column('description', sa.String(length=128), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
@@ -239,6 +239,8 @@ def upgrade():
     sa.Column('room_id', sa.Integer(), nullable=True),
     sa.Column('equipment_type_id', sa.Integer(), nullable=True),
     sa.Column('name', sa.String(length=255), nullable=True),
+    sa.Column('horizontal', sa.Integer(), nullable=True),
+    sa.Column('vertical', sa.Integer(), nullable=True),
     sa.Column('max_number', sa.Integer(), nullable=True),
     sa.Column('status', sa.Integer(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
@@ -288,6 +290,8 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('equipment_id', sa.Integer(), nullable=True),
     sa.Column('name', sa.String(length=255), nullable=True),
+    sa.Column('horizontal', sa.Integer(), nullable=True),
+    sa.Column('vertical', sa.Integer(), nullable=True),
     sa.Column('max_number', sa.Integer(), nullable=True),
     sa.Column('status', sa.Integer(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
@@ -300,6 +304,8 @@ def upgrade():
     op.create_table('box',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('rack_id', sa.Integer(), nullable=True),
+    sa.Column('horizontal', sa.Integer(), nullable=True),
+    sa.Column('vertical', sa.Integer(), nullable=True),
     sa.Column('box_type_id', sa.Integer(), nullable=True),
     sa.Column('name', sa.String(length=255), nullable=True),
     sa.Column('status', sa.Integer(), nullable=True),

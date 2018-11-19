@@ -1,0 +1,48 @@
+{% extends "admin.html" %}
+{% set active_page = "user" %}
+{% block title %}Users{% endblock %}
+{% block admin_content %}
+    <div class="bar">
+        <div>
+            <h1>{{ _('Utilisateur') }}</h1>
+        </div>
+        <div class="actions">
+            <a class="btn btn-default" href="{{ url_for('user.export_user') }}">{{ _('Exporter') }}</a>
+            <a class="btn btn-default" href="{{ url_for('user.add') }}">{{ _('Nouvelle utilisateur') }}</a>
+        </div>
+    </div>
+{% if list %}
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th width="15%"> Nom</th>
+            <th width="15%"> Prénom</th>
+            <th width="15%"> Email</th>
+            <th width="15%"> Modifier</th>
+            <th width="15%"> Supprimer</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in list %}
+        <tr>
+            <td> {{ item.first_name }}</td>
+            <td> {{ item.last_name }}</td>
+            <td> {{ item.email }}</td>
+            <td>
+                <a href="{{ url_for('user.edit', id=item.id) }}">
+                    <i class="fa fa-pencil"></i> Modifier
+                </a>
+            </td>
+            <td>
+                <a href="{{ url_for('user.delete', id=item.id) }}">
+                    <i class="fa fa-trash"></i> Supprimer
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+
+{% endif %}
+{% endblock %}

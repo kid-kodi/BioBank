@@ -8,6 +8,7 @@
         <a class="btn btn-default" href="{{ url_for('patient.add', order_id=0) }}">{{ _('Nouveau patient') }}</a>
       </div>
     </div>
+    {% if patients | length > 0 %}
     <table class="table">
       <thead>
         <tr>
@@ -25,4 +26,13 @@
         {% endfor %}
       </tbody>
     </table>
+    {% else %}
+    <div class="panel panel-default emptyspace">
+      <div class="panel-body text-center">
+        <h3>Aucuns patients enregistrés</h3>
+        <p>veuillez en créer un en cliquant sur le lien ci-dessous</p>
+        <a class="btn btn-default" href="{{ url_for('patient.add') }}">{{_('Nouveau patient')}}</a>
+      </div>
+    </div>
+    {% endif %}
 {% endblock %}

@@ -15,5 +15,7 @@ class EquipmentForm(FlaskForm):
     name = StringField(_l('Nom de l\'equipment'), validators=[DataRequired()])
     room = SelectField(choices=[], coerce=int, label="Choisir la salle")
     equipment_type = SelectField(choices=[], coerce=int, label="Choisir le type")
+    horizontal = StringField(_l('Nombre de ligne'), validators=[DataRequired()])
+    vertical = StringField(_l('Nombre de colonne'), validators=[DataRequired()])
     max_number = IntegerField(_l('Espace maximum'))
     submit = SubmitField(_l('Enregistrer'))

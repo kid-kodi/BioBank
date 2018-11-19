@@ -32,7 +32,7 @@ def add():
         db.session.add(customer)
         db.session.commit()
         flash(_('Nouveau Client ajouté avec succèss!'))
-        return redirect(url_for('customer.detail', id=customer.id))
+        return redirect(url_for('project.add', customer_id=customer.id))
     return render_template('customer/form.html', form=form)
 
 

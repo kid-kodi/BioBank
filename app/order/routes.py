@@ -22,7 +22,7 @@ def index():
 @bp.route('/order/add', methods=['GET', 'POST'])
 @bp.route('/project/<int:project_id>/order/add', methods=['GET', 'POST'])
 @login_required
-def add(project_id):
+def add(project_id=0):
     project = None
     form = OrderForm()
     if project_id != 0:

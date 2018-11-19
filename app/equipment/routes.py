@@ -50,8 +50,12 @@ def add():
     if form.validate_on_submit():
         equipment = Equipment(name=form.name.data,
                               equipment_type_id=form.equipment_type.data,
-                              max_number=form.max_number.data,
+                              horizon=form.max_number.data,
+                              horizontal=form.horizontal.data,
+                              vertical=form.vertical.data,
+                              max_number=int(form.vertical.data) + int(form.horizontal.data),
                               room_id=form.room.data,
+                              status=0,
                               created_at=datetime.utcnow(),
                               created_by=current_user.id)
         db.session.add(equipment)

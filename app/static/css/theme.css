@@ -78,9 +78,9 @@ navbar{
 }
 
 
-.nav-pills>li.active>a,
-.nav-pills>li.active>a:focus,
-.nav-pills>li.active>a:hover {
+#nav .nav-pills>li.active>a,
+#nav .nav-pills>li.active>a:focus,
+#nav .nav-pills>li.active>a:hover {
     border-radius : 0;
     color: #337ab7;
     border-right: 3px solid #F48024;

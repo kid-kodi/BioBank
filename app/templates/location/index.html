@@ -54,15 +54,21 @@
         <div class="col-md-5">
             {% if box %}
                 {% include 'location/_box.html' %}
-            {% endif %}
-            {% if room %}
+            {% elif room %}
                 {% include 'location/_room.html' %}
-            {% endif %}
-            {% if equipment %}
+            {% elif equipment %}
                 {% include 'location/_equipment.html' %}
-            {% endif %}
-            {% if rack %}
+            {% elif rack %}
                 {% include 'location/_rack.html' %}
+            {% else %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">Détails de l'emplacement</div>
+                    <div class="panel-body">
+                        <div class="text-center">
+                            <h3>Aucun emplacement selectionner</h3>
+                        </div>
+                    </div>
+                </div>
             {% endif %}
         </div>
 

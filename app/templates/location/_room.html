@@ -6,12 +6,8 @@
             <td>{{ room.name }}</td>
         </tr>
         <tr>
-            <td>ESPACE DISPONIBLE</td>
-            <td>{{room.available()}}</td>
-        </tr>
-        <tr>
-            <td>ESPACE OCCUPE</td>
-            <td>{{room.occupied()}}</td>
+            <td>NOMBRE TOTAL D'EQUIPEMENT</td>
+            <td>{{room.equipments.all()|length}}</td>
         </tr>
     </table>
 </div>

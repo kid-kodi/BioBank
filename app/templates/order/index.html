@@ -8,6 +8,7 @@
         <a class="btn btn-default" href="{{ url_for('order.add', project_id=0) }}">{{ _('Nouveau dépôt') }}</a>
       </div>
     </div>
+    {% if orders | length > 0 %}
     <table class="table">
       <thead>
         <tr>
@@ -25,4 +26,13 @@
         {% endfor %}
       </tbody>
     </table>
+    {% else %}
+    <div class="panel panel-default emptyspace">
+      <div class="panel-body text-center">
+        <h3>Aucuns dépôts enregistrés</h3>
+        <p>veuillez en créer un en cliquant sur le lien ci-dessous</p>
+        <a class="btn btn-default" href="{{ url_for('order.add') }}">{{_('Nouveau dépôt')}}</a>
+      </div>
+    </div>
+    {% endif %}
 {% endblock %}

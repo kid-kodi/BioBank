@@ -80,6 +80,9 @@ def create_app(config_class=Config):
     from app.setup import bp as setup_bp
     app.register_blueprint(setup_bp)
 
+    from app.user import bp as user_bp
+    app.register_blueprint(user_bp)
+
     from app.location import bp as location_bp
     app.register_blueprint(location_bp)
 

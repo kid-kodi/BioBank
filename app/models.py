@@ -381,7 +381,7 @@ class SampleNature(db.Model):
 class Origin(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120))
-    sign = db.Column(db.String(5))
+    siggle = db.Column(db.String(5))
     description = db.Column(db.String(128))
     patients = db.relationship('Patient', backref='origin', lazy='dynamic')
 
@@ -573,6 +573,8 @@ class Equipment(db.Model):
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
     equipment_type_id = db.Column(db.Integer, db.ForeignKey('equipment_type.id'))
     name = db.Column(db.String(255))
+    horizontal = db.Column(db.Integer)
+    vertical = db.Column(db.Integer)
     max_number = db.Column(db.Integer)
     status = db.Column(db.Integer)
     racks = db.relationship('Rack', backref='equipment', lazy='dynamic')
@@ -614,6 +616,8 @@ class Rack(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     equipment_id = db.Column(db.Integer, db.ForeignKey('equipment.id'))
     name = db.Column(db.String(255))
+    horizontal = db.Column(db.Integer)
+    vertical = db.Column(db.Integer)
     max_number = db.Column(db.Integer)
     status = db.Column(db.Integer)
     boxes = db.relationship('Box', backref='rack', lazy='dynamic')
@@ -666,6 +670,8 @@ class BoxType(db.Model):
 class Box(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     rack_id = db.Column(db.Integer, db.ForeignKey('rack.id'))
+    horizontal = db.Column(db.Integer)
+    vertical = db.Column(db.Integer)
     box_type_id = db.Column(db.Integer, db.ForeignKey('box_type.id'))
     name = db.Column(db.String(255))
     status = db.Column(db.Integer)

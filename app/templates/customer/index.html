@@ -14,6 +14,7 @@
             </ul>
         </div>
     </div>
+    {% if customers | length > 0 %}
     <table class="table">
       <thead>
         <tr>
@@ -41,4 +42,13 @@
         {% endfor %}
       </tbody>
     </table>
+    {% else %}
+    <div class="panel panel-default emptyspace">
+      <div class="panel-body text-center">
+        <h3>Aucun(e)s client(e)s enregistré(e)s</h3>
+        <p>veuillez en créer un en cliquant sur le lien ci-dessous</p>
+        <a class="btn btn-default" href="{{ url_for('customer.add') }}">{{_('Nouveau client')}}</a>
+      </div>
+    </div>
+    {% endif %}
 {% endblock %}

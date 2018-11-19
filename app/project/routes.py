@@ -19,8 +19,12 @@ def index():
 
 
 @bp.route('/project/add', methods=['GET', 'POST'])
+@bp.route('/customer/<int:customer_id>/project/add', methods=['GET', 'POST'])
 @login_required
-def add():
+def add(customer_id=0):
+    customer = None
+    if customer_id:
+        customer = Customer.query.get(customer_id)
     form = ProjectForm()
     form.customer.choices = [(c.id, c.display_as) for c in Customer.query.all()]
     form.study.choices = [(c.id, c.name) for c in Study.query.all()]
@@ -32,8 +36,9 @@ def add():
                     title=form.title.data, description=form.description.data)
         db.session.add(project)
         db.session.commit()
-        flash(_('Nouveau projet ajouté avec succèss!'))
-        return redirect(url_for('project.detail', id=project.id))
+        flash(_('Nouveau projetc ajouté avec succèss!'))
+        return redirect(url_for('order.add', project_id=project.id))
+    form.customer.data = customer_id
     return render_template('project/form.html', form=form)
 
 
