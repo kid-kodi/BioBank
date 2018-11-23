@@ -28,6 +28,12 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            {{ sample.technique.label }}
+            {{ sample.technique(class_="form-control") }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             {{ sample.site.label }}
             {{ sample.site(class_="form-control") }}
         </div>
@@ -61,6 +67,12 @@
                     {{ sample.mesure(class_="form-control col-md-6") }}
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {{ sample.results.label }}
+            {{ sample.results(class_="form-control") }}
         </div>
     </div>
 </div>

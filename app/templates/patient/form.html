@@ -59,6 +59,20 @@
                 </label>
                 {{ form.birthday(class_="form-control datepicker") }}
             </div>
+            <div class="col-md-3">
+                <label>
+                    {{ form.age.label }}
+                </label>
+                {{ form.age(class_="form-control") }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label>
+                    {{ form.clinical_data.label }}
+                </label>
+                {{ form.clinical_data(class_="form-control") }}
+            </div>
         </div>
     </div>
     <div class="block">

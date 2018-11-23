@@ -104,6 +104,8 @@ def edit(id):
         sample.volume = form.volume.data
         sample.site = form.site.data
         sample.date = form.date.data
+        sample.technique = form.technique.data
+        sample.results = form.results.data
         db.session.commit()
         flash(_('Les informations ont été modifiées avec succèss'))
         return redirect(url_for('sample.detail', id=sample.id))
@@ -118,6 +120,8 @@ def edit(id):
     form.volume.data = sample.volume
     form.site.data = sample.site
     form.date.data = sample.date
+    form.technique.data = sample.technique
+    form.results.data = sample.results
     return render_template('sample/form.html', form=form)
 
 

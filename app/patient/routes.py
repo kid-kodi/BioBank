@@ -36,7 +36,8 @@ def add(order_id=0):
 
     if form.validate_on_submit():
         patient = Patient(bio_code=get_bio_code('HU'), order_id=order_id, origin_id=1, code=form.code.data,
-                          sexe=form.sexe.data, birthday=form.birthday.data)
+                          sexe=form.sexe.data, birthday=form.birthday.data, age=form.age.data,
+                          clinical_data=form.clinical_data.data)
         db.session.add(patient)
         db.session.commit()
 
@@ -45,6 +46,8 @@ def add(order_id=0):
             index = index + 1
             sample = Sample()
             sample.code = s.code.data
+            sample.technique = s.technique.data
+            sample.results = s.results.data
             sample.sample_nature_id = s.sample_nature.data
             sample.sample_type_id = s.sample_type.data
             sample.date = s.date.data
@@ -78,6 +81,8 @@ def edit(id):
         patient.code = form.code.data
         patient.sexe = form.sexe.data
         patient.birthday = form.birthday.data
+        patient.age = form.age.data
+        patient.clinical_data = form.clinical_data.data
         db.session.commit()
         flash(_('Les informations ont été modifiées avec succèss'))
         return redirect(url_for('patient.index'))
@@ -86,6 +91,8 @@ def edit(id):
     form.code.data = patient.code
     form.sexe.data = patient.sexe
     form.birthday.data = patient.birthday
+    form.clinical_data.data = patient.clinical_data
+    form.age.data = patient.age
     return render_template('patient/form.html', form=form)
 
 
@@ -105,5 +112,5 @@ def get_bio_code(s):
 def generateCode(s, index):
     s.code = str(s.number) + '-' + str(s.sample_nature.siggle) + str(index) + '-' + str(s.jonc_type.siggle)
     db.session.commit()
-    #3SURur2 - fn - rouge
+    # 3SURur2 - fn - rouge
     return s

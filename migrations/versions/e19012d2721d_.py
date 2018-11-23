@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: bd64c867137d
+Revision ID: e19012d2721d
 Revises: 
-Create Date: 2018-11-19 00:20:11.240312
+Create Date: 2018-11-23 16:06:56.069396
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'bd64c867137d'
+revision = 'e19012d2721d'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -342,7 +342,9 @@ def upgrade():
     sa.Column('code', sa.String(length=120), nullable=True),
     sa.Column('bio_code', sa.String(length=120), nullable=True),
     sa.Column('birthday', sa.String(length=128), nullable=True),
+    sa.Column('age', sa.Integer(), nullable=True),
     sa.Column('sexe', sa.Integer(), nullable=True),
+    sa.Column('clinical_data', sa.String(length=255), nullable=True),
     sa.Column('observation_file', sa.Integer(), nullable=True),
     sa.Column('observation_file_url', sa.String(length=255), nullable=True),
     sa.Column('sample_file', sa.Integer(), nullable=True),
@@ -361,6 +363,7 @@ def upgrade():
     sa.Column('tube_type_id', sa.Integer(), nullable=True),
     sa.Column('jonc_type_id', sa.Integer(), nullable=True),
     sa.Column('mesure_id', sa.Integer(), nullable=True),
+    sa.Column('technique', sa.String(length=255), nullable=True),
     sa.Column('serial', sa.String(length=255), nullable=True),
     sa.Column('code', sa.String(length=255), nullable=True),
     sa.Column('date', sa.String(length=255), nullable=True),

@@ -19,6 +19,8 @@ class SampleForm(FlaskForm):
     tube_type = SelectField(_l('Conditionement'), coerce=int, choices=[])
     mesure = SelectField(_l('Unité de mésure'), coerce=int, choices=[])
     volume = StringField(_l('Volume / Concentration'), validators=[DataRequired()])
+    technique = StringField(_l('Technique de préparation'), validators=[DataRequired()])
+    results = StringField(_l('Résultat des examens parasitologiques'), validators=[DataRequired()])
     submit = SubmitField(_l('Enregistrer'))
 
 
