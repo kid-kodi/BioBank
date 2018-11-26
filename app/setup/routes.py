@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
 import flask_excel as excel
 from app import db
 from app.models import User, Category, Customer, Project, Order, Study, Subject, Program, Origin, Mesure, JoncType, \
@@ -56,7 +56,7 @@ def doimport():
             num = Program.query.filter_by(name=row['Nom']).count()
             if num > 0:
                 Program.query.delete()
-            subject = Subject.query.filter_by(name=row['Thématique']).first()
+            subject = Subject.query.filter_by(name=row['Thematique']).first()
             program.name = row['Nom']
             program.description = row['Description']
             program.subject = subject
@@ -253,7 +253,8 @@ def doimport():
             initializers=[user_init, category_init, study_init, subject_init, program_init, origin_init,
                           sample_nature_init, sample_type_init, mesure_init, jonc_type_init, tube_type_init,
                           temperature_init, basket_init, equipment_type_init, box_type_init, room_init, equipment_init, rack_init, box_init])
-        return redirect(url_for('.handson_table'), code=302)
+        flash(_('Initialisation terminé avec succèss.'))
+        return redirect(url_for('main.index'))
     return render_template('setup/import.html')
 
 

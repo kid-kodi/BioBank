@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: e19012d2721d
+Revision ID: f2e6934d16f7
 Revises: 
-Create Date: 2018-11-23 16:06:56.069396
+Create Date: 2018-11-25 22:12:39.132989
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'e19012d2721d'
+revision = 'f2e6934d16f7'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -74,6 +74,8 @@ def upgrade():
     )
     op.create_table('user',
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('first_name', sa.String(length=64), nullable=True),
+    sa.Column('last_name', sa.String(length=64), nullable=True),
     sa.Column('username', sa.String(length=64), nullable=True),
     sa.Column('email', sa.String(length=120), nullable=True),
     sa.Column('password_hash', sa.String(length=128), nullable=True),
@@ -344,6 +346,8 @@ def upgrade():
     sa.Column('birthday', sa.String(length=128), nullable=True),
     sa.Column('age', sa.Integer(), nullable=True),
     sa.Column('sexe', sa.Integer(), nullable=True),
+    sa.Column('city', sa.String(length=128), nullable=True),
+    sa.Column('job', sa.String(length=128), nullable=True),
     sa.Column('clinical_data', sa.String(length=255), nullable=True),
     sa.Column('observation_file', sa.Integer(), nullable=True),
     sa.Column('observation_file_url', sa.String(length=255), nullable=True),
@@ -351,10 +355,12 @@ def upgrade():
     sa.Column('sample_file_url', sa.String(length=255), nullable=True),
     sa.Column('consent_file', sa.Integer(), nullable=True),
     sa.Column('consent_file_url', sa.String(length=255), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['order_id'], ['order.id'], ),
     sa.ForeignKeyConstraint(['origin_id'], ['origin.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_index(op.f('ix_patient_created_at'), 'patient', ['created_at'], unique=False)
     op.create_table('sample',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('patient_id', sa.Integer(), nullable=True),
@@ -431,6 +437,7 @@ def downgrade():
     op.drop_table('aliquot')
     op.drop_index(op.f('ix_sample_created_at'), table_name='sample')
     op.drop_table('sample')
+    op.drop_index(op.f('ix_patient_created_at'), table_name='patient')
     op.drop_table('patient')
     op.drop_index(op.f('ix_order_timestamp'), table_name='order')
     op.drop_table('order')

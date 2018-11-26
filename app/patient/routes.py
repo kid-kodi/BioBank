@@ -5,7 +5,7 @@ from flask_login import current_user, login_required
 from flask_babel import _, get_locale
 from guess_language import guess_language
 from app import db
-from app.patient.forms import PatientForm
+from app.patient.forms import PatientForm, SearchForm
 from app.models import Patient, Origin, Project, Order, SampleType, Mesure, TubeType, SampleNature, JoncType, Sample
 from app.translate import translate
 from app.patient import bp
@@ -14,8 +14,30 @@ from app.patient import bp
 @bp.route('/patient', methods=['GET', 'POST'])
 @login_required
 def index():
-    patients = Patient.query.all()
-    return render_template('patient/index.html', patients=patients)
+    pagination = []
+    search_form = SearchForm()
+    page = request.args.get('page', 1, type=int)
+    if search_form.validate_on_submit():
+        code = search_form.code.data
+        if code != '':
+            pagination = Patient.query.filter_by(code=code) \
+                .order_by(Patient.created_at.desc()).paginate(
+                page, per_page=current_app.config['FLASK_PER_PAGE'],
+                error_out=False)
+        else:
+            pagination = Patient.query \
+                .order_by(Patient.created_at.desc()).paginate(
+                page, per_page=current_app.config['FLASK_PER_PAGE'],
+                error_out=False)
+    else:
+        pagination = Patient.query \
+            .order_by(Patient.created_at.desc()).paginate(
+            page, per_page=current_app.config['FLASK_PER_PAGE'],
+            error_out=False)
+    patients = pagination.items
+    return render_template('patient/index.html',
+                           samples=patients, pagination=pagination,
+                           title="patient", search_form=search_form)
 
 
 @bp.route('/patient/add', methods=['GET', 'POST'])
@@ -36,7 +58,7 @@ def add(order_id=0):
 
     if form.validate_on_submit():
         patient = Patient(bio_code=get_bio_code('HU'), order_id=order_id, origin_id=1, code=form.code.data,
-                          sexe=form.sexe.data, birthday=form.birthday.data, age=form.age.data,
+                          sexe=form.sexe.data, birthday=form.birthday.data, age=form.age.data, city=form.city.data, job=form.job.data,
                           clinical_data=form.clinical_data.data)
         db.session.add(patient)
         db.session.commit()
@@ -82,6 +104,8 @@ def edit(id):
         patient.sexe = form.sexe.data
         patient.birthday = form.birthday.data
         patient.age = form.age.data
+        patient.city = form.city.data
+        patient.job = form.job.data
         patient.clinical_data = form.clinical_data.data
         db.session.commit()
         flash(_('Les informations ont été modifiées avec succèss'))
@@ -93,6 +117,9 @@ def edit(id):
     form.birthday.data = patient.birthday
     form.clinical_data.data = patient.clinical_data
     form.age.data = patient.age
+    form.age.data = patient.age
+    form.job.data = patient.job
+    form.city.data = patient.city
     return render_template('patient/form.html', form=form)
 
 

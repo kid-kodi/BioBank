@@ -48,7 +48,7 @@ def add(project_id=0):
         db.session.add(order)
         db.session.commit()
 
-        flash(_('Nouveau prélèvement ajouté avec succèss!'))
+        flash(_('Informations du dépôt enregistrées!'))
         return redirect(url_for('patient.add', order_id=order.id))
 
     return render_template('order/form.html', form=form, project=project)

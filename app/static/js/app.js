@@ -76,6 +76,6 @@ $(function() {
         }
     });
 
-    $( ".datepicker" ).datepicker();
+    $( ".datepicker" ).datepicker( $.datepicker.regional[ "fr" ] );
 
 });

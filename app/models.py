@@ -90,6 +90,8 @@ followers = db.Table(
 
 class User(UserMixin, PaginatedAPIMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(64))
+    last_name = db.Column(db.String(64))
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
@@ -302,6 +304,20 @@ class Project(db.Model):
     orders = db.relationship('Order', backref='project', lazy='dynamic')
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
+    def total_sample(self):
+        number = 0
+        orders = self.orders
+        for o in orders:
+            number = number + o.total_sample()
+        return number
+
+    def total_patient(self):
+        number = 0
+        orders = self.orders
+        for o in orders:
+            number = number + o.total_patient()
+        return number
+
     def to_json(self):
         json_post = {
             'id': self.id,
@@ -335,6 +351,17 @@ class Order(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     patients = db.relationship('Patient', backref='order', lazy='dynamic')
+
+    def total_sample(self):
+        number = 0
+        patients = self.patients
+        for p in patients:
+            number = number + p.total_sample()
+        return number
+
+    def total_patient(self):
+        number = len(self.patients.all())
+        return number
 
 
 class Study(db.Model):
@@ -419,6 +446,8 @@ class Patient(db.Model):
     birthday = db.Column(db.String(128))
     age = db.Column(db.Integer)
     sexe = db.Column(db.Integer)
+    city = db.Column(db.String(128))
+    job = db.Column(db.String(128))
     clinical_data = db.Column(db.String(255))
     observation_file = db.Column(db.Integer)
     observation_file_url = db.Column(db.String(255))
@@ -427,6 +456,14 @@ class Patient(db.Model):
     consent_file = db.Column(db.Integer)
     consent_file_url = db.Column(db.String(255))
     samples = db.relationship('Sample', backref='patient', lazy='dynamic')
+    created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+    def total_sample(self):
+        number = 0
+        samples = self.samples
+        for s in samples:
+            number = number + len(s.all())
+        return number
 
 
 sample_hole_history = db.Table(

@@ -1,5 +1,6 @@
 {% extends "collect.html" %}
 {% import 'bootstrap/wtf.html' as wtf %}
+{% import "_pagination.html" as macros %}
 {% set active_page = "patient" %}
 {% block collect_content %}
     <div class="bar">
@@ -26,6 +27,9 @@
         {% endfor %}
       </tbody>
     </table>
+    <div class="pagination">
+        {{ macros.pagination_widget(pagination, '.index') }}
+    </div>
     {% else %}
     <div class="panel panel-default emptyspace">
       <div class="panel-body text-center">

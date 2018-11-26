@@ -4,7 +4,10 @@
 <div class="bar">
     <h1>{{_('Client : ')}}{{customer.display_as}}</h1>
     <div class="actions">
-        <a class="btn btn-default" href="{{ url_for('customer.edit', id=customer.id) }}">Modifier</a>
+        <ul class="nav nav-pills">
+            <li><a class="btn btn-default" href="{{ url_for('customer.edit', id=customer.id) }}">Modifier</a></li>
+            <li><a class="btn btn-default" href="{{ url_for('customer.add_project', id=customer.id) }}">Nouveau projet</a></li>
+        </ul>
     </div>
 </div>
 <div class="block">
@@ -43,9 +46,6 @@
 <div class="block">
     <div class="bar">
         <h1>Projets</h1>
-        <div class="actions">
-            <a class="btn btn-default" href="{{ url_for('customer.add_project', id=customer.id) }}">Nouveau projet</a>
-        </div>
     </div>
     <table class="table">
         <thead>

@@ -5,7 +5,7 @@
 <div class="bar">
     <div>
         <h1>{{_('Client : ')}}{{project.customer.display_as}}{{_(' > Projet : ')}}{{project.title}}</h1>
-        <p></p>
+        <p>Dépôts {{project.orders.all() | length}} | Participants {{project.total_patient()}} | Echantillons {{project.total_sample()}}</p>
     </div>
     <div class="actions">
         <a class="btn btn-default" href="{{ url_for('project.edit', id=project.id) }}">Modifier</a>
@@ -28,6 +28,7 @@
                 <th>{{_('Nom et prénoms du déposant')}}</th>
                 <th>{{_('Date')}}</th>
                 <th>{{_('Receptionné par')}}</th>
+                <th>{{_('Nombre d\'échantillon')}}</th>
                 <th></th>
             </tr>
             </thead>

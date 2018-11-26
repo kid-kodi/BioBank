@@ -6,9 +6,9 @@
 {% if form.errors %}
 <ul class="errors">
     {% for field_name, field_errors in form.errors|dictsort if field_errors %}
-    {% for error in field_errors %}
-    <li>{{ form[field_name].label }}: {{ error }}</li>
-    {% endfor %}
+        {% for error in field_errors %}
+        <li>{{ form[field_name].label }}: {{ error }}</li>
+        {% endfor %}
     {% endfor %}
 </ul>
 {% endif %}
@@ -20,7 +20,7 @@
 <form action="" method="post" novalidate>
     <div class="block">
         <div class="bar">
-            <a href="{{url_for('order.detail', id=order.id)}}"><h1>Numéro de dépôt {% if order %} : {{order.serial}} {% endif %}</h1></a>
+            {% if order %} <a href="{{url_for('order.detail', id=order.id)}}"><h1>Numéro de dépôt : {{order.serial}} </h1></a>{% endif %}
         </div>
     </div>
     <div class="block" {% if order %} style="display:none;" {% endif %}>
@@ -64,6 +64,20 @@
                     {{ form.age.label }}
                 </label>
                 {{ form.age(class_="form-control") }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label>
+                    {{ form.city.label }}
+                </label>
+                {{ form.city(class_="form-control") }}
+            </div>
+            <div class="col-md-6">
+                <label>
+                    {{ form.job.label }}
+                </label>
+                {{ form.job(class_="form-control") }}
             </div>
         </div>
         <div class="row">

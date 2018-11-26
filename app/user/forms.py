@@ -9,13 +9,13 @@ class UserForm(FlaskForm):
     """
     Form for departement to add or edit a user
     """
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    username = StringField('Username', validators=[DataRequired()])
-    first_name = StringField('First Name', validators=[DataRequired()])
-    last_name = StringField('Last Name', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[
+    email = StringField('Adresse email', validators=[DataRequired(), Email()])
+    username = StringField('Pseudonyme', validators=[DataRequired()])
+    first_name = StringField('Nom', validators=[DataRequired()])
+    last_name = StringField('Prénoms', validators=[DataRequired()])
+    password = PasswordField('Mot de passe', validators=[
         DataRequired(),
         EqualTo('confirm_password')
     ])
-    confirm_password = PasswordField('Confirm Password')
-    submit = SubmitField('Save')
+    confirm_password = PasswordField('Confirmer le mot de passe')
+    submit = SubmitField('Enregistrer')

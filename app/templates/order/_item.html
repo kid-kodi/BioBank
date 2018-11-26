@@ -6,6 +6,7 @@
     <td>{{order.firstname}} {{order.lastname}}</td>
     <td>{{order.timestamp}}</td>
     <td>{{order.user.username}}</td>
+    <td>{{order.patients.all()|length}}</td>
     <td>
         <a href="{{ url_for('order.edit', id=order.id) }}">Modifier</a>
         <a href="{{ url_for('order.detail', id=order.id) }}">Détails</a>

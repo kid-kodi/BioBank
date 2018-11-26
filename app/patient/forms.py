@@ -34,26 +34,33 @@ class ModelFieldList(FieldList):
 
 
 class SampleForm(NoCsrfForm):
-    code = StringField(_l('Code'), validators=[DataRequired()])
-    date = StringField(_l('Date de prélèvement'), validators=[DataRequired()])
-    technique = StringField(_l('Technique de préparation'), validators=[DataRequired()])
+    code = StringField(_l('Code'))
+    date = StringField(_l('Date de prélèvement'))
+    technique = StringField(_l('Technique de préparation'))
     sample_nature = SelectField(_l('Nature de prélèvement'), coerce=int, choices=[])
     sample_type = SelectField(_l('Type de prélèvement'), coerce=int, choices=[])
     number = StringField(_l('Nombre de tube'), validators=[DataRequired()])
     site = StringField(_l('Site anatomique'), validators=[DataRequired()])
     tube_type = SelectField(_l('Conditionement'), coerce=int, choices=[])
-    jonc_type = SelectField(_l('Conditionement'), coerce=int, choices=[])
+    jonc_type = SelectField(_l('Type de jonc'), coerce=int, choices=[])
     mesure = SelectField(_l('Unité de mésure'), coerce=int, choices=[])
     volume = StringField(_l('Volume / Concentration'), validators=[DataRequired()])
-    results = TextAreaField(_l('Résultat des examens parasitologiques'))
+    results = TextAreaField(_l('Résultat des examens'))
 
 
 class PatientForm(FlaskForm):
-    code = StringField(_l('Code Patient'), validators=[DataRequired()])
+    code = StringField(_l('Code Patient'))
     order = SelectField(_l('Selectionner un numéro de commande'), coerce=int, choices=[])
     sexe = SelectField(_l('Sexe'), coerce=int, choices=[(1, 'Male'), (2, 'Femelle')])
     birthday = StringField(_l('Date de naissaince'))
+    city = StringField(_l('Lieu d\'habitation'))
+    job = StringField(_l('Fonction'))
     age = StringField(_l('Age'))
     clinical_data = TextAreaField(_l('Renseignement clinique'))
     samples = ModelFieldList(FormField(SampleForm), min_entries=1, model=Sample)
     submit = SubmitField(_l('Enregistrer'))
+
+
+class SearchForm(FlaskForm):
+    code = StringField(_l('Code patient'), validators=[DataRequired()])
+    submit = SubmitField(_l('Recherche'))
