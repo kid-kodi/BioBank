@@ -4,7 +4,7 @@ from flask import render_template, flash, redirect, url_for, request, g, \
 from flask_login import current_user, login_required
 from flask_babel import _, get_locale
 from guess_language import guess_language
-from app import db
+from app import db, excel
 from app.patient.forms import PatientForm, SearchForm
 from app.models import Patient, Origin, Project, Order, SampleType, Mesure, TubeType, SampleNature, JoncType, Sample
 from app.translate import translate
@@ -36,7 +36,7 @@ def index():
             error_out=False)
     patients = pagination.items
     return render_template('patient/index.html',
-                           samples=patients, pagination=pagination,
+                           patients=patients, pagination=pagination,
                            title="patient", search_form=search_form)
 
 
@@ -58,33 +58,34 @@ def add(order_id=0):
 
     if form.validate_on_submit():
         patient = Patient(bio_code=get_bio_code('HU'), order_id=order_id, origin_id=1, code=form.code.data,
-                          sexe=form.sexe.data, birthday=form.birthday.data, age=form.age.data, city=form.city.data, job=form.job.data,
+                          sexe=form.sexe.data, birthday=form.birthday.data, age=form.age.data, city=form.city.data,
+                          job=form.job.data,
                           clinical_data=form.clinical_data.data)
         db.session.add(patient)
         db.session.commit()
 
-        index = 0
         for s in form.samples.entries:
-            index = index + 1
-            sample = Sample()
-            sample.code = s.code.data
-            sample.technique = s.technique.data
-            sample.results = s.results.data
-            sample.sample_nature_id = s.sample_nature.data
-            sample.sample_type_id = s.sample_type.data
-            sample.date = s.date.data
-            sample.site = s.site.data
-            sample.tube_type_id = s.tube_type.data
-            sample.jonc_type_id = s.jonc_type.data
-            sample.number = s.number.data
-            sample.mesure_id = s.mesure.data
-            sample.volume = s.volume.data
-            sample.patient_id = patient.id
-            sample.status = 0
+            print(int(s.number.data))
+            for r in range(int(s.number.data)):
+                sample = Sample()
+                sample.code = s.code.data
+                sample.technique = s.technique.data
+                sample.results = s.results.data
+                sample.sample_nature_id = s.sample_nature.data
+                sample.sample_type_id = s.sample_type.data
+                sample.date = s.date.data
+                sample.site = s.site.data
+                sample.tube_type_id = s.tube_type.data
+                sample.jonc_type_id = s.jonc_type.data
+                sample.number = s.number.data
+                sample.mesure_id = s.mesure.data
+                sample.volume = s.volume.data
+                sample.patient_id = patient.id
+                sample.status = 0
 
-            db.session.add(sample)
-            db.session.commit()
-            generateCode(sample, index)
+                db.session.add(sample)
+                db.session.commit()
+                generateCode(sample, r + 1)
 
         flash(_('Nouveau patient ajouté avec succèss!'))
         return redirect(url_for('patient.add', order_id=order_id))
@@ -128,6 +129,42 @@ def edit(id):
 def detail(id):
     patient = Patient.query.get(id)
     return render_template('patient/detail.html', patient=patient)
+
+
+@bp.route("/patient/export", methods=['GET'])
+@login_required
+def export_data():
+    return excel.make_response_from_tables(db.session, [Patient], "xls", file_name="export_data")
+
+
+@bp.route("/patient/custom_export", methods=['GET'])
+def docustomexport():
+    query_sets = Patient.query.all()
+    for row in query_sets:
+        print(row.__dict__)
+    column_names = ['id', 'serial', '', '', '']
+    return excel.make_response_from_query_sets(query_sets, column_names, "xls", file_name="export_data")
+
+
+@bp.route("/patient/import", methods=['GET', 'POST'])
+@login_required
+def import_data():
+    if request.method == 'POST':
+        # if request.form.get('is_delete') is True:
+        Patient.query.delete()
+
+        def patient_init_func(row):
+            p = Patient(age=row['age'], bio_code=row['bio_code'], birthday=row['birthday'],
+                        clinical_data=row['clinical_data'], code=row['code'], id=row['id'], order_id=row['order_id'],
+                        origin_id=row['origin_id'], sexe=row['sexe'])
+            return p
+
+        request.save_book_to_database(
+            field_name='file', session=db.session,
+            tables=[Patient],
+            initializers=[patient_init_func])
+        return redirect(url_for('.index'))
+    return render_template('patient/import.html')
 
 
 def get_bio_code(s):

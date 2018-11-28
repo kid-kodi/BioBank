@@ -1,11 +1,15 @@
-{% extends "collect.html" %}
+{% extends "base.html" %}
 {% import 'bootstrap/wtf.html' as wtf %}
 {% set active_page = "sample" %}
-{% block collect_content %}
+{% block app_content %}
 <div class="bar">
     <div>
+        {% if sample.patient.order.project %}
         <h1>{{_('Client : ')}}{{sample.patient.order.project.customer.display_as}} {{_(' > Projet : ')}}
             {{sample.patient.order.project.title}} </h1>
+        {% else %}
+        <h1>Aucun client ni projet</h1>
+        {% endif %}
         <h3>{{_('Patient : ')}}{{sample.patient.bio_code}} {{_(' > Code aliqot : ')}} {{sample.code}}</h3>
     </div>
     <div class="actions">

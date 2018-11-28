@@ -4,8 +4,12 @@
 {% block collect_content %}
 <div class="bar">
     <div>
+        {% if patient.order.project %}
         <h1>{{_('Client : ')}} {{patient.order.project.customer.display_as}} {{_(' > Projet : ')}}
             {{patient.order.project.title}}</h1>
+        {% else %}
+        <h1>Aucun client</h1>
+        {% endif %}
         <h3>{{_('Numéro de dépôt : ')}}{{patient.order.serial}} {{_(' > Patient : ')}} {{patient.bio_code}} </h3>
     </div>
     <div class="actions">

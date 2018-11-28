@@ -6,7 +6,17 @@
     <div class="bar">
       <h1>{{ _('Patient') }}</h1>
       <div class="actions">
-        <a class="btn btn-default" href="{{ url_for('patient.add', order_id=0) }}">{{ _('Nouveau patient') }}</a>
+          <ul class="nav nav-pills">
+            <li>
+                <a class="btn btn-default" href="{{ url_for('patient.add', order_id=0) }}">{{ _('Nouveau patient') }}</a>
+            </li>
+              <li>
+                <a class="btn btn-default" href="{{ url_for('patient.import_data') }}">{{ _('Importer') }}</a>
+            </li>
+            <li>
+                <a class="btn btn-default" href="{{ url_for('patient.export_data') }}">{{ _('Exporter') }}</a>
+            </li>
+          </ul>
       </div>
     </div>
     {% if patients | length > 0 %}

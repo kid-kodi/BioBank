@@ -4,9 +4,9 @@ from flask import render_template, make_response, flash, redirect, url_for, requ
 from flask_login import current_user, login_required
 from flask_babel import _, get_locale
 from guess_language import guess_language
-from app import db
+from app import db, excel
 from app.sample.forms import SampleForm, SearchForm
-from app.models import Sample, Origin, Customer, Project, Order, SampleType, Mesure, TubeType, Patient, Basket, \
+from app.models import Sample, Origin, Sample, Project, Order, SampleType, Mesure, TubeType, Patient, Basket, \
     SampleNature, JoncType
 from app.translate import translate
 from app.sample import bp
@@ -62,20 +62,26 @@ def add():
     form.mesure.choices = [(c.id, c.name) for c in Mesure.query.all()]
 
     if form.validate_on_submit():
-        sample = Sample()
-        sample.serial = get_bio_code('HU')
-        sample.code = form.code.data
-        sample.patient_id = form.patient.data
-        sample.sample_nature_id = form.sample_nature.data
-        sample.sample_type_id = form.sample_type.data
-        sample.tube_type_id = form.tube_type.data
-        sample.jonc_type_id = form.jonc_type.data
-        sample.mesure_id = form.mesure.data
-        sample.volume = form.volume.data
-        sample.site = form.site.data
-        sample.date = form.date.data
-        db.session.add(sample)
-        db.session.commit()
+        for r in range(int(form.number.data)):
+            print(form.number.data)
+            sample = Sample()
+            sample.code = form.code.data
+            sample.technique = form.technique.data
+            sample.results = form.results.data
+            sample.patient_id = form.patient.data
+            sample.sample_nature_id = form.sample_nature.data
+            sample.sample_type_id = form.sample_type.data
+            sample.tube_type_id = form.tube_type.data
+            sample.jonc_type_id = form.jonc_type.data
+            sample.mesure_id = form.mesure.data
+            sample.volume = form.volume.data
+            sample.site = form.site.data
+            sample.number = form.number.data
+            sample.date = form.date.data
+            sample.status = 0
+            db.session.add(sample)
+            db.session.commit()
+            generateCode(sample, r + 1)
         flash(_('Nouveau prélèvement ajouté avec succèss!'))
         return redirect(url_for('sample.index'))
     return render_template('sample/form.html', form=form)
@@ -132,6 +138,44 @@ def detail(id):
     return render_template('sample/detail.html', sample=sample)
 
 
+@bp.route("/sample/export", methods=['GET'])
+@login_required
+def export_data():
+    return excel.make_response_from_tables(db.session, [Sample], "xls", file_name="export_data")
+
+
+@bp.route("/sample/custom_export", methods=['GET'])
+def docustomexport():
+    query_sets = Sample.query.all()
+    column_names = ['id', 'serial', 'code', 'sample_nature_id', 'sample_type_id']
+    for key in query_sets.columns:
+        column_names.append(key)
+    return excel.make_response_from_query_sets(query_sets, column_names, "xls", file_name="export_data")
+
+
+@bp.route("/sample/import", methods=['GET', 'POST'])
+@login_required
+def import_data():
+    if request.method == 'POST':
+        #if request.form.get('is_delete') is True:
+        Sample.query.delete()
+
+        def sample_init_func(row):
+            p = Sample(code=row['code'], date=row['date'], jonc_type_id=row['jonc_type_id'],
+                       mesure_id=row['mesure_id'], parent_id=row['parent_id'], patient_id=row['patient_id'],
+                       sample_nature_id=row['sample_nature_id'], sample_type_id=row['sample_type_id'],
+                       status=row['status'], technique=row['technique'], tube_type_id=row['tube_type_id'],
+                       volume=row['volume'])
+            return p
+
+        request.save_book_to_database(
+            field_name='file', session=db.session,
+            tables=[Sample],
+            initializers=[sample_init_func])
+        return redirect(url_for('.search'))
+    return render_template('sample/import.html')
+
+
 @bp.route('/sample/addtolist/<int:id>', methods=['GET'])
 @login_required
 def addtolist(id):
@@ -140,7 +184,7 @@ def addtolist(id):
     basket.samples.append(sample)
     sample.basket_id = basket.id
     db.session.commit()
-    return redirect(url_for('sample.index'))
+    return redirect(url_for('sample.search'))
 
 
 @bp.route('/sample/removefromlist/<int:id>', methods=['GET'])
@@ -151,7 +195,7 @@ def removefromlist(id):
     basket.samples.remove(sample)
     sample.basket_id = 0
     db.session.commit()
-    return redirect(url_for('sample.index'))
+    return redirect(url_for('sample.search'))
 
 
 @bp.route('/sample/<int:id>/print', methods=['GET'])
@@ -170,3 +214,10 @@ def get_bio_code(s):
     size = len(Sample.query.all()) + 1
     num = s + str(size).zfill(10)
     return num
+
+
+def generateCode(s, index):
+    s.code = str(s.number) + '-' + str(s.sample_nature.siggle) + str(index) + str(s.jonc_type.siggle)
+    db.session.commit()
+    # 3SURur2 - fn - rouge
+    return s

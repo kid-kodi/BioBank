@@ -459,10 +459,7 @@ class Patient(db.Model):
     created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def total_sample(self):
-        number = 0
-        samples = self.samples
-        for s in samples:
-            number = number + len(s.all())
+        number = len(self.samples.all())
         return number
 
 

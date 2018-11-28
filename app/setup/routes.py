@@ -4,6 +4,7 @@ from app import db
 from app.models import User, Category, Customer, Project, Order, Study, Subject, Program, Origin, Mesure, JoncType, \
     Patient, TubeType, SampleNature, SampleType, Temperature, Box, Rack, Equipment, Hole, Sample, Basket, EquipmentType, BoxType, Room
 from app.setup import bp
+from flask_babel import _
 
 
 @bp.route('/setup')

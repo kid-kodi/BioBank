@@ -12,13 +12,24 @@
     <div class="col-md-10">
         <div class="bar">
             <h1>{{ _('Echantillon') }}</h1>
+            <div class="actions">
+                <ul class="nav nav-pills">
+                    <li>
+                        <a class="btn btn-default" href="{{ url_for('sample.import_data') }}">{{ _('Importer') }}</a>
+                    </li>
+                    <li>
+                        <a class="btn btn-default" href="{{ url_for('sample.export_data') }}">{{ _('Exporter') }}</a>
+                    </li>
+                </ul>
+            </div>
         </div>
         <table class="table">
             <thead>
             <tr>
                 <th></th>
-                <th>{{_('Code biobanque')}}</th>
-                <th>{{_('Nature d\'échantillon')}}</th>
+                <th>{{_('Code')}}</th>
+                <th>{{_('Nature')}}</th>
+                <th>{{_('Type')}}</th>
                 <th>{{_('Conditionnement')}}</th>
                 <th>{{_('Volume')}}/{{_('Unité')}}</th>
                 <th>{{_('Date de prélèvement')}}</th>
@@ -27,12 +38,12 @@
             </thead>
             <tbody>
             {% for sample in samples %}
-            {% include 'sample/_item.html' %}
+                {% include 'sample/_item.html' %}
             {% endfor %}
             </tbody>
         </table>
         <div class="pagination">
-            {{ macros.pagination_widget(pagination, '.index') }}
+            {{ macros.pagination_widget(pagination, '.search') }}
         </div>
     </div>
 </div>
