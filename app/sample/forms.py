@@ -26,6 +26,7 @@ class SampleForm(FlaskForm):
 
 
 class SearchForm(FlaskForm):
-    code = StringField(_l('Code'), validators=[DataRequired()])
-    sample_type = SelectField(_l('Nature du prélèvement'), coerce=int, choices=[])
+    origin_id = SelectField(_l('Origine'), coerce=int, choices=[])
+    sample_type_id = SelectField(_l('Nature du prélèvement'), coerce=int, choices=[])
+    code = StringField(_l('Code'))
     submit = SubmitField(_l('Recherche'))

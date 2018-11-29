@@ -1,0 +1,23 @@
+@page {
+  size: A4; margin: 1cm
+}
+
+@media print {
+  #printableArea{
+      display: block;
+  }
+
+  #printableArea ul{
+    list-style : none;
+  }
+
+  .card-print{
+    display : inline-block;
+    width : 20%;
+    height : 65px;
+    border : 1px solid #ddd;
+    margin-bottom : 5px;
+    padding : 5px;
+  }
+
+}

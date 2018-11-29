@@ -55,3 +55,9 @@ EXP :
 HypoTC18CHUC003
 HU0000000001
 3SURur2-fn-rouge
+
+##TODO
+1) search liste of sample +
+2) select what we want
+3) print liste
+Print

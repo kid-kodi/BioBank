@@ -411,6 +411,7 @@ class Origin(db.Model):
     siggle = db.Column(db.String(5))
     description = db.Column(db.String(128))
     patients = db.relationship('Patient', backref='origin', lazy='dynamic')
+    samples = db.relationship('Sample', backref='origin', lazy='dynamic')
 
 
 class TubeType(db.Model):
@@ -458,6 +459,21 @@ class Patient(db.Model):
     samples = db.relationship('Sample', backref='patient', lazy='dynamic')
     created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
+    def to_json(self):
+        json_patient = {
+            'id': self.id,
+            'order_id': self.order_id,
+            'origin_id': self.origin_id,
+            'code': self.code,
+            'sexe': self.sexe,
+            'birthday': self.birthday,
+            'city': self.city,
+            'job': self.job,
+            'clinical_data': self.clinical_data,
+            'created_at': self.created_at
+        }
+        return json_patient
+
     def total_sample(self):
         number = len(self.samples.all())
         return number
@@ -473,6 +489,7 @@ sample_hole_history = db.Table(
 class Sample(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
+    origin_id = db.Column(db.Integer, db.ForeignKey('origin.id'))
     sample_nature_id = db.Column(db.Integer, db.ForeignKey('sample_nature.id'))
     sample_type_id = db.Column(db.Integer, db.ForeignKey('sample_type.id'))
     tube_type_id = db.Column(db.Integer, db.ForeignKey('tube_type.id'))
@@ -496,6 +513,36 @@ class Sample(db.Model):
         "Hole",
         secondary=sample_hole_history,
         back_populates="samples")
+
+    def to_json(self):
+        json_sample = {
+            'id': self.id,
+            'patient_id': self.patient_id,
+            'patient_code': self.patient.code,
+            'bio_code': self.patient.bio_code,
+            'origin_id': self.origin_id,
+            'origin_name': self.origin.name,
+            'sample_nature_name': self.sample_nature.name,
+            'sample_nature_id': self.sample_nature_id,
+            'sample_type_id': self.sample_type_id,
+            'sample_type_name': self.sample_type.name,
+            'tube_type_id': self.tube_type_id,
+            'tube_type_name': self.tube_type.name,
+            'jonc_type_id': self.jonc_type_id,
+            'jonc_type_name': self.jonc_type.name,
+            'mesure_name': self.mesure.name,
+            'mesure_id': self.mesure_id,
+            'technique': self.technique,
+            'serial': self.serial,
+            'code': self.code,
+            'date': self.date,
+            'site': self.site,
+            'volume': self.volume,
+            'status': self.status,
+            'created_at': self.created_at,
+            'created_by': self.created_by
+        }
+        return json_sample
 
 
 class Basket(db.Model):

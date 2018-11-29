@@ -68,6 +68,7 @@ def add(order_id=0):
             print(int(s.number.data))
             for r in range(int(s.number.data)):
                 sample = Sample()
+                sample.origin_id = s.patient.origin_id
                 sample.code = s.code.data
                 sample.technique = s.technique.data
                 sample.results = s.results.data

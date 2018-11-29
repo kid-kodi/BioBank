@@ -18,23 +18,25 @@ import pdfkit
 def search():
     pagination = []
     search_form = SearchForm()
-    search_form.sample_type.choices = [(c.id, c.name) for c in Origin.query.all()]
+    search_form.sample_type_id.choices = [(c.id, c.name) for c in SampleType.query.all()]
+    search_form.sample_type_id.choices.append((0, "Choisir un type"))
+    search_form.origin_id.choices = [(c.id, c.name) for c in Origin.query.all()]
+    search_form.origin_id.choices.append((0, "Choisir une origine"))
     page = request.args.get('page', 1, type=int)
+    q = db.session.query(Sample)
     if search_form.validate_on_submit():
-        code = search_form.code.data
-        if code != '':
-            pagination = Sample.query.filter_by(code=code) \
-                .order_by(Sample.created_at.desc()).paginate(
-                page, per_page=current_app.config['FLASK_PER_PAGE'],
-                error_out=False)
-        else:
-            pagination = Sample.query \
-                .order_by(Sample.created_at.desc()).paginate(
-                page, per_page=current_app.config['FLASK_PER_PAGE'],
-                error_out=False)
+        if search_form.code.data != '':
+            q = q.filter_by(code=search_form.code.data)
+        if search_form.sample_type_id.data != 0:
+            q = q.filter_by(sample_type_id=search_form.sample_type_id.data)
+        if search_form.origin_id.data != 0:
+            q = q.filter_by(origin_id=search_form.origin_id.data)
+
+        pagination = q.order_by(Sample.created_at.desc()).paginate(
+            page, per_page=current_app.config['FLASK_PER_PAGE'],
+            error_out=False)
     else:
-        pagination = Sample.query \
-            .order_by(Sample.created_at.desc()).paginate(
+        pagination = q.order_by(Sample.created_at.desc()).paginate(
             page, per_page=current_app.config['FLASK_PER_PAGE'],
             error_out=False)
     samples = pagination.items
@@ -157,7 +159,7 @@ def docustomexport():
 @login_required
 def import_data():
     if request.method == 'POST':
-        #if request.form.get('is_delete') is True:
+        # if request.form.get('is_delete') is True:
         Sample.query.delete()
 
         def sample_init_func(row):
@@ -165,7 +167,7 @@ def import_data():
                        mesure_id=row['mesure_id'], parent_id=row['parent_id'], patient_id=row['patient_id'],
                        sample_nature_id=row['sample_nature_id'], sample_type_id=row['sample_type_id'],
                        status=row['status'], technique=row['technique'], tube_type_id=row['tube_type_id'],
-                       volume=row['volume'])
+                       volume=row['volume'], origin_id=row['origin_id'], )
             return p
 
         request.save_book_to_database(
@@ -208,6 +210,36 @@ def print(id):
     response.headers['Content-Type'] = 'application/pdf'
     response.headers['Content-Disposition'] = 'attachment; filename=code.pdf'
     return response
+
+
+@bp.route('/sample/print_selected', methods=['GET', 'POST'])
+@login_required
+def print_selected(data):
+    all_args = request.args.to_dict()
+    print(all_args)
+    sample = []
+    html = render_template('_bar_code.html', sample=sample)
+    pdf = pdfkit.from_string(html, False)
+    response = make_response(pdf)
+    response.headers['Content-Type'] = 'application/pdf'
+    response.headers['Content-Disposition'] = 'attachment; filename=code.pdf'
+    return response
+
+
+@bp.route('/sample/print', methods=['GET', 'POST'])
+@login_required
+def print_to():
+    data = request.get_json()
+    ids = data['items']
+    samples = []
+    for id in ids:
+        _sample = Sample.query.get(int(id))
+        samples.append(_sample)
+
+    #for value in samples:
+        #print(value)
+    # Make a PDF straight from HTML in a string.
+    return jsonify({'samples': [sample.to_json() for sample in samples]})
 
 
 def get_bio_code(s):

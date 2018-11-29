@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 9acbd62d4e7d
+Revision ID: f52a715054df
 Revises: 
-Create Date: 2018-11-26 11:48:37.249334
+Create Date: 2018-11-29 05:59:40.377718
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '9acbd62d4e7d'
+revision = 'f52a715054df'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -364,6 +364,7 @@ def upgrade():
     op.create_table('sample',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('patient_id', sa.Integer(), nullable=True),
+    sa.Column('origin_id', sa.Integer(), nullable=True),
     sa.Column('sample_nature_id', sa.Integer(), nullable=True),
     sa.Column('sample_type_id', sa.Integer(), nullable=True),
     sa.Column('tube_type_id', sa.Integer(), nullable=True),
@@ -385,6 +386,7 @@ def upgrade():
     sa.ForeignKeyConstraint(['created_by'], ['user.id'], ),
     sa.ForeignKeyConstraint(['jonc_type_id'], ['jonc_type.id'], ),
     sa.ForeignKeyConstraint(['mesure_id'], ['mesure.id'], ),
+    sa.ForeignKeyConstraint(['origin_id'], ['origin.id'], ),
     sa.ForeignKeyConstraint(['parent_id'], ['sample.id'], ),
     sa.ForeignKeyConstraint(['patient_id'], ['patient.id'], ),
     sa.ForeignKeyConstraint(['sample_nature_id'], ['sample_nature.id'], ),

@@ -21,8 +21,8 @@ class Config(object):
     MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')
     ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
     REDIS_URL = os.environ.get('REDIS_URL') or 'redis://'
-    POSTS_PER_PAGE = 25
-    FLASK_PER_PAGE = 25
+    POSTS_PER_PAGE = 80
+    FLASK_PER_PAGE = 80
 
     UPLOADS_DEFAULT_DEST = os.path.join(basedir, 'app/static/img/')
     UPLOADS_DEFAULT_URL = 'http://localhost:5000/static/img/'

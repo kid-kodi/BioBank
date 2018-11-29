@@ -15,6 +15,9 @@
             <div class="actions">
                 <ul class="nav nav-pills">
                     <li>
+                        <a class="btn btn-default printBtn" href="{{ url_for('sample.print_to') }}">{{ _('Imprimer') }}</a>
+                    </li>
+                    <li>
                         <a class="btn btn-default" href="{{ url_for('sample.import_data') }}">{{ _('Importer') }}</a>
                     </li>
                     <li>
@@ -26,7 +29,9 @@
         <table class="table">
             <thead>
             <tr>
-                <th></th>
+                <th>
+                    <input type="checkbox" class="chkAllBtn">
+                </th>
                 <th>{{_('Code')}}</th>
                 <th>{{_('Nature')}}</th>
                 <th>{{_('Type')}}</th>
@@ -47,5 +52,5 @@
         </div>
     </div>
 </div>
-
+<div id="printableArea"></div>
 {% endblock %}

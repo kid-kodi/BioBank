@@ -76,6 +76,78 @@ $(function() {
         }
     });
 
+    $('.chkAllBtn').click(function() {
+        var isChecked = $(this).prop("checked");
+        $('table tr:has(td)').find('input[type="checkbox"]').prop('checked', isChecked);
+    });
+
+    $('table tr:has(td)').find('input[type="checkbox"]').click(function() {
+        var isChecked = $(this).prop("checked");
+        var isHeaderChecked = $(".chkAllBtn").prop("checked");
+        if (isChecked == false && isHeaderChecked)
+            $(".chkAllBtn").prop('checked', isChecked);
+        else {
+            $('table tr:has(td)').find('input[type="checkbox"]').each(function() {
+                if ($(this).prop("checked") == false)
+                    isChecked = false;
+            });
+            $(".chkAllBtn").prop('checked', isChecked);
+        }
+    });
+
+    var onDataPrint = function (argument) {
+      var items = [];
+      $('input[name=items]:checked').map(function() {
+          items.push($(this).val());
+          console.log( items );
+      });
+
+
+      $.ajax({
+          url: "/sample/print",
+          type: "POST",
+          data: JSON.stringify({"items":items}),
+          contentType: "application/json; charset=utf-8",
+          success: function(data) {
+            console.log(data);
+            console.log(data);
+            var samples = data.samples;
+            $('#printableArea').html('')
+            for (i = 0; i < samples.length; i++) {
+                $('#printableArea').append( addTemplateToList(samples[ i ]) );
+            }
+            printDiv();
+          }
+      });
+
+      return false;
+    };
+
+    var addTemplateToList = function( data ){
+        html = String()
+        + '<div class="card-print">'
+            +    '<div>' + data.bio_code + '</div>'
+            +    '<div>' + data.patient_code + '</div>'
+            +    '<div>' + data.code + '</div>'
+        + '</div>'
+
+        return html;
+    }
+
+    var printDiv = function() {
+         var divName = 'printableArea';
+         var printContents = document.getElementById(divName).innerHTML;
+         var originalContents = document.body.innerHTML;
+
+         document.body.innerHTML = printContents;
+
+         window.print();
+
+         document.body.innerHTML = originalContents;
+    };
+
+    $('body').on('click', '.printBtn', onDataPrint);
+
     $( ".datepicker" ).datepicker( $.datepicker.regional[ "fr" ] );
 
 });
