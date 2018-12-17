@@ -1,15 +1,17 @@
+import os
 from datetime import datetime
 from flask import render_template, flash, redirect, url_for, request, g, \
     jsonify, current_app, make_response
 from flask_login import current_user, login_required
 from flask_babel import _, get_locale
 from guess_language import guess_language
-from app import db
+from app import db, current_app
 from app.print.forms import PrintForm
 from app.models import Hole, Sample, Basket, Label, Print, PrintItem
 from app.translate import translate
 from app.print import bp
 import pdfkit
+
 
 
 @bp.route('/print', methods=['GET', 'POST'])
@@ -68,7 +70,8 @@ def proceed(id):
     print.status = 1
     db.session.commit()
     html = render_template('_bar_code.html', samples=samples)
-    pdf = pdfkit.from_string(html, False)
+    css = current_app.config['APP_CSS'] + 'print.css'
+    pdf = pdfkit.from_string(html, False, css=css)
     response = make_response(pdf)
     response.headers['Content-Type'] = 'application/pdf'
     response.headers['Content-Disposition'] = 'attachment; filename=code.pdf'

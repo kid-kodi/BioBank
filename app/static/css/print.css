@@ -12,6 +12,7 @@
   }
 
   .card-print{
+    font-size : 5px;
     display : inline-block;
     width : 20%;
     height : 65px;

@@ -3,103 +3,21 @@
   <component name="ChangeListManager">
     <list default="true" id="3ffebfb4-8765-44f9-97cb-39d7d06de54a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.~lock.setup.xls#" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BIOBIP.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GESTION_ECHANTILLONS_UCB-CeReB[1].docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/README.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app#.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/auth/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/auth/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/basket/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/basket/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/basket/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/basket/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/box_type/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/box_type/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/equipment_type/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/equipment_type/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/location/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/location/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/location/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/location/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/order/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/order/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/order/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/order/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/order/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/order/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/patient/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/patient/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/patient/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/patient/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/process/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/process/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/process/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/process/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/program/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/program/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/program/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/program/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/project/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/project/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/sample/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/sample/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/setup/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/setup/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/css/theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/css/theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/study/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/study/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/subject/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/subject/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/subject/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/subject/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/technique/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/technique/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/technique/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/technique/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/aliquot/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/aliquot/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/aliquot/templates/aliquot/_item.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/aliquot/templates/aliquot/_item.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/basket/templates/basket/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/basket/templates/basket/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/print/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/print/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/sample/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/sample/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/css/print.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/css/print.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/_bar_code.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/_bar_code.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/admin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/basket/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/basket/form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/basket/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/box_type/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/box_type/form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/box_type/list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/collect.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/collect.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/customer/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/customer/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/customer/import.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/customer/import.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/customer/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/customer/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/equipment_type/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/equipment_type/form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/equipment_type/list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/location/_box.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/location/_equipment.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/location/_rack.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/location/_room.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/location/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/order/_item.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/order/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/order/form (copie).html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/order/form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/order/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/process.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/process.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/process/_item.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/process/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/process/form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/process/handsontable.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/process/import.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/process/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/program/_item.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/program/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/program/form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/program/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/project/_item.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/project/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/project/form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/project/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/sample/_item.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/sample/_item.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/sample/_sample.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/sample/_sample.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/study/_item.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/study/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/study/form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/study/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/technique/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/technique/form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/technique/handsontable.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/technique/import.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/technique/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/user/form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/user/list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/user/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/user/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot.sh" beforeDir="false" afterPath="$PROJECT_DIR$/boot.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/sample/_item.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/sample/_sample.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/sample/detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/sample/form.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/sample/import.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/sample/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/sample/search.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docker.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logiciel UGEC.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/versions/f52a715054df_.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.xls" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -131,34 +49,34 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Dockerfile" value="9" />
-          <entry key="css" value="678" />
+          <entry key="css" value="701" />
           <entry key="dummy" value="3" />
-          <entry key="html" value="16896" />
+          <entry key="html" value="16946" />
           <entry key="js" value="333" />
           <entry key="md" value="362" />
-          <entry key="py" value="18178" />
+          <entry key="py" value="18365" />
           <entry key="sh" value="10" />
           <entry key="txt" value="1663" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CSS" value="678" />
-          <entry key="HTML" value="16896" />
+          <entry key="CSS" value="701" />
+          <entry key="HTML" value="16946" />
           <entry key="JavaScript" value="333" />
           <entry key="Markdown" value="362" />
           <entry key="PLAIN_TEXT" value="1685" />
-          <entry key="Python" value="18178" />
+          <entry key="Python" value="18365" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="Dockerfile" value="4" />
-          <entry key="css" value="22" />
-          <entry key="html" value="590" />
-          <entry key="js" value="13" />
+          <entry key="css" value="24" />
+          <entry key="html" value="599" />
+          <entry key="js" value="14" />
           <entry key="md" value="3" />
-          <entry key="py" value="548" />
+          <entry key="py" value="558" />
           <entry key="rnc" value="1" />
           <entry key="sh" value="3" />
           <entry key="txt" value="22" />
@@ -166,13 +84,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSS" value="22" />
+          <entry key="CSS" value="24" />
           <entry key="Dockerfile" value="2" />
-          <entry key="HTML" value="590" />
-          <entry key="JavaScript" value="13" />
+          <entry key="HTML" value="599" />
+          <entry key="JavaScript" value="14" />
           <entry key="Markdown" value="3" />
           <entry key="PLAIN_TEXT" value="27" />
-          <entry key="Python" value="548" />
+          <entry key="Python" value="558" />
           <entry key="RNG Compact" value="1" />
         </counts>
       </usages-collector>
@@ -181,10 +99,13 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models.py">
+        <entry file="file://$PROJECT_DIR$/app/aliquot/routes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="998" column="52" selection-start-line="998" selection-start-column="52" selection-end-line="998" selection-end-column="52" />
+            <state relative-caret-position="423">
+              <caret line="93" column="60" selection-start-line="93" selection-start-column="60" selection-end-line="93" selection-end-column="60" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -192,8 +113,46 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/print/routes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="52" column="31" selection-start-line="52" selection-start-column="31" selection-end-line="52" selection-end-column="31" />
+            <state relative-caret-position="174">
+              <caret line="73" column="40" selection-start-line="73" selection-start-column="35" selection-end-line="73" selection-end-column="40" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/static/css/theme.css">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/static/css/print.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="27" column="11" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="11" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/main/routes.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="46" column="14" selection-start-line="46" selection-start-column="14" selection-end-line="46" selection-end-column="50" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -202,64 +161,40 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/_bar_code.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/templates/process.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="42" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/print/templates/print/form.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/print/templates/print/list.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/print/templates/print/_item.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" selection-start-line="2" selection-end-line="2" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/print/templates/print/detail.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="96" selection-start-line="11" selection-start-column="96" selection-end-line="11" selection-end-column="96" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/sample/routes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="48" selection-start-line="1" selection-start-column="35" selection-end-line="1" selection-end-column="48" />
+            <state relative-caret-position="92">
+              <caret line="18" column="19" lean-forward="true" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/sample/templates/sample/search.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="38">
+              <caret line="17" column="93" selection-start-line="17" selection-start-column="85" selection-end-line="17" selection-end-column="93" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/sample/templates/sample/_item.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="4" lean-forward="true" selection-start-column="4" selection-end-line="4" selection-end-column="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/basket/templates/basket/detail.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="14" column="6" lean-forward="true" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -268,8 +203,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>tube_type</find>
-      <find>EquipmentType</find>
       <find>equipementType</find>
       <find>equipment_type</find>
       <find>customer</find>
@@ -298,6 +231,8 @@
       <find>study</find>
       <find>Box</find>
       <find>store</find>
+      <find>print_to</find>
+      <find>basedir</find>
     </findStrings>
     <replaceStrings>
       <replace>customer</replace>
@@ -341,10 +276,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/location/routes.py" />
-        <option value="$PROJECT_DIR$/app/store/__init__.py" />
-        <option value="$PROJECT_DIR$/app/store/templates/store/form.html" />
-        <option value="$PROJECT_DIR$/app/order/templates/order/form.html" />
         <option value="$PROJECT_DIR$/app/order/forms.py" />
         <option value="$PROJECT_DIR$/app/order/templates/order/index.html" />
         <option value="$PROJECT_DIR$/app/order/templates/order/_item.html" />
@@ -363,7 +294,6 @@
         <option value="$PROJECT_DIR$/app/aliquot/templates/aliquot/form.html" />
         <option value="$PROJECT_DIR$/app/aliquot/forms.py" />
         <option value="$PROJECT_DIR$/app/templates/base.html" />
-        <option value="$PROJECT_DIR$/app/aliquot/templates/aliquot/_item.html" />
         <option value="$PROJECT_DIR$/app/aliquot/templates/aliquot/list.html" />
         <option value="$PROJECT_DIR$/app/aliquot/templates/aliquot/_aliquot_item.html" />
         <option value="$PROJECT_DIR$/app/aliquot/templates/aliquot/detail.html" />
@@ -372,7 +302,6 @@
         <option value="$PROJECT_DIR$/app/sample/routes.py" />
         <option value="$PROJECT_DIR$/README.txt" />
         <option value="$PROJECT_DIR$/app/print/__init__.py" />
-        <option value="$PROJECT_DIR$/app/aliquot/routes.py" />
         <option value="$PROJECT_DIR$/app/label/routes.py" />
         <option value="$PROJECT_DIR$/app/label/forms.py" />
         <option value="$PROJECT_DIR$/app/label/__init__.py" />
@@ -385,13 +314,19 @@
         <option value="$PROJECT_DIR$/app/print/forms.py" />
         <option value="$PROJECT_DIR$/app/print/templates/print/_item.html" />
         <option value="$PROJECT_DIR$/app/print/templates/print/_store_item.html" />
-        <option value="$PROJECT_DIR$/app/templates/_bar_code.html" />
         <option value="$PROJECT_DIR$/app/print/templates/print/form.html" />
         <option value="$PROJECT_DIR$/app/print/templates/print/list.html" />
         <option value="$PROJECT_DIR$/app/models.py" />
-        <option value="$PROJECT_DIR$/app/print/routes.py" />
         <option value="$PROJECT_DIR$/app/print/templates/print/detail.html" />
         <option value="$PROJECT_DIR$/app/templates/process.html" />
+        <option value="$PROJECT_DIR$/app/sample/__init__.py" />
+        <option value="$PROJECT_DIR$/app/templates/_bar_code.html" />
+        <option value="$PROJECT_DIR$/config.py" />
+        <option value="$PROJECT_DIR$/app/basket/templates/basket/detail.html" />
+        <option value="$PROJECT_DIR$/app/aliquot/templates/aliquot/_item.html" />
+        <option value="$PROJECT_DIR$/app/aliquot/routes.py" />
+        <option value="$PROJECT_DIR$/app/print/routes.py" />
+        <option value="$PROJECT_DIR$/app/static/css/print.css" />
       </list>
     </option>
   </component>
@@ -423,7 +358,20 @@
               <item name="biobank" type="b2602c69:ProjectViewProjectNode" />
               <item name="biobank" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="biobank" type="b2602c69:ProjectViewProjectNode" />
+              <item name="biobank" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="biobank" type="b2602c69:ProjectViewProjectNode" />
+              <item name="biobank" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -494,20 +442,19 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19037078" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32972974" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49836066" visible="true" weight="0.35027027" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49836066" weight="0.35027027" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.4989071" weight="0.3264865" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.4989071" visible="true" weight="0.3264865" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50163937" side_tool="true" weight="0.35027027" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
@@ -540,87 +487,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/location/templates/location/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1226">
-          <caret line="86" column="79" selection-start-line="86" selection-start-column="79" selection-end-line="86" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/static/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="499">
-          <caret line="77" column="7" selection-start-line="77" selection-start-column="7" selection-end-line="77" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/static/css/theme.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="248" column="1" selection-start-line="248" selection-start-column="1" selection-end-line="248" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/store/templates/store/form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/store/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="43" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/store/templates/store/list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="105" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/store/templates/store/_item.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="85" selection-start-line="7" selection-start-column="81" selection-end-line="7" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/store/templates/store/_store_item.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="40" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/store/templates/store/detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/store/routes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="36" column="56" selection-start-line="36" selection-start-column="56" selection-end-line="36" selection-end-column="56" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/sample/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/process/routes.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -669,20 +535,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/aliquot/templates/aliquot/list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="18" column="35" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/aliquot/templates/aliquot/_item.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="135" selection-start-line="7" selection-start-column="135" selection-end-line="7" selection-end-column="135" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/order/templates/order/detail.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -727,26 +579,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="439">
           <caret line="99" column="1" selection-start-line="99" selection-start-column="1" selection-end-line="99" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/aliquot/routes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="91" column="26" selection-start-line="91" selection-start-column="26" selection-end-line="91" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/order/routes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="389" selection-start-line="389" selection-end-line="397" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -863,20 +695,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/sample/routes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="48" selection-start-line="1" selection-start-column="35" selection-end-line="1" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/_bar_code.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/print/templates/print/form.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -912,16 +730,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/print/routes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="52" column="31" selection-start-line="52" selection-start-column="31" selection-end-line="52" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/print/templates/print/detail.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -933,6 +741,140 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="42" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/sample/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="61" selection-start-line="2" selection-start-column="61" selection-end-line="2" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="51" column="16" lean-forward="true" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/order/routes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3690">
+          <caret line="15" column="7" selection-start-line="15" selection-end-line="15" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/basket/templates/basket/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-307" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/basket/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/_bar_code.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="12" lean-forward="true" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/aliquot/templates/aliquot/list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="18" column="35" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/aliquot/templates/aliquot/_item.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="38" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/sample/templates/sample/search.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="17" column="93" selection-start-line="17" selection-start-column="85" selection-end-line="17" selection-end-column="93" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/sample/templates/sample/_item.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="4" lean-forward="true" selection-start-column="4" selection-end-line="4" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/basket/templates/basket/detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="6" lean-forward="true" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/sample/routes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="18" column="19" lean-forward="true" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/aliquot/routes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="423">
+          <caret line="93" column="60" selection-start-line="93" selection-start-column="60" selection-end-line="93" selection-end-column="60" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/main/routes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="46" column="14" selection-start-line="46" selection-start-column="14" selection-end-line="46" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="11" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/css/theme.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/print/routes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="73" column="40" selection-start-line="73" selection-start-column="35" selection-end-line="73" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/css/print.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
         </state>
       </provider>
     </entry>

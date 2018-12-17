@@ -19,8 +19,8 @@
         <thead>
         <tr>
             <th></th>
-            <th>{{_('Numéro à l\'arrivé')}}</th>
             <th>{{_('Code biobanque')}}</th>
+            <th>{{_('Numéro à l\'arrivé')}}</th>
             <th>{{_('Nature d\'échantillon')}}</th>
             <th>{{_('Conditionnement')}}</th>
             <th>{{_('Volume')}}/{{_('Unité')}}</th>
@@ -34,9 +34,9 @@
                 <td>
                     <input type="checkbox" name="items" value="{{sample.id}}">
                 </td>
+                <td>{{sample.patient.bio_code}}</td>
                 <td>{{sample.code}}</td>
                 <td>{{sample.sample_nature.name}}</td>
-                <td>{{sample.sample_type.name}}</td>
                 <td>{{sample.support.name}}</td>
                 <td>{{sample.volume}}/{{sample.mesure.name}}</td>
                 <td>{{sample.date}}</td>

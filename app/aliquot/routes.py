@@ -26,7 +26,8 @@ def add():
     form = AliquotForm()
     basket = Basket.query.filter_by(created_by=current_user.id).first()
     form.support.choices = [(c.id, c.name) for c in Support.query.all()]
-    form.samples.choices = [(c.id, c.code) for c in basket.samples.filter_by(parent_id=None).all()]
+    form.samples.choices = [(c.id, str(c.patient.bio_code + ' ' + c.code)) for c in
+                            basket.samples.filter_by(parent_id=None).all()]
     form.mesure.choices = [(c.id, c.name) for c in Mesure.query.all()]
     if form.validate_on_submit():
         aliquot = Aliquot()
@@ -89,8 +90,10 @@ def proceed(id):
             db.session.add(sample)
             db.session.commit()
             generateCode(sample, num + 1)
-        _sample.volume = 0
-        _sample.status = 3
+
+        __sample = Sample.query.get(aliquot_items.sample.id)
+        __sample.volume = 0
+        __sample.status = 3
         aliquot_items.status = 1
         db.session.commit()
     aliquot.status = 1
