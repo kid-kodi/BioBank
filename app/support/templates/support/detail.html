@@ -1,0 +1,15 @@
+{% extends "admin.html" %}
+{% set active_page = "support" %}
+{% block admin_content %}
+<div class="bar">
+  <h1>{{ support.name }}</h1>
+    <div class="actions">
+        <ul class="nav nav-pills">
+            <li>
+                <a href="{{ url_for('support.edit', id=support.id) }}">{{ _('Modifier') }}</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

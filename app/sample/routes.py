@@ -6,7 +6,7 @@ from flask_babel import _, get_locale
 from guess_language import guess_language
 from app import db, excel
 from app.sample.forms import SampleForm, SearchForm
-from app.models import Sample, Origin, Sample, Project, Order, SampleType, Mesure, TubeType, Patient, Basket, \
+from app.models import Sample, Origin, Sample, Project, Order, SampleType, Mesure, Support, Patient, Basket, \
     SampleNature, JoncType
 from app.translate import translate
 from app.sample import bp
@@ -59,7 +59,7 @@ def add():
     form.patient.choices = [(c.id, c.code) for c in Patient.query.all()]
     form.sample_nature.choices = [(c.id, c.name) for c in SampleNature.query.all()]
     form.sample_type.choices = [(c.id, c.name) for c in SampleType.query.all()]
-    form.tube_type.choices = [(c.id, c.name) for c in TubeType.query.all()]
+    form.support.choices = [(c.id, c.name) for c in Support.query.all()]
     form.jonc_type.choices = [(c.id, c.name) for c in JoncType.query.all()]
     form.mesure.choices = [(c.id, c.name) for c in Mesure.query.all()]
 
@@ -73,7 +73,7 @@ def add():
             sample.patient_id = form.patient.data
             sample.sample_nature_id = form.sample_nature.data
             sample.sample_type_id = form.sample_type.data
-            sample.tube_type_id = form.tube_type.data
+            sample.support_id = form.support.data
             sample.jonc_type_id = form.jonc_type.data
             sample.mesure_id = form.mesure.data
             sample.volume = form.volume.data
@@ -97,7 +97,7 @@ def edit(id):
     form.patient.choices = [(c.id, c.code) for c in Patient.query.all()]
     form.sample_nature.choices = [(c.id, c.name) for c in SampleNature.query.all()]
     form.sample_type.choices = [(c.id, c.name) for c in SampleType.query.all()]
-    form.tube_type.choices = [(c.id, c.name) for c in TubeType.query.all()]
+    form.support.choices = [(c.id, c.name) for c in Support.query.all()]
     form.jonc_type.choices = [(c.id, c.name) for c in JoncType.query.all()]
     form.mesure.choices = [(c.id, c.name) for c in Mesure.query.all()]
 
@@ -106,7 +106,7 @@ def edit(id):
         sample.patient_id = form.patient.data
         sample.sample_nature_id = form.sample_nature.data
         sample.sample_type_id = form.sample_type.data
-        sample.tube_type_id = form.tube_type.data
+        sample.support_id = form.support.data
         sample.jonc_type_id = form.jonc_type.data
         sample.mesure_id = form.mesure.data
         sample.volume = form.volume.data
@@ -122,7 +122,7 @@ def edit(id):
     form.patient.data = sample.patient_id
     form.sample_nature.data = sample.sample_nature_id
     form.sample_type.data = sample.sample_type_id
-    form.tube_type.data = sample.tube_type_id
+    form.support.data = sample.support_id
     form.jonc_type.data = sample.jonc_type_id
     form.mesure.data = sample.mesure_id
     form.volume.data = sample.volume
@@ -166,7 +166,7 @@ def import_data():
             p = Sample(code=row['code'], date=row['date'], jonc_type_id=row['jonc_type_id'],
                        mesure_id=row['mesure_id'], parent_id=row['parent_id'], patient_id=row['patient_id'],
                        sample_nature_id=row['sample_nature_id'], sample_type_id=row['sample_type_id'],
-                       status=row['status'], technique=row['technique'], tube_type_id=row['tube_type_id'],
+                       status=row['status'], technique=row['technique'], support_id=row['support_id'],
                        volume=row['volume'], origin_id=row['origin_id'], )
             return p
 
@@ -249,7 +249,10 @@ def get_bio_code(s):
 
 
 def generateCode(s, index):
-    s.code = str(s.number) + '-' + str(s.sample_nature.siggle) + str(index) + str(s.jonc_type.siggle)
+    jonc_type_str = ''
+    if s.jonc_type:
+        jonc_type_str = str(s.jonc_type.siggle)
+    s.code = str(s.number) + '-' + str(s.sample_nature.siggle) + str(index) + '-' + jonc_type_str
     db.session.commit()
     # 3SURur2 - fn - rouge
     return s

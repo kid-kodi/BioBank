@@ -1,0 +1,45 @@
+{% extends "process.html" %}
+{% set active_page = "aliquot" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block process_content %}
+<div class="bar">
+    <div>
+        <h1>{{aliquot.serial}}</h1>
+    </div>
+    <div class="actions">
+        <ul class="nav nav-pills">
+
+            <li>
+                {% if aliquot.status == 0 %}
+                <a class="btn btn-success" href="{{url_for('aliquot.proceed', id=aliquot.id)}}">Valider</a>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="block">
+    <div class="bar">
+        <h1>{{_('Information générale')}}</h1>
+    </div>
+    <table class="table">
+        <tr>
+            <td>Numéro</td>
+            <td>{{aliquot.serial}}</td>
+        </tr>
+        <tr>
+            <td>Volume / Quantité</td>
+            <td>{{aliquot.volume}} {{aliquot.mesure.name}}</td>
+        </tr>
+    </table>
+</div>
+
+<div class="">
+    <div class="bar">
+        <h1>Liste des aliquots à effectués</h1>
+    </div>
+    {% for aliquot_item in aliquot.aliquot_items %}
+        {% include 'aliquot/_aliquot_item.html' %}
+    {% endfor %}
+</div>
+{% endblock %}

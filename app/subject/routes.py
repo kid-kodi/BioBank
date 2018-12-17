@@ -15,7 +15,7 @@ from app.subject import bp
 @login_required
 def index():
     subjects = Subject.query.all()
-    return render_template('subject/index.html', subjects=subjects)
+    return render_template('subject/list.html', subjects=subjects)
 
 
 @bp.route('/subject/add', methods=['GET', 'POST'])

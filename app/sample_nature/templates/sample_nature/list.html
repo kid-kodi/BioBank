@@ -1,0 +1,67 @@
+{% extends "admin.html" %}
+{% set active_page = "sample_nature" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% import "_pagination.html" as macros %}
+{% block admin_content %}
+<div class="bar">
+    <h1>{{_('Nature d\'échantillon')}}</h1>
+    <div class="actions">
+        <ul class="nav nav-pills">
+            <li>
+                <a class="btn btn-default" href="{{ url_for('sample_nature.add') }}">{{_('Ajouter une nature d\'échantillon')}}</a>
+            </li>
+            <li><a class="btn btn-default" href="{{ url_for('sample_nature.download') }}">{{ _('Télécharger template') }}</a></li>
+            <li><a class="btn btn-default" href="{{ url_for('sample_nature.import_data') }}">{{ _('Importer') }}</a></li>
+            <li><a class="btn btn-default" href="{{ url_for('sample_nature.export_data') }}">{{ _('Exporter') }}</a></li>
+        </ul>
+    </div>
+</div>
+<div>
+    {% if list %}
+    <div class="bar">
+        <form class="form-inline" method="post" action="">
+            {{ search_form.hidden_tag() }}
+            <div class="form-group">
+                {{ search_form.name(size=20, class='form-control', placeholder=search_form.name.label.text) }}
+            </div>
+        </form>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nature d'échantillon</th>
+            <th>Abbreviation</th>
+            <th>Description</th>
+            <th>Crée le</th>
+            <th class="text-right"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in list %}
+        <tr>
+            <td>{{item.name}}</td>
+            <td>{{item.description}}</td>
+            <td>{{moment(item.created_at).format('LLL') }}</td>
+            <td class="text-right">
+                <a href="{{ url_for('sample_nature.edit', id=item.id) }}">{{_('Modifier')}}</a>
+                <a href="{{ url_for('sample_nature.detail', id=item.id) }}">{{_('Detail')}}</a>
+                <a href="{{ url_for('sample_nature.delete', id=item.id) }}">{{_('Supprimer')}}</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination">
+        {{ macros.pagination_widget(pagination, '.index') }}
+    </div>
+    {% else %}
+    <div class="panel panel-default emptyspace">
+        <div class="panel-body text-center">
+            <h3>Aucune nature d'échantillon enregistré</h3>
+            <p>veuillez en créer un en cliquant sur le lien ci-dessous</p>
+            <a class="btn btn-default" href="{{ url_for('sample_nature.add') }}">{{_('Ajouter une nature d\'échantillon')}}</a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

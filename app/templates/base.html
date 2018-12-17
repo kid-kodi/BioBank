@@ -18,12 +18,11 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url_for('customer.index') }}">{{ _('RECEPTION') }}</a></li>
-                    <li><a href="{{ url_for('process.index') }}">{{ _('TRAITEMENT') }}</a></li>
+                    <li><a href="{{ url_for('order.index') }}">{{ _('RECEPTION / EXPEDITION') }}</a></li>
+                    <li><a href="{{ url_for('aliquot.index') }}">{{ _('PROCESSUS') }}</a></li>
                     <li><a href="{{ url_for('location.index') }}">{{ _('STOCKAGE') }}</a></li>
-                    <li><a href="#">{{ _('MISE A DISPOSITION') }}</a></li>
-                    <li><a href="{{ url_for('sample.search') }}">{{ _('ECHANTILLON') }}</a></li>
-                    <li><a href="{{ url_for('study.index') }}">{{ _('ADMINISTRATION') }}</a></li>
+                    <li><a href="{{ url_for('sample.search') }}">{{ _('RECHERCHE') }}</a></li>
+                    <li><a href="{{ url_for('customer.index') }}">{{ _('ADMINISTRATION') }}</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     {% if current_user.is_anonymous %}

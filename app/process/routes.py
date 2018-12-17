@@ -17,7 +17,7 @@ from app.process import bp
 @login_required
 def index():
     processes = Aliquot.query.all()
-    return render_template('process/index.html', processes=processes)
+    return render_template('process/process.html', processes=processes)
 
 
 @bp.route('/process/add', methods=['GET', 'POST'])

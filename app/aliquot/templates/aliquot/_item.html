@@ -1,0 +1,17 @@
+<tr>
+    <td>{{aliquot.serial}}</td>
+    <td>{{aliquot.volume}} {{aliquot.mesure.name}}</td>
+    <td>
+        <ul>
+            {% for aliquot_item in aliquot.aliquot_items %}
+            <li>
+                {{aliquot_item.sample.code}} {{aliquot_item.volume_by_aliquot}} {{aliquot_item.mesure.name}} {{aliquot_item.nbr_aliquot}}
+            </li>
+            {% endfor %}
+        </ul>
+    </td>
+    <td>{{aliquot.author.username}} {{aliquot.created_at}}</td>
+    <td>
+        <a href="{{ url_for('aliquot.detail', id=aliquot.id) }}">Détails</a>
+    </td>
+</tr>

@@ -195,6 +195,6 @@ def notifications():
 @bp.route('/basketto')
 @login_required
 def basketto():
-    basket = Basket.query.first()
+    basket = Basket.query.filter_by(created_by=current_user.id).first()
     sample_count = len(basket.samples.all())
     return jsonify({"count": sample_count})

@@ -15,7 +15,7 @@ from app.program import bp
 @login_required
 def index():
     programs = Program.query.all()
-    return render_template('program/index.html', programs=programs)
+    return render_template('program/list.html', programs=programs)
 
 
 @bp.route('/program/add', methods=['GET', 'POST'])

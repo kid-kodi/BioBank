@@ -2,11 +2,8 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% set navigation_bar = [
-    ('/customer', 'customer', 'Client'),
-    ('/project', 'project', 'Projet'),
-    ('/order', 'order', 'Dépôt'),
-    ('/patient', 'patient', 'Patient'),
-    ('/sample', 'sample', 'Echantillon')
+    ('/order', 'order', 'Reception'),
+    ('/expo', 'expd', 'Expedition')
 ] -%}
 {% set active_page = active_page|default('index') -%}
 

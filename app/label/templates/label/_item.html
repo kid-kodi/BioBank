@@ -1,0 +1,10 @@
+<tr>
+  <td>{{label.id}}</td>
+  <td>
+    <a href="{{ url_for('label.detail', id=label.id) }}">{{label.name}}</a>
+  </td>
+  <td>{{label.description}}</td>
+  <td>
+    <a href="{{ url_for('label.edit', id=label.id) }}">Modifier</a>
+  </td>
+</tr>

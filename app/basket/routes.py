@@ -6,7 +6,7 @@ from flask_babel import _, get_locale
 from guess_language import guess_language
 from app import db
 from app.basket.forms import BasketForm, SearchForm
-from app.models import Customer, Basket
+from app.models import Customer, Basket, Sample
 from app.translate import translate
 from app.basket import bp
 
@@ -43,7 +43,7 @@ from app.basket import bp
 @bp.route('/basket', methods=['GET', 'POST'])
 @login_required
 def index():
-    basket = Basket.query.first()
+    basket = Basket.query.filter_by(created_by=current_user.id).first()
     return render_template('basket/detail.html', basket=basket)
 
 
@@ -101,4 +101,26 @@ def delete(id):
     flash('You have successfully deleted the basket.')
 
     # redirect to the bps page
+    return redirect(url_for('basket.index'))
+
+
+@bp.route('/basket/remove_all', methods=['GET'])
+@login_required
+def remove_all():
+    basket = Basket.query.filter_by(created_by=current_user.id).first()
+    for sample in basket.samples:
+        basket.samples.remove(sample)
+        sample.basket_id = 0
+        db.session.commit()
+    return redirect(url_for('basket.index'))
+
+
+@bp.route('/basket/removefromlist/<int:id>', methods=['GET'])
+@login_required
+def removefromlist(id):
+    basket = Basket.query.filter_by(created_by=current_user.id).first()
+    sample = Sample.query.get(id)
+    basket.samples.remove(sample)
+    sample.basket_id = 0
+    db.session.commit()
     return redirect(url_for('basket.index'))

@@ -1,0 +1,11 @@
+<tr>
+  <td>{{subject.id}}</td>
+  <td>{{subject.study.name}}</td>
+  <td>
+    <a href="{{ url_for('subject.detail', id=subject.id) }}">{{subject.name}}</a>
+  </td>
+  <td>{{subject.description}}</td>
+  <td>
+    <a href="{{ url_for('subject.edit', id=subject.id) }}">Modifier</a>
+  </td>
+</tr>

@@ -1,0 +1,14 @@
+{% extends "admin.html" %}
+{% set active_page = "technique" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block admin_content %}
+    <div class="bar">
+        <h1>{{ _('Formulaire d\'enregistrement de technique de préparation') }}</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            {{ wtf.quick_form(form) }}
+        </div>
+    </div>
+{% endblock %}

@@ -9,13 +9,20 @@ from app import db
 from app.models import Sample
 
 
+class ImportForm(FlaskForm):
+    document = FileField('Selectionner un fichier')
+    submit = SubmitField(_l('Suivant'))
+
 
 class OrderForm(FlaskForm):
     customer = SelectField(_l('Client'), coerce=int, choices=[])
     project = SelectField(_l('Projet'), coerce=int, choices=[])
-    firstname = StringField(_l('Nom du deposant'), validators=[DataRequired()])
-    lastname = StringField(_l('Prénoms du deposant'), validators=[DataRequired()])
+    first_name = StringField(_l('Nom du deposant'))
+    last_name = StringField(_l('Prénoms du deposant'), validators=[DataRequired()])
     telephone = StringField(_l('Téléphone'), validators=[DataRequired()])
-    transport_date = StringField(_l('Date de transport'), validators=[DataRequired()])
-    temperature = SelectField(_l('Température'), coerce=int, choices=[])
+    send_date = StringField(_l('Date d\'expedition'), validators=[DataRequired()])
+    temperature = SelectField(_l('Température de transport'), coerce=int, choices=[])
+    receive_date = StringField(_l('Date de reception'), validators=[DataRequired()])
+    nbr_pack = StringField(_l('Nombre de paquet'), validators=[DataRequired()])
+    file = FileField('Selectionner un fichier')
     submit = SubmitField(_l('Suivant'))

@@ -6,7 +6,7 @@ from flask_babel import _, get_locale
 from guess_language import guess_language
 from app import db, excel
 from app.patient.forms import PatientForm, SearchForm
-from app.models import Patient, Origin, Project, Order, SampleType, Mesure, TubeType, SampleNature, JoncType, Sample
+from app.models import Patient, Origin, Project, Order, SampleType, Mesure, Support, SampleNature, JoncType, Sample
 from app.translate import translate
 from app.patient import bp
 
@@ -52,7 +52,7 @@ def add(order_id=0):
     for entry in form.samples.entries:
         entry.sample_type.choices = [(c.id, c.name) for c in SampleType.query.all()]
         entry.mesure.choices = [(c.id, c.name) for c in Mesure.query.all()]
-        entry.tube_type.choices = [(c.id, c.name) for c in TubeType.query.all()]
+        entry.support.choices = [(c.id, c.name) for c in Support.query.all()]
         entry.sample_nature.choices = [(c.id, c.name) for c in SampleNature.query.all()]
         entry.jonc_type.choices = [(c.id, c.name) for c in JoncType.query.all()]
 
@@ -76,7 +76,7 @@ def add(order_id=0):
                 sample.sample_type_id = s.sample_type.data
                 sample.date = s.date.data
                 sample.site = s.site.data
-                sample.tube_type_id = s.tube_type.data
+                sample.support_id = s.support.data
                 sample.jonc_type_id = s.jonc_type.data
                 sample.number = s.number.data
                 sample.mesure_id = s.mesure.data

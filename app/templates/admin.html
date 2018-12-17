@@ -2,12 +2,26 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% set navigation_bar = [
+    ('/customer', 'customer', 'Clients'),
+    ('/project', 'project', 'Projets'),
     ('/study', 'study', 'Etude'),
-    ('/subject', 'subject', 'Thématique'),
     ('/program', 'program', 'Programme'),
+    ('/subject', 'subject', 'Sujet'),
+    ('/sample_nature', 'sample_nature', 'Nature d\'echantillon'),
+    ('/sample_type', 'sample_type', 'Type d\'echantillon'),
+    ('/technique', 'technique', 'Préparation'),
+    ('/support', 'support', 'Modèle de support'),
+    ('/container_type', 'container_type', 'Type de conteneur'),
+    ('/container', 'container', 'Conteneur'),
+    ('/template', 'template', 'Template'),
+    ('/report', 'report', 'Rapports'),
+    ('/role', 'role', 'Groupe utilisateur'),
+    ('/user', 'user', 'Utilisateur'),
+    ('/label', 'label', 'Formats d\'étiquettes'),
+    ('/database', 'database', 'Base de données'),
     ('/equipment_type', 'equipment_type', 'Type d\'équipement'),
     ('/box_type', 'box_type', 'Type de boîte'),
-    ('/user', 'user', 'Utilisateur')
+    ('/disease', 'disease', 'Maladie')
 ] -%}
 {% set active_page = active_page|default('index') -%}
 
@@ -16,7 +30,7 @@
         <nav class="col-md-2">
             <ul class="nav nav-pills nav-stacked">
                 {% for href, id, caption in navigation_bar %}
-                <li{% if id == active_page %} class="active"{% endif
+                <li {% if id == active_page %} class="active"{% endif
                 %}><a href="{{ href|e }}">{{_(caption|e) }}</a>
                 </li>
             {% endfor %}

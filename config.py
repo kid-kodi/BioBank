@@ -24,8 +24,8 @@ class Config(object):
     POSTS_PER_PAGE = 80
     FLASK_PER_PAGE = 80
 
-    UPLOADS_DEFAULT_DEST = os.path.join(basedir, 'app/static/img/')
-    UPLOADS_DEFAULT_URL = 'http://localhost:5000/static/img/'
+    UPLOADS_DEFAULT_DEST = os.path.join(basedir, 'app/static/files/')
+    UPLOADS_DEFAULT_URL = 'http://localhost:5000/static/files/'
 
-    UPLOADED_IMAGES_DEST = os.path.join(basedir, 'app/static/img/')
-    UPLOADED_IMAGES_URL = 'http://localhost:5000/static/img/'
+    UPLOADED_IMAGES_DEST = os.path.join(basedir, 'app/static/files/')
+    UPLOADED_IMAGES_URL = 'http://localhost:5000/static/files/'

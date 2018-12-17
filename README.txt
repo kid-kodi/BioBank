@@ -61,3 +61,44 @@ HU0000000001
 2) select what we want
 3) print liste
 Print
+
+
+
+
+1) Reception
+- fill form and attch file
+- after save go to detail
+- validate the reception that generate the samples
+- add to basket for storage or preparation etc....
+
+
+- non conformité can be added to sample at any time
+
+so create conformity blueprint.
+
+2)
+
+
+Ajouter un bouton de conformité
+Renseigner la fiche de conformité pour un échantillon
+ajouter un echantillon au panier
+stocker les echantillons selectionés
+
+
+Voir les informations sur un echantillons
+
+
+Aliquotage
+Pooling
+Etiquetage.
+
+
+
+Definir les différents status d'un echantillon
+
+
+received  = 0
+prepared  = 1
+stored    = 2
+expedited = 3
+destroyed = 4

@@ -88,14 +88,41 @@ followers = db.Table(
 )
 
 
+class Permission:
+    FOLLOW = 0x01
+    COMMENT = 0x02
+    WRITE_ARTICLES = 0x04
+    MODERATE_COMMENTS = 0x08
+    ADMINISTER = 0x80
+
+
+class Role(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64), unique=True)
+    default = db.Column(db.Boolean, default=False, index=True)
+    permissions = db.Column(db.Integer)
+    users = db.relationship('User', backref='role', lazy='dynamic')
+
+
 class User(UserMixin, PaginatedAPIMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
     first_name = db.Column(db.String(64))
     last_name = db.Column(db.String(64))
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
+    diseases = db.relationship('Disease', backref='author', lazy='dynamic')
     posts = db.relationship('Post', backref='author', lazy='dynamic')
+    baskets = db.relationship('Basket', backref='author', lazy='dynamic')
+    documents = db.relationship('Document', backref='author', lazy='dynamic')
+    stores = db.relationship('Store', backref='author', lazy='dynamic')
+    store_items = db.relationship('StoreItem', backref='author', lazy='dynamic')
+    labels = db.relationship('Label', backref='author', lazy='dynamic')
+    prints = db.relationship('Print', backref='author', lazy='dynamic')
+    print_items = db.relationship('PrintItem', backref='author', lazy='dynamic')
+    aliquots = db.relationship('Aliquot', backref='author', lazy='dynamic')
+    aliquot_items = db.relationship('AliquotItem', backref='author', lazy='dynamic')
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     token = db.Column(db.String(32), index=True, unique=True)
@@ -337,19 +364,35 @@ class Project(db.Model):
                 setattr(self, field, data[field])
 
 
+class Document(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    url = db.Column(db.String)
+    status = db.Column(db.Integer)
+    created_at = db.Column(db.DateTime(), default=datetime.utcnow)
+    created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __repr__(self):
+        return '<Document: {}>'.format(self.name)
+
+
 class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    project_id = db.Column(db.Integer, db.ForeignKey('project.id'))
-    firstname = db.Column(db.String(255))
     serial = db.Column(db.String(255))
-    lastname = db.Column(db.String(255))
+    project_id = db.Column(db.Integer, db.ForeignKey('project.id'))
+    first_name = db.Column(db.String(255))
+    last_name = db.Column(db.String(255))
     telephone = db.Column(db.String(255))
-    order_date = db.Column(db.String(255))
-    transport_date = db.Column(db.String(255))
-    temperature = db.Column(db.String(255))
+    send_date = db.Column(db.String(255))
+    temperature_id = db.Column(db.Integer, db.ForeignKey('temperature.id'))
+    receive_date = db.Column(db.String(255))
+    nbr_pack = db.Column(db.String(255))
+    file_name = db.Column(db.String(255))
+    file_url = db.Column(db.String(255))
     description = db.Column(db.String(255))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    status = db.Column(db.Integer)
     patients = db.relationship('Patient', backref='order', lazy='dynamic')
 
     def total_sample(self):
@@ -370,6 +413,7 @@ class Study(db.Model):
     description = db.Column(db.String(255))
     subjects = db.relationship('Subject', backref='study', lazy='dynamic')
     projects = db.relationship('Project', backref='study', lazy='dynamic')
+    created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
 
 class Subject(db.Model):
@@ -379,6 +423,7 @@ class Subject(db.Model):
     description = db.Column(db.String(255))
     programs = db.relationship('Program', backref='subject', lazy='dynamic')
     projects = db.relationship('Project', backref='subject', lazy='dynamic')
+    created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
 
 class Program(db.Model):
@@ -386,6 +431,7 @@ class Program(db.Model):
     subject_id = db.Column(db.Integer, db.ForeignKey('subject.id'))
     name = db.Column(db.String(255))
     description = db.Column(db.String(255))
+    created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     projects = db.relationship('Project', backref='program', lazy='dynamic')
 
 
@@ -394,6 +440,7 @@ class SampleType(db.Model):
     name = db.Column(db.String(120))
     siggle = db.Column(db.String(120))
     description = db.Column(db.String(128))
+    created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     samples = db.relationship('Sample', backref='sample_type', lazy='dynamic')
 
 
@@ -402,6 +449,7 @@ class SampleNature(db.Model):
     name = db.Column(db.String(120))
     siggle = db.Column(db.String(120))
     description = db.Column(db.String(128))
+    created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     samples = db.relationship('Sample', backref='sample_nature', lazy='dynamic')
 
 
@@ -411,15 +459,19 @@ class Origin(db.Model):
     siggle = db.Column(db.String(5))
     description = db.Column(db.String(128))
     patients = db.relationship('Patient', backref='origin', lazy='dynamic')
+    created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     samples = db.relationship('Sample', backref='origin', lazy='dynamic')
 
 
-class TubeType(db.Model):
+class Support(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120))
     siggle = db.Column(db.String(120))
+    volume = db.Column(db.String(120))
     description = db.Column(db.String(128))
-    samples = db.relationship('Sample', backref='tube_type', lazy='dynamic')
+    created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    aliquot_items = db.relationship('AliquotItem', backref='support', lazy='dynamic')
+    samples = db.relationship('Sample', backref='support', lazy='dynamic')
 
 
 class Mesure(db.Model):
@@ -427,6 +479,8 @@ class Mesure(db.Model):
     name = db.Column(db.String(120))
     siggle = db.Column(db.String(120))
     description = db.Column(db.String(128))
+    aliquot_items = db.relationship('AliquotItem', backref='mesure', lazy='dynamic')
+    aliquots = db.relationship('Aliquot', backref='mesure', lazy='dynamic')
     samples = db.relationship('Sample', backref='mesure', lazy='dynamic')
 
 
@@ -492,7 +546,7 @@ class Sample(db.Model):
     origin_id = db.Column(db.Integer, db.ForeignKey('origin.id'))
     sample_nature_id = db.Column(db.Integer, db.ForeignKey('sample_nature.id'))
     sample_type_id = db.Column(db.Integer, db.ForeignKey('sample_type.id'))
-    tube_type_id = db.Column(db.Integer, db.ForeignKey('tube_type.id'))
+    support_id = db.Column(db.Integer, db.ForeignKey('support.id'))
     jonc_type_id = db.Column(db.Integer, db.ForeignKey('jonc_type.id'))
     mesure_id = db.Column(db.Integer, db.ForeignKey('mesure.id'))
     technique = db.Column(db.String(255))
@@ -504,11 +558,13 @@ class Sample(db.Model):
     status = db.Column(db.Integer)
     in_basket = db.Column(db.Integer)
     basket_id = db.Column(db.Integer, db.ForeignKey('basket.id'))
-    aliquots = db.relationship('Aliquot', backref='sample', lazy='dynamic')
+    aliquot_items = db.relationship('AliquotItem', backref='sample', lazy='dynamic')
     created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
     parent_id = db.Column(db.Integer, db.ForeignKey('sample.id'))
     children = db.relationship("Sample", backref=db.backref('parent', remote_side=[id]))
+    store_items = db.relationship('StoreItem', backref='sample', lazy='dynamic')
+    print_items = db.relationship('PrintItem', backref='sample', lazy='dynamic')
     holes = db.relationship(
         "Hole",
         secondary=sample_hole_history,
@@ -526,8 +582,8 @@ class Sample(db.Model):
             'sample_nature_id': self.sample_nature_id,
             'sample_type_id': self.sample_type_id,
             'sample_type_name': self.sample_type.name,
-            'tube_type_id': self.tube_type_id,
-            'tube_type_name': self.tube_type.name,
+            'support_id': self.support_id,
+            'support_name': self.support.name,
             'jonc_type_id': self.jonc_type_id,
             'jonc_type_name': self.jonc_type.name,
             'mesure_name': self.mesure.name,
@@ -557,50 +613,12 @@ class Basket(db.Model):
 class Temperature(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
+    orders = db.relationship('Order', backref='temperature', lazy='dynamic')
     created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
         return '<Temperature {}>'.format(self.name)
-
-
-# 1 - pushing(aliquot), 2 pulling
-class Technique(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255))
-    category = db.Column(db.Integer, default=1)
-    out_number = db.Column(db.Integer, default=0)
-    in_number = db.Column(db.Integer, default=0)
-    description = db.Column(db.String(255))
-    processes = db.relationship('Process', backref='technique', lazy='dynamic')
-    created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-    def __repr__(self):
-        return '<Technique {}>'.format(self.name)
-
-
-class Process(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    technique_id = db.Column(db.Integer, db.ForeignKey('technique.id'))
-    name = db.Column(db.String(255))
-    created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-    def __repr__(self):
-        return '<Process {}>'.format(self.name)
-
-
-class Aliquot(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    sample_id = db.Column(db.Integer, db.ForeignKey('sample.id'))
-    volume = db.Column(db.Integer)
-    number = db.Column(db.Integer)
-    created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-    def __repr__(self):
-        return '<Process {}>'.format(self.name)
 
 
 class Room(db.Model):
@@ -759,6 +777,7 @@ class Box(db.Model):
     box_type_id = db.Column(db.Integer, db.ForeignKey('box_type.id'))
     name = db.Column(db.String(255))
     status = db.Column(db.Integer)
+    stores = db.relationship('Store', backref='box', lazy='dynamic')
     holes = db.relationship('Hole', backref='box', lazy='dynamic')
     created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -802,6 +821,7 @@ class Hole(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     box_id = db.Column(db.Integer, db.ForeignKey('box.id'))
     sample_id = db.Column(db.Integer, db.ForeignKey('sample.id'))
+    store_items = db.relationship('StoreItem', backref='hole', lazy='dynamic')
     name = db.Column(db.String(255))
     status = db.Column(db.Integer)
     created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
@@ -841,6 +861,19 @@ class LocationHistory(db.Model):
 
     def __repr__(self):
         return '<LocationHistory {}>'.format(self.name)
+
+
+class Disease(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255))
+    description = db.Column(db.String(255))
+    parent_id = db.Column(db.Integer, db.ForeignKey('disease.id'))
+    children = db.relationship("Disease", backref=db.backref('parent', remote_side=[id]))
+    created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __repr__(self):
+        return '<Disease {}>'.format(self.name)
 
 
 class Message(db.Model):
@@ -884,6 +917,109 @@ class Task(db.Model):
         return job.meta.get('progress', 0) if job is not None else 100
 
 
+class Store(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    serial = db.Column(db.String(255), index=True)
+    box_id = db.Column(db.Integer, db.ForeignKey('box.id'))
+    status = db.Column(db.Integer)
+    store_items = db.relationship('StoreItem', backref='store', lazy='dynamic')
+    created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+
+class StoreItem(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    store_id = db.Column(db.Integer, db.ForeignKey('store.id'))
+    sample_id = db.Column(db.Integer, db.ForeignKey('sample.id'))
+    hole_id = db.Column(db.Integer, db.ForeignKey('hole.id'))
+    status = db.Column(db.Integer)
+    created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+
+# 1 - pushing(aliquot), 2 pulling
+class Technique(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255))
+    category = db.Column(db.Integer, default=1)
+    out_number = db.Column(db.Integer, default=0)
+    in_number = db.Column(db.Integer, default=0)
+    description = db.Column(db.String(255))
+    processes = db.relationship('Process', backref='technique', lazy='dynamic')
+    created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __repr__(self):
+        return '<Technique {}>'.format(self.name)
+
+
+class Process(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    technique_id = db.Column(db.Integer, db.ForeignKey('technique.id'))
+    name = db.Column(db.String(255))
+    created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __repr__(self):
+        return '<Process {}>'.format(self.name)
+
+
+class Aliquot(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    serial = db.Column(db.String(255), index=True)
+    volume = db.Column(db.Integer)
+    mesure_id = db.Column(db.Integer, db.ForeignKey('mesure.id'))
+    status = db.Column(db.Integer)
+    aliquot_items = db.relationship('AliquotItem', backref='aliquot', lazy='dynamic')
+    created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __repr__(self):
+        return '<Aliquot {}>'.format(self.serial)
+
+
+class AliquotItem(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    aliquot_id = db.Column(db.Integer, db.ForeignKey('aliquot.id'))
+    sample_id = db.Column(db.Integer, db.ForeignKey('sample.id'))
+    volume = db.Column(db.Integer)
+    support_id = db.Column(db.Integer, db.ForeignKey('support.id'))
+    mesure_id = db.Column(db.Integer, db.ForeignKey('mesure.id'))
+    nbr_aliquot = db.Column(db.Integer)
+    volume_by_aliquot = db.Column(db.Integer)
+    status = db.Column(db.Integer)
+    created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+
+class Label(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255))
+    description = db.Column(db.String(255))
+    prints = db.relationship('Print', backref='label', lazy='dynamic')
+    created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+
+class Print(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    serial = db.Column(db.String(255), index=True)
+    label_id = db.Column(db.Integer, db.ForeignKey('label.id'))
+    status = db.Column(db.Integer)
+    print_items = db.relationship('PrintItem', backref='print', lazy='dynamic')
+    created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+
+class PrintItem(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    print_id = db.Column(db.Integer, db.ForeignKey('print.id'))
+    sample_id = db.Column(db.Integer, db.ForeignKey('sample.id'))
+    status = db.Column(db.Integer)
+    created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+
 class Init():
     def start(self):
         category = Category(name='Unité', description='')
@@ -922,11 +1058,11 @@ class Init():
         sample_nature = SampleNature(name='LCR', siggle="Lcr", description='')
         db.session.add(sample_nature)
 
-        tube_type = TubeType(name='EDTA', siggle='', description='')
-        db.session.add(tube_type)
+        support = Support(name='EDTA', siggle='', description='')
+        db.session.add(support)
 
-        tube_type = TubeType(name='Tube sec', description='')
-        db.session.add(tube_type)
+        support = Support(name='Tube sec', description='')
+        db.session.add(support)
 
         jonc_type = JoncType(name='Rouge', siggle='Rouge', description='')
         db.session.add(jonc_type)

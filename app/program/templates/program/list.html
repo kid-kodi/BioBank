@@ -1,0 +1,36 @@
+{% extends "admin.html" %}
+{% set active_page = "program" %}
+{% block admin_content %}
+    <div class="bar">
+        <h1>{{ _('Programme') }}</h1>
+        <div class="actions">
+            <a class="btn btn-default" href="{{ url_for('program.add') }}">{{ _('Nouveau programme') }}</a>
+        </div>
+    </div>
+    {% if programs %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>{{_('Thématique')}}</th>
+          <th>{{_('Programme')}}</th>
+          <th>{{_('Description')}}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for program in programs %}
+          {% include 'program/_item.html' %}
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="panel panel-default emptyspace">
+        <div class="panel-body text-center">
+            <h3>Aucunes données enregistrées</h3>
+            <p>veuillez en créer un en cliquant sur le lien ci-dessous</p>
+            <a class="btn btn-default" href="{{ url_for('program.add') }}">{{_('Ajouter un programme')}}</a>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "admin.html" %}
+{% set active_page = "sample_nature" %}
+{% block admin_content %}
+<div class="bar">
+  <h1>{{ sample_nature.name }}</h1>
+    <div class="actions">
+        <ul class="nav nav-pills">
+            <li>
+                <a href="{{ url_for('sample_nature.edit', id=sample_nature.id) }}">{{ _('Modifier') }}</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

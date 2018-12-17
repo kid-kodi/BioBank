@@ -1,27 +1,24 @@
 from flask import render_template, request, redirect, url_for, flash
 import flask_excel as excel
+from flask_login import current_user, login_required
 from app import db
 from app.models import User, Category, Customer, Project, Order, Study, Subject, Program, Origin, Mesure, JoncType, \
-    Patient, TubeType, SampleNature, SampleType, Temperature, Box, Rack, Equipment, Hole, Sample, Basket, EquipmentType, BoxType, Room
+    Patient, Support, SampleNature, SampleType, Temperature, Box, Rack, Equipment, Hole, Sample, Basket, EquipmentType, \
+    BoxType, Room
 from app.setup import bp
 from flask_babel import _
 
 
 @bp.route('/setup')
+@login_required
 def index():
     return render_template('setup/index.html')
 
 
 @bp.route("/import", methods=['GET', 'POST'])
+@login_required
 def doimport():
     if request.method == 'POST':
-        def user_init(row):
-            num = User.query.filter_by(username=row['Pseudo']).count()
-            if num > 0:
-                User.query.delete()
-            user = User(id=1, username=row['Pseudo'], email=row['Email'])
-            user.set_password(row['Mot de passe'])
-            return user
 
         def category_init(row):
             category = Category()
@@ -113,15 +110,16 @@ def doimport():
             jonc_type.description = row['Description']
             return jonc_type
 
-        def tube_type_init(row):
-            tube_type = TubeType()
-            num = TubeType.query.filter_by(name=row['Nom']).count()
+        def support_init(row):
+            support = Support()
+            num = Support.query.filter_by(name=row['Nom']).count()
             if num > 0:
-                TubeType.query.delete()
-            tube_type.name = row['Nom']
-            tube_type.siggle = row['Siggle']
-            tube_type.description = row['Description']
-            return tube_type
+                Support.query.delete()
+            support.name = row['Nom']
+            support.volume = row['Volume']
+            support.siggle = row['Siggle']
+            support.description = row['Description']
+            return support
 
         def temperature_init(row):
             temperature = Temperature()
@@ -131,16 +129,6 @@ def doimport():
             temperature.id = row['Id']
             temperature.name = row['Nom']
             return temperature
-
-        def basket_init(row):
-            basket = Basket()
-            num = Basket.query.filter_by(name=row['Nom']).count()
-            if num > 0:
-                Basket.query.delete()
-            basket.id = row['Id']
-            basket.name = row['Nom']
-            basket.description = row['Description']
-            return basket
 
         def equipment_type_init(row):
             equipment_type = EquipmentType()
@@ -249,27 +237,30 @@ def doimport():
 
         request.save_book_to_database(
             field_name='file', session=db.session,
-            tables=[User, Category, Study, Subject, Program, Origin, SampleNature, SampleType, Mesure, JoncType,
-                    TubeType, Temperature, Basket, EquipmentType, BoxType, Room, Equipment, Rack, Box],
-            initializers=[user_init, category_init, study_init, subject_init, program_init, origin_init,
-                          sample_nature_init, sample_type_init, mesure_init, jonc_type_init, tube_type_init,
-                          temperature_init, basket_init, equipment_type_init, box_type_init, room_init, equipment_init, rack_init, box_init])
+            tables=[Category, Study, Subject, Program, Origin, SampleNature, SampleType, Mesure, JoncType,
+                    Support, Temperature, EquipmentType, BoxType, Room, Equipment, Rack, Box],
+            initializers=[category_init, study_init, subject_init, program_init, origin_init,
+                          sample_nature_init, sample_type_init, mesure_init, jonc_type_init, support_init,
+                          temperature_init, equipment_type_init, box_type_init, room_init, equipment_init,
+                          rack_init, box_init])
         flash(_('Initialisation terminé avec succèss.'))
         return redirect(url_for('main.index'))
     return render_template('setup/import.html')
 
 
 @bp.route("/handson_view", methods=['GET'])
+@login_required
 def handson_table():
     return excel.make_response_from_tables(
         db.session, [User, Category, Study, Subject, Program, Origin, SampleNature, SampleType, Mesure, JoncType,
-                    TubeType, Temperature, Basket], 'setup/handsontable.html')
+                     Support, Temperature, Basket], 'setup/handsontable.html')
 
 
 @bp.route("/export", methods=['GET'])
+@login_required
 def doexport():
     return excel.make_response_from_tables(db.session,
                                            [User, Category, Customer, Project, Order, Study, Subject, Program, Origin,
-                                            Mesure, JoncType, Patient, TubeType, Sample, SampleNature, SampleType,
+                                            Mesure, JoncType, Patient, Support, Sample, SampleNature, SampleType,
                                             Temperature, Box, Rack, Equipment, Hole, Sample], "xls",
                                            file_name="template")

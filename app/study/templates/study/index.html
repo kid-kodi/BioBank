@@ -1,0 +1,35 @@
+{% extends "admin.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% set active_page = "study" %}
+{% block admin_content %}
+    <div class="bar">
+      <h1>{{ _('Etude') }}</h1>
+      <div class="actions">
+        <a class="btn btn-default" href="{{ url_for('study.add') }}">{{ _('Nouvelle étude') }}</a>
+      </div>
+    </div>
+    {% if list %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>{{_('Nom')}}</th>
+              <th>{{_('Description')}}</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for study in studys %}
+                {% include 'study/_item.html' %}
+            {% endfor %}
+          </tbody>
+        </table>
+    {% else %}
+        <div class="panel panel-default emptyspace">
+            <div class="panel-body text-center">
+                <h3>Aucunes données enregistrées</h3>
+                <p>veuillez en créer un en cliquant sur le lien ci-dessous</p>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

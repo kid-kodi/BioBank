@@ -15,7 +15,7 @@ from app.technique import bp
 @login_required
 def index():
     techniques = Technique.query.all()
-    return render_template('technique/index.html', techniques=techniques)
+    return render_template('technique/list.html', techniques=techniques)
 
 
 @bp.route('/technique/add', methods=['GET', 'POST'])

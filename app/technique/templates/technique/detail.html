@@ -1,0 +1,59 @@
+{% extends "admin.html" %}
+{% set active_page = "technique" %}
+{% block admin_content %}
+<div class="bar">
+    <h1>{{technique.name}}</h1>
+    <div class="actions">
+        <a class="btn btn-default" href="{{ url_for('technique.edit', id=technique.id) }}">Modifier</a>
+    </div>
+</div>
+<div class="block">
+    <h3>Information générale</h3>
+    <table class="table">
+        <tr>
+            <td><b>{{_('Catégorie')}}</b></td>
+            <td>{% if technique.category == 1 %}
+                Pushing
+                {% else %}
+                Pulling
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td><b>{{_('Nom de la technique')}}</b></td>
+            <td>{{technique.name}}</td>
+        </tr>
+        <tr>
+            <td><b>{{_('Echnatillons sortant')}}</b></td>
+            <td>{{technique.out_number}}</td>
+        </tr>
+        <tr>
+            <td><b>{{_('Echantillons entrant')}}</b></td>
+            <td>{{technique.in_number}}</td>
+        </tr>
+        <tr>
+            <td><b>{{_('Description')}}</b></td>
+            <td>{{technique.descritpion}}</td>
+        </tr>
+    </table>
+</div>
+<div class="block">
+    <h3>Préparation</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>{{_('Titre')}}</th>
+            <th>{{_('Description')}}</th>
+            <th>{{_('Client')}}</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for project in technique.processes %}
+        {% include 'process/_item.html' %}
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

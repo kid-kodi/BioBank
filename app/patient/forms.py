@@ -41,7 +41,7 @@ class SampleForm(NoCsrfForm):
     sample_type = SelectField(_l('Type de prélèvement'), coerce=int, choices=[])
     number = StringField(_l('Nombre de tube'), validators=[DataRequired()])
     site = StringField(_l('Site anatomique'))
-    tube_type = SelectField(_l('Conditionement'), coerce=int, choices=[])
+    support = SelectField(_l('Conditionement'), coerce=int, choices=[])
     jonc_type = SelectField(_l('Type de jonc'), coerce=int, choices=[])
     mesure = SelectField(_l('Unité de mésure'), coerce=int, choices=[])
     volume = StringField(_l('Volume / Concentration'), validators=[DataRequired()])

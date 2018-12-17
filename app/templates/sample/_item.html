@@ -2,10 +2,10 @@
     <td>
         <input type="checkbox" name="items" value="{{sample.id}}">
     </td>
-    <td>{{sample.code}}</td>
+    <td>{{sample.patient.bio_code}}{{sample.code}}</td>
     <td>{{sample.sample_nature.name}}</td>
     <td>{{sample.sample_type.name}}</td>
-    <td>{{sample.tube_type.name}}</td>
+    <td>{{sample.support.name}}</td>
     <td>{{sample.volume}}/{{sample.mesure.name}}</td>
     <td>{{sample.date}}</td>
     <td>

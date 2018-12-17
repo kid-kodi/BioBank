@@ -25,7 +25,7 @@ mail = Mail()
 bootstrap = Bootstrap()
 moment = Moment()
 babel = Babel()
-images = UploadSet('images', IMAGES)
+documents = UploadSet('documents')
 
 
 def create_app(config_class=Config):
@@ -40,7 +40,7 @@ def create_app(config_class=Config):
     moment.init_app(app)
     babel.init_app(app)
     excel.init_excel(app)
-    configure_uploads(app, images)
+    configure_uploads(app, documents)
 
     app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) \
         if app.config['ELASTICSEARCH_URL'] else None
@@ -80,6 +80,9 @@ def create_app(config_class=Config):
     from app.setup import bp as setup_bp
     app.register_blueprint(setup_bp)
 
+    from app.role import bp as role_bp
+    app.register_blueprint(role_bp)
+
     from app.user import bp as user_bp
     app.register_blueprint(user_bp)
 
@@ -104,6 +107,12 @@ def create_app(config_class=Config):
     from app.box import bp as box_bp
     app.register_blueprint(box_bp)
 
+    from app.store import bp as store_bp
+    app.register_blueprint(store_bp)
+
+    from app.aliquot import bp as aliquot_bp
+    app.register_blueprint(aliquot_bp)
+
     from app.technique import bp as technique_bp
     app.register_blueprint(technique_bp)
 
@@ -115,6 +124,24 @@ def create_app(config_class=Config):
 
     from app.program import bp as program_bp
     app.register_blueprint(program_bp)
+
+    from app.support import bp as support_bp
+    app.register_blueprint(support_bp)
+
+    from app.sample_type import bp as sample_type_bp
+    app.register_blueprint(sample_type_bp)
+
+    from app.sample_nature import bp as sample_nature_bp
+    app.register_blueprint(sample_nature_bp)
+
+    from app.disease import bp as disease_bp
+    app.register_blueprint(disease_bp)
+
+    from app.label import bp as label_bp
+    app.register_blueprint(label_bp)
+
+    from app.print import bp as print_bp
+    app.register_blueprint(print_bp)
 
     from app.api import bp as api_bp
     app.register_blueprint(api_bp, url_prefix='/api/v1.0')

@@ -1,0 +1,66 @@
+{% extends "admin.html" %}
+{% set active_page = "support" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% import "_pagination.html" as macros %}
+{% block admin_content %}
+<div class="bar">
+    <h1>{{_('Modèle de support')}}</h1>
+    <div class="actions">
+        <ul class="nav nav-pills">
+            <li>
+                <a class="btn btn-default" href="{{ url_for('support.add') }}">{{_('Nouveau modèle')}}</a>
+            </li>
+            <li><a class="btn btn-default" href="{{ url_for('support.download') }}">{{ _('Télécharger template') }}</a></li>
+            <li><a class="btn btn-default" href="{{ url_for('support.import_data') }}">{{ _('Importer') }}</a></li>
+            <li><a class="btn btn-default" href="{{ url_for('support.export_data') }}">{{ _('Exporter') }}</a></li>
+        </ul>
+    </div>
+</div>
+<div>
+    {% if list %}
+    <div class="bar">
+        <form class="form-inline" method="post" action="">
+            {{ search_form.hidden_tag() }}
+            <div class="form-group">
+                {{ search_form.name(size=20, class='form-control', placeholder=search_form.name.label.text) }}
+            </div>
+        </form>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Modèle</th>
+            <th>Volume</th>
+            <th>Crée le</th>
+            <th class="text-right"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in list %}
+        <tr>
+            <td>{{item.name}}</td>
+            <td>{{item.volume}}</td>
+            <td>{{moment(item.created_at).format('LLL') }}</td>
+            <td class="text-right">
+                <a href="{{ url_for('support.edit', id=item.id) }}">{{_('Edit')}}</a>
+                <a href="{{ url_for('support.detail', id=item.id) }}">{{_('Detail')}}</a>
+                <a href="{{ url_for('support.delete', id=item.id) }}">{{_('Delete')}}</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination">
+        {{ macros.pagination_widget(pagination, '.index') }}
+    </div>
+    {% else %}
+    <div class="panel panel-default emptyspace">
+        <div class="panel-body text-center">
+            <h3>Aucun modèle de support enregistré</h3>
+            <p>veuillez en créer un en cliquant sur le lien ci-dessous</p>
+            <a class="btn btn-default" href="{{ url_for('support.add') }}">{{_('Add support')}}</a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -110,10 +110,11 @@ ul .btn{
 }
 
 #holes ul{
-  width: 405px;
+  width: 426px;
   list-style: none;
   padding: 0;
   margin: 0;
+  /* background: green; */
 }
 
 #holes li a{
@@ -121,8 +122,9 @@ ul .btn{
 }
 
 #holes li{
-  width: 30px;
-  height: 30px;
+  width: 39px;
+  height: 34px;
+  margin: 0 0px;
   line-height: 30px;
   display: inline-block;
   list-style: none;

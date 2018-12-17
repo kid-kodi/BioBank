@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% set active_page = "basket" %}
+{% block app_content %}
+<div class="bar">
+    <h1>{{ basket.name }}</h1>
+    <div class="actions">
+        <ul class="nav nav-pills">
+            <li>
+                <a class="btn btn-default" href="{{ url_for('basket.remove_all') }}">
+                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="">
+    {% if basket.samples.all() | length  > 0%}
+    <table class="table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>{{_('Numéro à l\'arrivé')}}</th>
+            <th>{{_('Code biobanque')}}</th>
+            <th>{{_('Nature d\'échantillon')}}</th>
+            <th>{{_('Conditionnement')}}</th>
+            <th>{{_('Volume')}}/{{_('Unité')}}</th>
+            <th>{{_('Date de prélèvement')}}</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for sample in basket.samples %}
+            <tr>
+                <td>
+                    <input type="checkbox" name="items" value="{{sample.id}}">
+                </td>
+                <td>{{sample.code}}</td>
+                <td>{{sample.sample_nature.name}}</td>
+                <td>{{sample.sample_type.name}}</td>
+                <td>{{sample.support.name}}</td>
+                <td>{{sample.volume}}/{{sample.mesure.name}}</td>
+                <td>{{sample.date}}</td>
+                <td>
+                    <ul class="nav nav-pills">
+
+                        <li>
+                            <a class="btn btn-default" href="{{ url_for('basket.removefromlist', id=sample.id) }}">
+                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                        <li><a class="btn btn-default" href="{{ url_for('sample.detail', id=sample.id) }}">Voir</a></li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        {% include '_empty.html' %}
+    {% endif %}
+</div>
+{% endblock %}

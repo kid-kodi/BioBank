@@ -6,7 +6,7 @@ from app import db
 from app.auth import bp
 from app.auth.forms import LoginForm, RegistrationForm, \
     ResetPasswordRequestForm, ResetPasswordForm
-from app.models import User
+from app.models import User, Basket
 from app.auth.email import send_password_reset_email
 
 
@@ -42,6 +42,8 @@ def register():
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
+        basket = Basket(name='Mon panier', description='')
+        user.baskets.append(basket)
         db.session.add(user)
         db.session.commit()
         flash(_('Enregistrement effectué'))

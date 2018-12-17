@@ -2,7 +2,9 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% set navigation_bar = [
-    ('/process', 'process', 'Aliquotage')
+    ('/aliquot', 'aliquot', 'Aliquotage'),
+    ('/print', 'print', 'Impression des code à barres'),
+    ('/store', 'store', 'Ranger plusieurs supports')
 ] -%}
 {% set active_page = active_page|default('index') -%}
 

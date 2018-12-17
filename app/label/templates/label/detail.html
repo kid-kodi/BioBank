@@ -1,0 +1,16 @@
+{% extends "admin.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% set active_page = "label" %}
+{% block admin_content %}
+  <table class="table no-lign" style="border-top: 0;">
+    <tr>
+      <td style="text-align:left;"><h3>{{label.name}}</h3></td>
+      <td style="text-align:right;">
+        <a href="{{ url_for('label.edit', id=label.id) }}">Modifier</a>
+      </td>
+    </tr>
+    <tr>
+      <td>{{label.description}}</td>
+    </tr>
+  </table>
+{% endblock %}
