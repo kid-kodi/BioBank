@@ -83,7 +83,7 @@ def proceed(id):
             sample.mesure_id = _sample.mesure_id
             sample.volume = aliquot_items.volume_by_aliquot
             sample.site = _sample.site
-            sample.number = num
+            sample.number = int(aliquot_items.nbr_aliquot)
             sample.date = _sample.date
             sample.status = 0
 
