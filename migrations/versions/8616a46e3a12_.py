@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 352b9f95f861
+Revision ID: 8616a46e3a12
 Revises: 
-Create Date: 2018-12-16 12:20:00.320094
+Create Date: 2018-12-19 12:28:38.490133
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '352b9f95f861'
+revision = '8616a46e3a12'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -137,20 +137,6 @@ def upgrade():
     op.create_index(op.f('ix_user_email'), 'user', ['email'], unique=True)
     op.create_index(op.f('ix_user_token'), 'user', ['token'], unique=True)
     op.create_index(op.f('ix_user_username'), 'user', ['username'], unique=True)
-    op.create_table('aliquot',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('serial', sa.String(length=255), nullable=True),
-    sa.Column('volume', sa.Integer(), nullable=True),
-    sa.Column('mesure_id', sa.Integer(), nullable=True),
-    sa.Column('status', sa.Integer(), nullable=True),
-    sa.Column('created_at', sa.DateTime(), nullable=True),
-    sa.Column('created_by', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['created_by'], ['user.id'], ),
-    sa.ForeignKeyConstraint(['mesure_id'], ['mesure.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
-    op.create_index(op.f('ix_aliquot_created_at'), 'aliquot', ['created_at'], unique=False)
-    op.create_index(op.f('ix_aliquot_serial'), 'aliquot', ['serial'], unique=False)
     op.create_table('basket',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=255), nullable=True),
@@ -210,6 +196,16 @@ def upgrade():
     sa.ForeignKeyConstraint(['followed_id'], ['user.id'], ),
     sa.ForeignKeyConstraint(['follower_id'], ['user.id'], )
     )
+    op.create_table('label',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('name', sa.String(length=255), nullable=True),
+    sa.Column('description', sa.String(length=255), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('created_by', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['created_by'], ['user.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_label_created_at'), 'label', ['created_at'], unique=False)
     op.create_table('location_history',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('location_type', sa.String(length=255), nullable=True),
@@ -323,6 +319,19 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_equipment_created_at'), 'equipment', ['created_at'], unique=False)
+    op.create_table('print',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('serial', sa.String(length=255), nullable=True),
+    sa.Column('label_id', sa.Integer(), nullable=True),
+    sa.Column('status', sa.Integer(), nullable=True),
+    sa.Column('created_by', sa.Integer(), nullable=True),
+    sa.Column('timestamp', sa.DateTime(), nullable=True),
+    sa.ForeignKeyConstraint(['created_by'], ['user.id'], ),
+    sa.ForeignKeyConstraint(['label_id'], ['label.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_print_serial'), 'print', ['serial'], unique=False)
+    op.create_index(op.f('ix_print_timestamp'), 'print', ['timestamp'], unique=False)
     op.create_table('process',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('technique_id', sa.Integer(), nullable=True),
@@ -475,26 +484,24 @@ def upgrade():
     )
     op.create_index(op.f('ix_store_serial'), 'store', ['serial'], unique=False)
     op.create_index(op.f('ix_store_timestamp'), 'store', ['timestamp'], unique=False)
-    op.create_table('aliquot_item',
+    op.create_table('aliquot',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('aliquot_id', sa.Integer(), nullable=True),
+    sa.Column('serial', sa.String(length=255), nullable=True),
     sa.Column('sample_id', sa.Integer(), nullable=True),
-    sa.Column('volume', sa.Integer(), nullable=True),
     sa.Column('support_id', sa.Integer(), nullable=True),
+    sa.Column('volume', sa.Integer(), nullable=True),
     sa.Column('mesure_id', sa.Integer(), nullable=True),
-    sa.Column('nbr_aliquot', sa.Integer(), nullable=True),
-    sa.Column('volume_by_aliquot', sa.Integer(), nullable=True),
     sa.Column('status', sa.Integer(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('created_by', sa.Integer(), nullable=True),
-    sa.Column('timestamp', sa.DateTime(), nullable=True),
-    sa.ForeignKeyConstraint(['aliquot_id'], ['aliquot.id'], ),
     sa.ForeignKeyConstraint(['created_by'], ['user.id'], ),
     sa.ForeignKeyConstraint(['mesure_id'], ['mesure.id'], ),
     sa.ForeignKeyConstraint(['sample_id'], ['sample.id'], ),
     sa.ForeignKeyConstraint(['support_id'], ['support.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_index(op.f('ix_aliquot_item_timestamp'), 'aliquot_item', ['timestamp'], unique=False)
+    op.create_index(op.f('ix_aliquot_created_at'), 'aliquot', ['created_at'], unique=False)
+    op.create_index(op.f('ix_aliquot_serial'), 'aliquot', ['serial'], unique=False)
     op.create_table('hole',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('box_id', sa.Integer(), nullable=True),
@@ -509,6 +516,33 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_hole_created_at'), 'hole', ['created_at'], unique=False)
+    op.create_table('print_item',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('print_id', sa.Integer(), nullable=True),
+    sa.Column('sample_id', sa.Integer(), nullable=True),
+    sa.Column('status', sa.Integer(), nullable=True),
+    sa.Column('created_by', sa.Integer(), nullable=True),
+    sa.Column('timestamp', sa.DateTime(), nullable=True),
+    sa.ForeignKeyConstraint(['created_by'], ['user.id'], ),
+    sa.ForeignKeyConstraint(['print_id'], ['print.id'], ),
+    sa.ForeignKeyConstraint(['sample_id'], ['sample.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_print_item_timestamp'), 'print_item', ['timestamp'], unique=False)
+    op.create_table('aliquot_item',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('aliquot_id', sa.Integer(), nullable=True),
+    sa.Column('serial', sa.String(length=255), nullable=True),
+    sa.Column('volume', sa.Integer(), nullable=True),
+    sa.Column('status', sa.Integer(), nullable=True),
+    sa.Column('created_by', sa.Integer(), nullable=True),
+    sa.Column('timestamp', sa.DateTime(), nullable=True),
+    sa.ForeignKeyConstraint(['aliquot_id'], ['aliquot.id'], ),
+    sa.ForeignKeyConstraint(['created_by'], ['user.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_aliquot_item_serial'), 'aliquot_item', ['serial'], unique=False)
+    op.create_index(op.f('ix_aliquot_item_timestamp'), 'aliquot_item', ['timestamp'], unique=False)
     op.create_table('sample_hole_history',
     sa.Column('sample_id', sa.Integer(), nullable=True),
     sa.Column('hole_id', sa.Integer(), nullable=True),
@@ -538,10 +572,16 @@ def downgrade():
     op.drop_index(op.f('ix_store_item_timestamp'), table_name='store_item')
     op.drop_table('store_item')
     op.drop_table('sample_hole_history')
+    op.drop_index(op.f('ix_aliquot_item_timestamp'), table_name='aliquot_item')
+    op.drop_index(op.f('ix_aliquot_item_serial'), table_name='aliquot_item')
+    op.drop_table('aliquot_item')
+    op.drop_index(op.f('ix_print_item_timestamp'), table_name='print_item')
+    op.drop_table('print_item')
     op.drop_index(op.f('ix_hole_created_at'), table_name='hole')
     op.drop_table('hole')
-    op.drop_index(op.f('ix_aliquot_item_timestamp'), table_name='aliquot_item')
-    op.drop_table('aliquot_item')
+    op.drop_index(op.f('ix_aliquot_serial'), table_name='aliquot')
+    op.drop_index(op.f('ix_aliquot_created_at'), table_name='aliquot')
+    op.drop_table('aliquot')
     op.drop_index(op.f('ix_store_timestamp'), table_name='store')
     op.drop_index(op.f('ix_store_serial'), table_name='store')
     op.drop_table('store')
@@ -559,6 +599,9 @@ def downgrade():
     op.drop_table('project')
     op.drop_index(op.f('ix_process_created_at'), table_name='process')
     op.drop_table('process')
+    op.drop_index(op.f('ix_print_timestamp'), table_name='print')
+    op.drop_index(op.f('ix_print_serial'), table_name='print')
+    op.drop_table('print')
     op.drop_index(op.f('ix_equipment_created_at'), table_name='equipment')
     op.drop_table('equipment')
     op.drop_index(op.f('ix_temperature_created_at'), table_name='temperature')
@@ -580,6 +623,8 @@ def downgrade():
     op.drop_table('message')
     op.drop_index(op.f('ix_location_history_created_at'), table_name='location_history')
     op.drop_table('location_history')
+    op.drop_index(op.f('ix_label_created_at'), table_name='label')
+    op.drop_table('label')
     op.drop_table('followers')
     op.drop_index(op.f('ix_equipment_type_created_at'), table_name='equipment_type')
     op.drop_table('equipment_type')
@@ -590,9 +635,6 @@ def downgrade():
     op.drop_table('box_type')
     op.drop_index(op.f('ix_basket_created_at'), table_name='basket')
     op.drop_table('basket')
-    op.drop_index(op.f('ix_aliquot_serial'), table_name='aliquot')
-    op.drop_index(op.f('ix_aliquot_created_at'), table_name='aliquot')
-    op.drop_table('aliquot')
     op.drop_index(op.f('ix_user_username'), table_name='user')
     op.drop_index(op.f('ix_user_token'), table_name='user')
     op.drop_index(op.f('ix_user_email'), table_name='user')

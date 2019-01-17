@@ -39,8 +39,8 @@ def add():
         user = User(email=form.email.data,
                     username=form.username.data,
                     first_name=form.first_name.data,
-                    last_name=form.last_name.data,
-                    password=form.password.data)
+                    last_name=form.last_name.data)
+        user.set_password(form.password.data)
         try:
             # add user to the database
             db.session.add(user)

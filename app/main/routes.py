@@ -5,7 +5,7 @@ from flask_login import current_user, login_required
 from flask_babel import _, get_locale
 from guess_language import guess_language
 from app import db
-from app.main.forms import EditProfileForm, PostForm, SearchForm, MessageForm
+from app.main.forms import EditProfileForm, PostForm, SearchForm, MessageForm, EditPasswordForm
 from app.models import Customer, Project, Sample, User, Post, Message, Notification, Basket, Room, Equipment, Box, Rack, \
     Hole
 from app.translate import translate
@@ -68,12 +68,25 @@ def edit_profile():
         current_user.username = form.username.data
         current_user.about_me = form.about_me.data
         db.session.commit()
-        flash(_('Your changes have been saved.'))
+        flash(_('Vos informations ont été modifiées'))
         return redirect(url_for('main.edit_profile'))
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.about_me.data = current_user.about_me
-    return render_template('edit_profile.html', title=_('Edit Profile'),
+    return render_template('edit_profile.html', title=_('Modifier Profile'),
+                           form=form)
+
+
+@bp.route('/edit_password', methods=['GET', 'POST'])
+@login_required
+def edit_password():
+    form = EditPasswordForm()
+    if form.validate_on_submit():
+        current_user.set_password(form.new_password.data)
+        db.session.commit()
+        flash(_('Mot de passe modifié'))
+        return redirect(url_for('main.user', username=current_user.username))
+    return render_template('edit_password.html', title=_('Modifier Password'),
                            form=form)
 
 

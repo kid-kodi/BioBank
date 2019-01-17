@@ -102,3 +102,11 @@ prepared  = 1
 stored    = 2
 expedited = 3
 destroyed = 4
+
+
+définition d'un aliquot
+Table aliquot
+- contient un échantillon et le volume pour les différents aliquot à creér
+
+Aliquot(par échantillon information pour la création)
+AliquotItem (liste des aliquots à créer)

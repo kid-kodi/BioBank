@@ -470,7 +470,7 @@ class Support(db.Model):
     volume = db.Column(db.String(120))
     description = db.Column(db.String(128))
     created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    aliquot_items = db.relationship('AliquotItem', backref='support', lazy='dynamic')
+    aliquots = db.relationship('Aliquot', backref='support', lazy='dynamic')
     samples = db.relationship('Sample', backref='support', lazy='dynamic')
 
 
@@ -479,7 +479,6 @@ class Mesure(db.Model):
     name = db.Column(db.String(120))
     siggle = db.Column(db.String(120))
     description = db.Column(db.String(128))
-    aliquot_items = db.relationship('AliquotItem', backref='mesure', lazy='dynamic')
     aliquots = db.relationship('Aliquot', backref='mesure', lazy='dynamic')
     samples = db.relationship('Sample', backref='mesure', lazy='dynamic')
 
@@ -558,7 +557,7 @@ class Sample(db.Model):
     status = db.Column(db.Integer)
     in_basket = db.Column(db.Integer)
     basket_id = db.Column(db.Integer, db.ForeignKey('basket.id'))
-    aliquot_items = db.relationship('AliquotItem', backref='sample', lazy='dynamic')
+    aliquots = db.relationship('Aliquot', backref='sample', lazy='dynamic')
     created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
     parent_id = db.Column(db.Integer, db.ForeignKey('sample.id'))
@@ -967,6 +966,8 @@ class Process(db.Model):
 class Aliquot(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     serial = db.Column(db.String(255), index=True)
+    sample_id = db.Column(db.Integer, db.ForeignKey('sample.id'))
+    support_id = db.Column(db.Integer, db.ForeignKey('support.id'))
     volume = db.Column(db.Integer)
     mesure_id = db.Column(db.Integer, db.ForeignKey('mesure.id'))
     status = db.Column(db.Integer)
@@ -977,16 +978,16 @@ class Aliquot(db.Model):
     def __repr__(self):
         return '<Aliquot {}>'.format(self.serial)
 
+    def nbr_aliquot(self):
+        number = len(self.aliquot_items.all())
+        return int(number)
+
 
 class AliquotItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     aliquot_id = db.Column(db.Integer, db.ForeignKey('aliquot.id'))
-    sample_id = db.Column(db.Integer, db.ForeignKey('sample.id'))
+    serial = db.Column(db.String(255), index=True)
     volume = db.Column(db.Integer)
-    support_id = db.Column(db.Integer, db.ForeignKey('support.id'))
-    mesure_id = db.Column(db.Integer, db.ForeignKey('mesure.id'))
-    nbr_aliquot = db.Column(db.Integer)
-    volume_by_aliquot = db.Column(db.Integer)
     status = db.Column(db.Integer)
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)

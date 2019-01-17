@@ -4,7 +4,7 @@
 {% block process_content %}
 <div class="bar">
     <div>
-        <h1>{{aliquot.serial}}</h1>
+        <h1>{{aliquot.serial}} - {{aliquot.id}}</h1>
     </div>
     <div class="actions">
         <ul class="nav nav-pills">
@@ -28,6 +28,14 @@
             <td>{{aliquot.serial}}</td>
         </tr>
         <tr>
+            <td>Echantillons</td>
+            <td>{{aliquot.sample.patient.bio_code}} {{aliquot.sample.code}}</td>
+        </tr>
+        <tr>
+            <td>Nombre d'aliquot</td>
+            <td>{{aliquot.nbr_aliquot()}}</td>
+        </tr>
+        <tr>
             <td>Volume / Quantité</td>
             <td>{{aliquot.volume}} {{aliquot.mesure.name}}</td>
         </tr>
@@ -38,8 +46,25 @@
     <div class="bar">
         <h1>Liste des aliquots à effectués</h1>
     </div>
-    {% for aliquot_item in aliquot.aliquot_items %}
-        {% include 'aliquot/_aliquot_item.html' %}
+    {% for _item in aliquot.aliquot_items %}
+        <form novalidate method="post" action="{{ url_for('aliquot.update', id=_item.id) }}">
+            <table class="table">
+                <tr>
+                    <td>Numéro</td>
+                    <td>Volume</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>{{_item.serial}}</td>
+                    <td>
+                        <input name="volume" type="text" class="form-control" value="{{_item.volume}}">
+                    </td>
+                    <td>
+                        <input type="submit" class="form-control" value="Changer">
+                    </td>
+                </tr>
+            </table>
+        </form>
     {% endfor %}
 </div>
 {% endblock %}

@@ -1,16 +1,21 @@
 <h3>{{aliquot_item.sample.code}} Volume : {{aliquot_item.sample.volume}}{{aliquot_item.sample.mesure.name}}</h3>
 {% for index in range(aliquot_item.nbr_aliquot) %}
-<form novalidate method="post" action="{{ url_for('aliquot.set_hole', id=aliquot_item.id) }}">
+<form novalidate method="post" action="{{ url_for('aliquot.update', id=aliquot_item.id) }}">
     <input name="aliquot_item_id" type="hidden" value="{{aliquot_item.id}}">
     <input name="sample_id" type="hidden" value="{{aliquot_item.sample_id}}">
     <table class="table">
         <tr>
-            <td>{{aliquot_item.sample.code}}</td>
+            <td>{{aliquot_item.sample.code}} {{aliquot_item.id}}</td>
             <td>
                 {% if aliquot_item.status == 0 %}
-                <input type="text" value="{{aliquot_item.volume_by_aliquot}}"> {{aliquot_item.mesure.name}}
+                <input type="text" value="{{aliquot_item.volume_by_aliquot}}" name="volume_by_aliquot"> {{aliquot_item.mesure.name}}
                 {% else %}
                     {{ aliquot_item.volume_by_aliquot }} {{aliquot_item.mesure.name}}
+                {% endif %}
+            </td>
+            <td class="text-right">
+                {% if aliquot_item.status == 0 %}
+                <input type="submit" value="Changer">
                 {% endif %}
             </td>
         </tr>

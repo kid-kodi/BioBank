@@ -1,6 +1,6 @@
 from flask import request
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, TextAreaField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField
 from wtforms.validators import ValidationError, DataRequired, Length
 from flask_babel import _, lazy_gettext as _l
 from app.models import User
@@ -21,6 +21,16 @@ class EditProfileForm(FlaskForm):
             user = User.query.filter_by(username=self.username.data).first()
             if user is not None:
                 raise ValidationError(_('Please use a different username.'))
+
+
+class EditPasswordForm(FlaskForm):
+    new_password = PasswordField(_l('Nouveau mot de passe'), validators=[DataRequired()])
+    confirm_password = PasswordField(_l('Confirmer le mot de passe'), validators=[DataRequired()])
+    submit = SubmitField(_l('Envoyer'))
+
+    def validate_password(self, new_password):
+        if new_password.data != self.confirm_password:
+            raise ValidationError(_('Mot de passe doit être identique'))
 
 
 class PostForm(FlaskForm):

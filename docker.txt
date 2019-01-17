@@ -1,10 +1,10 @@
-docker run --name mysql -d -e MYSQL_RANDOM_ROOT_PASSWORD=yes \
+sudo docker run --name mysql -d -e MYSQL_RANDOM_ROOT_PASSWORD=yes \
     -e MYSQL_DATABASE=biobank -e MYSQL_USER=biobank \
     -e MYSQL_PASSWORD=pass12345 \
     mysql/mysql-server:5.7
 
 
-docker run --name biobank -d -p 8000:5000 --rm -e SECRET_KEY=biobank@2018 \
+sudo docker run --name biobank -d -p 8000:5000 --rm -e SECRET_KEY=biobank@2018 \
     --link mysql:dbserver \
     -e DATABASE_URL=mysql+pymysql://biobank:pass12345@dbserver/biobank \
     biobank:latest

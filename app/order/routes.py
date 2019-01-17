@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 from flask import render_template, flash, redirect, url_for, request, g, \
-    jsonify, current_app
+    jsonify, current_app, send_from_directory
 from flask_login import current_user, login_required
 from flask_babel import _, get_locale
 from guess_language import guess_language
@@ -11,7 +11,6 @@ from app.models import Order, Customer, Project, Patient, Sample, Origin, Sample
     JoncType, Temperature, Document, Basket
 from app.translate import translate
 from app.order import bp
-import pandas as pd
 
 basedir = ''
 
@@ -21,6 +20,11 @@ basedir = ''
 def index():
     orders = Order.query.all()
     return render_template('order/index.html', orders=orders)
+
+
+@bp.route('/order/download_file/<filename>')
+def download_file(filename):
+   return send_from_directory(current_app.config['UPLOADS_DEFAULT_DEST'], filename, as_attachment=True)
 
 
 @bp.route('/order/add', methods=['GET', 'POST'])

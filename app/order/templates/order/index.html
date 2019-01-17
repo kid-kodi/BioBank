@@ -6,6 +6,7 @@
     <h1>{{ _('Réception') }}</h1>
     <div class="actions">
         <a class="btn btn-default" href="{{ url_for('order.add', project_id=0) }}">{{ _('Nouvelle réception') }}</a>
+        <a class="btn btn-default" href="{{ url_for('order.download_file', filename='template.xls') }}">{{ _('Télécharger le template') }}</a>
     </div>
 </div>
 {% if orders | length > 0 %}
