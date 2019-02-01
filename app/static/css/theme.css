@@ -267,3 +267,11 @@ i {
 form .row{
     margin-bottom: 20px;
 }
+
+.navbar-header img{
+	float : left;
+	margin-top : 10px;
+	margin-right : 7px;
+	width : 35px;
+	height : 30px;
+}

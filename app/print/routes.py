@@ -13,7 +13,6 @@ from app.print import bp
 import pdfkit
 
 
-
 @bp.route('/print', methods=['GET', 'POST'])
 @login_required
 def index():

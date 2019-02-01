@@ -9,6 +9,7 @@ from app.study.forms import StudyForm
 from app.models import Study, Category
 from app.translate import translate
 from app.study import bp
+from app.decorators import admin_required, permission_required
 
 
 @bp.route('/study', methods=['GET', 'POST'])

@@ -11,6 +11,7 @@ from app.models import Order, Customer, Project, Patient, Sample, Origin, Sample
     JoncType, Temperature, Document, Basket
 from app.translate import translate
 from app.order import bp
+import pandas as pd
 
 basedir = ''
 

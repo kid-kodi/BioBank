@@ -110,3 +110,10 @@ Table aliquot
 
 Aliquot(par échantillon information pour la création)
 AliquotItem (liste des aliquots à créer)
+
+
+roles
+
+- Administrateur
+- Micro-organisme
+- Echantillon
