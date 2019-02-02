@@ -14,18 +14,30 @@ from app.box import bp
 @bp.route('/box', methods=['GET', 'POST'])
 @login_required
 def index():
-    list = []
+    pagination = []
     search_form = SearchForm()
+    page = request.args.get('page', 1, type=int)
     if search_form.validate_on_submit():
         name = search_form.name.data
         if name != '':
-            list = Box.query.filter_by(name=name).all()
+            pagination = Box.query.filter_by(name=name) \
+                .order_by(Box.created_at.desc()).paginate(
+                page, per_page=current_app.config['FLASK_PER_PAGE'],
+                error_out=False)
         else:
-            list = Box.query.all()
+            pagination = Box.query \
+                .order_by(Box.created_at.desc()).paginate(
+                page, per_page=current_app.config['FLASK_PER_PAGE'],
+                error_out=False)
     else:
-        list = Box.query.all()
+        pagination = Box.query \
+            .order_by(Box.created_at.desc()).paginate(
+            page, per_page=current_app.config['FLASK_PER_PAGE'],
+            error_out=False)
+    list = pagination.items
     return render_template('box/list.html',
-                           list=list, title="boxs", search_form=search_form)
+                           list=list, pagination=pagination,
+                           title="box", search_form=search_form)
 
 
 @bp.route('/box/add', methods=['GET', 'POST'])

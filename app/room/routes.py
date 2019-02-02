@@ -51,7 +51,7 @@ def add():
                     created_by=current_user.id)
         db.session.add(room)
         db.session.commit()
-        flash(_('Data saved!'))
+        flash(_('Enregistrement effectué'))
         return redirect(url_for('room.index'))
     return render_template('room/form.html', action="Add",
                            add=add, form=form,
@@ -67,7 +67,7 @@ def edit(id):
     if form.validate_on_submit():
         room.name = form.name.data
         db.session.commit()
-        flash('You have successfully edited the room.')
+        flash('Modification effectuée')
 
         # redirect to the bps page
         return redirect(url_for('room.index'))
@@ -91,7 +91,7 @@ def delete(id):
     room = Room.query.get_or_404(id)
     db.session.delete(room)
     db.session.commit()
-    flash('You have successfully deleted the room.')
+    flash('Suppression effectuée')
 
     # redirect to the bps page
     return redirect(url_for('room.index'))

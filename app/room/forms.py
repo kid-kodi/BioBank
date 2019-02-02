@@ -7,8 +7,8 @@ from app.models import Room
 
 
 class SearchForm(FlaskForm):
-    name = StringField(_l('Room name'))
-    submit = SubmitField('Search')
+    name = StringField(_l('Nom de la salle'))
+    submit = SubmitField('Rechercher')
 
 
 class RoomForm(FlaskForm):

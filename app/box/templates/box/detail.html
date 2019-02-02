@@ -1,0 +1,26 @@
+{% extends "storage.html" %}
+{% set active_page = "box" %}
+{% block storage_content %}
+<div class="bar">
+    <h1>{{ box.name }}</h1>
+    <div class="actions">
+        <ul class="nav nav-pills">
+            <li><a class="btn btn-default" href="{{ url_for('box.edit', id=box.id) }}">{{ _('Modifier') }}</a></li>
+        </ul>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">Répresentation</div>
+    <div class="panel-body">
+        <div class="" id="holes">
+            <ul>
+                {% for hole in box.holes %}
+                <li class="hole{{hole.status}}" id="{{hole.id}}">
+                    <a href="{{url_for('location.hole', id=hole.id)}}">{{ hole.name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

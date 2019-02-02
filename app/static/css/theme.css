@@ -56,6 +56,15 @@ html {
   padding-bottom: 30px;
 }
 
+.actions-bar {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  justify-content: space-between;
+  padding-bottom: 30px;
+}
+
+
 navbar{
     border-radius: 0;
     margin-bottom : 10px;

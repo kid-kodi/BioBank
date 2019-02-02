@@ -1,0 +1,61 @@
+{% extends "storage.html" %}
+{% set active_page = "rack" %}
+{% block storage_content %}
+<div class="bar">
+    <div>
+        <h1>{{ rack.name }}</h1>
+        <p>
+            <span>Espace disponible {{rack.available()}} </span>
+            <span>Espace Occupé {{rack.occupied()}}</span>
+        </p>
+    </div>
+    <div class="actions">
+        <ul class="nav nav-pills">
+            <li>
+                <a class="btn btn-default" href="{{ url_for('rack.edit', id=rack.id) }}">{{_('Modifier')}}</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="box">
+    <h3>Boxes</h3>
+    {% if rack.boxes.all() | length > 0 %}
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Nom de la boite</th>
+            <th>Type</th>
+            <th>Espace Total</th>
+            <th>Espace Oqp</th>
+            <th>Crée le</th>
+            <th class="text-right"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in rack.boxes %}
+        <tr>
+            <td>
+                <a href="{{ url_for('box.detail', id=item.id) }}">{{ item.name }}</a>
+            </td>
+            <td>{{item.box_type.name}}</td>
+            <td>{{item.holes.all()|length}}</td>
+            <td>{{item.occupied()}}</td>
+            <td>{{moment(item.created_at).format('LLL') }}</td>
+            <td class="text-right">
+                <a class="btn btn-default" href="{{ url_for('box.edit', id=item.id) }}">{{_('Modifier')}}</a>
+                <a class="btn btn-default" href="{{ url_for('box.delete', id=item.id) }}">{{_('Supprimer')}}</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="panel panel-default emptyspace">
+        <div class="panel-body text-center">
+            <h3>Aucune(s) donnée(s) enregistrée(s)</h3>
+            <p>veuillez en ajouter un en cliquant sur le lien ci-dessus</p>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

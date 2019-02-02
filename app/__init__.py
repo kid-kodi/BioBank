@@ -143,6 +143,9 @@ def create_app(config_class=Config):
     from app.print import bp as print_bp
     app.register_blueprint(print_bp)
 
+    from app.expedition import bp as expedition_bp
+    app.register_blueprint(expedition_bp)
+
     from app.api import bp as api_bp
     app.register_blueprint(api_bp, url_prefix='/api/v1.0')
 

@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 2fe0cddc2f09
+Revision ID: 18df3149e855
 Revises: 
-Create Date: 2019-02-01 12:43:11.794178
+Create Date: 2019-02-02 09:36:00.439642
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '2fe0cddc2f09'
+revision = '18df3149e855'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -359,6 +359,25 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_project_timestamp'), 'project', ['timestamp'], unique=False)
+    op.create_table('expedition',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('serial', sa.String(length=255), nullable=True),
+    sa.Column('project_id', sa.Integer(), nullable=True),
+    sa.Column('first_name', sa.String(length=255), nullable=True),
+    sa.Column('last_name', sa.String(length=255), nullable=True),
+    sa.Column('telephone', sa.String(length=255), nullable=True),
+    sa.Column('temperature_id', sa.Integer(), nullable=True),
+    sa.Column('expedition_date', sa.String(length=255), nullable=True),
+    sa.Column('description', sa.String(length=255), nullable=True),
+    sa.Column('timestamp', sa.DateTime(), nullable=True),
+    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('status', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['project_id'], ['project.id'], ),
+    sa.ForeignKeyConstraint(['temperature_id'], ['temperature.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_expedition_timestamp'), 'expedition', ['timestamp'], unique=False)
     op.create_table('order',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('serial', sa.String(length=255), nullable=True),
@@ -440,6 +459,7 @@ def upgrade():
     op.create_table('sample',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('patient_id', sa.Integer(), nullable=True),
+    sa.Column('expedition_id', sa.Integer(), nullable=True),
     sa.Column('origin_id', sa.Integer(), nullable=True),
     sa.Column('sample_nature_id', sa.Integer(), nullable=True),
     sa.Column('sample_type_id', sa.Integer(), nullable=True),
@@ -460,6 +480,7 @@ def upgrade():
     sa.Column('parent_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['basket_id'], ['basket.id'], ),
     sa.ForeignKeyConstraint(['created_by'], ['user.id'], ),
+    sa.ForeignKeyConstraint(['expedition_id'], ['expedition.id'], ),
     sa.ForeignKeyConstraint(['jonc_type_id'], ['jonc_type.id'], ),
     sa.ForeignKeyConstraint(['mesure_id'], ['mesure.id'], ),
     sa.ForeignKeyConstraint(['origin_id'], ['origin.id'], ),
@@ -595,6 +616,8 @@ def downgrade():
     op.drop_table('rack')
     op.drop_index(op.f('ix_order_timestamp'), table_name='order')
     op.drop_table('order')
+    op.drop_index(op.f('ix_expedition_timestamp'), table_name='expedition')
+    op.drop_table('expedition')
     op.drop_index(op.f('ix_project_timestamp'), table_name='project')
     op.drop_table('project')
     op.drop_index(op.f('ix_process_created_at'), table_name='process')

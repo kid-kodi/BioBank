@@ -357,6 +357,7 @@ class Project(db.Model):
     title = db.Column(db.String(255))
     description = db.Column(db.String(255))
     orders = db.relationship('Order', backref='project', lazy='dynamic')
+    expeditions = db.relationship('Expedition', backref='project', lazy='dynamic')
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def total_sample(self):
@@ -432,6 +433,26 @@ class Order(db.Model):
 
     def total_patient(self):
         number = len(self.patients.all())
+        return number
+
+
+class Expedition(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    serial = db.Column(db.String(255))
+    project_id = db.Column(db.Integer, db.ForeignKey('project.id'))
+    first_name = db.Column(db.String(255))
+    last_name = db.Column(db.String(255))
+    telephone = db.Column(db.String(255))
+    temperature_id = db.Column(db.Integer, db.ForeignKey('temperature.id'))
+    expedition_date = db.Column(db.String(255))
+    description = db.Column(db.String(255))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    status = db.Column(db.Integer)
+    samples = db.relationship('Sample', backref='expedition', lazy='dynamic')
+
+    def total_strain(self):
+        number = len(self.samples.all())
         return number
 
 
@@ -570,6 +591,7 @@ sample_hole_history = db.Table(
 class Sample(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'))
+    expedition_id = db.Column(db.Integer, db.ForeignKey('expedition.id'))
     origin_id = db.Column(db.Integer, db.ForeignKey('origin.id'))
     sample_nature_id = db.Column(db.Integer, db.ForeignKey('sample_nature.id'))
     sample_type_id = db.Column(db.Integer, db.ForeignKey('sample_type.id'))
@@ -665,6 +687,7 @@ class Room(db.Model):
         equipments = self.equipments
         for equipment in equipments:
             number = number + equipment.available()
+            print(equipment.available())
         return number
 
     def occupied(self):

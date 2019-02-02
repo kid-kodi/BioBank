@@ -1,0 +1,68 @@
+{% extends "storage.html" %}
+{% import "_pagination.html" as macros %}
+{% set active_page = "box" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block storage_content %}
+<div class="bar">
+    <h1>{{_('Boite')}}</h1>
+    <div class="actions">
+        <ul class="nav nav-pills">
+            <li>
+                <a class="btn btn-default" href="{{ url_for('box.add') }}">{{_('Nouvelle boite')}}</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="">
+    {% if list %}
+    <div class="actions-bar">
+        <form class="form-inline" method="post" action="">
+            {{ search_form.hidden_tag() }}
+            <div class="form-group">
+                {{ search_form.name(size=20, class='form-control', placeholder=search_form.name.label.text) }}
+            </div>
+        </form>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Nom de la boite</th>
+            <th>Type de boite</th>
+            <th>Espace</th>
+            <th>Rack</th>
+            <th>Crée le</th>
+            <th class="text-right"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in list %}
+        <tr>
+            <td>
+                <a href="{{ url_for('box.detail', id=item.id) }}">{{item.name}}</a>
+            </td>
+            <td>{{item.box_type.name}}</td>
+            <td>{{item.box_type.max_number}}</td>
+            <td>{% if item.rack %} {{item.rack.equipment.name + ' - ' + item.rack.name}}{% endif %}</td>
+            <td>{{moment(item.created_at).format('LLL') }}</td>
+            <td class="text-right">
+                <a class="btn btn-default" href="{{ url_for('box.edit', id=item.id) }}">{{_('Modifier')}}</a>
+                <a class="btn btn-default" href="{{ url_for('box.delete', id=item.id) }}">{{_('Supprimer')}}</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination">
+        {{ macros.pagination_widget(pagination, '.index') }}
+    </div>
+    {% else %}
+    <div class="panel panel-default emptyspace">
+        <div class="panel-body text-center">
+            <h3>Aucun box enregistré</h3>
+            <p>veuillez en créer un en cliquant sur le lien ci-dessous</p>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

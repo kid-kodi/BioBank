@@ -1,0 +1,51 @@
+{% extends "storage.html" %}
+{% set active_page = "equipment" %}
+{% block storage_content %}
+<div class="bar">
+    <h1>{{ equipment.name }}</h1>
+    <div class="actions">
+        <ul class="nav nav-pills">
+            <li><a class="btn btn-default" href="{{ url_for('equipment.edit', id=equipment.id) }}">{{ _('Modifier') }}</a></li>
+        </ul>
+    </div>
+</div>
+<div class="box">
+    <h3>Racks</h3>
+      {% if equipment.racks.all() | length > 0  %}
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Nom du rack</th>
+                <th>Espace Total</th>
+                <th>Espace Oqp</th>
+                <th>Crée le</th>
+                <th class="text-center"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in equipment.racks %}
+            <tr>
+                <td>
+                    <a href="{{ url_for('rack.detail', id=item.id) }}">{{ item.name }}</a>
+                </td>
+                <td>{{item.max_number}}</td>
+                <td>{{item.boxes.all()|length}}</td>
+                <td>{{moment(item.created_at).format('LLL') }}</td>
+                <td class="text-center">
+                    <a class="btn btn-default" href="{{ url_for('rack.edit', id=item.id) }}">{{_('Modifier')}}</a>
+                    <a class="btn btn-default" href="{{ url_for('rack.delete', id=item.id) }}">{{_('Supprimer')}}</a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="panel panel-default emptyspace">
+            <div class="panel-body text-center">
+                <h3>Aucune(s) donnée(s) enregistrée(s)</h3>
+                <p>veuillez en ajouter un en cliquant sur le lien ci-dessus</p>
+            </div>
+        </div>
+        {% endif %}
+  </div>
+{% endblock %}
